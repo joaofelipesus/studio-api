@@ -47,6 +47,8 @@ end
 group :test do
   # Simple one-liner tests for common Rails functionality
   gem 'shoulda-matchers', '~> 5.0'
+  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing.
+  gem 'database_cleaner-active_record'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
