@@ -13,7 +13,7 @@ RUN echo 'alias rspec="bundle exec rspec"' >> ~/.bashrc && \
     echo 'alias rails="bundle exec rails"' >> ~/.bashrc
 
 # env var with workdir path
-ENV INSTALL_PATH /portal-api
+ENV INSTALL_PATH /studio-api
 
 # create workdir
 RUN mkdir -p $INSTALL_PATH
