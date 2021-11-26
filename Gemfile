@@ -44,5 +44,10 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  # Simple one-liner tests for common Rails functionality
+  gem 'shoulda-matchers', '~> 5.0'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
