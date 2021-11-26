@@ -32,6 +32,10 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # RSpec for Rails 5+
   gem 'rspec-rails', '~> 5.0.0'
+  # A library for generating fake data such as names, addresses, and phone numbers.
+  gem 'faker'
+  # Factory Bot hearts Rails
+  gem 'factory_bot_rails'
 end
 
 group :development do
