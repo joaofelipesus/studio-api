@@ -6,5 +6,7 @@ FactoryBot.define do
     password_digest { 'MyString' }
     status { 'MyString' }
     name { 'MyString' }
+    confirmation_token { 'MyString' }
+    last_login { '2021-11-27 18:30:13' }
   end
 end
