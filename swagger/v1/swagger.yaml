@@ -1,0 +1,11 @@
+---
+swagger: '2.0'
+info:
+  title: Studio api
+  version: v1
+paths: {}
+servers:
+- url: https://localhost:3000
+  variables:
+    defaultHost:
+      default: localhost:3000

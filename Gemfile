@@ -36,6 +36,8 @@ group :development, :test do
   gem 'faker'
   # Factory Bot hearts Rails
   gem 'factory_bot_rails'
+  # Seamlessly adds a Swagger to Rails-based API's
+  gem 'rswag'
 end
 
 group :development do
