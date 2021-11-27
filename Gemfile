@@ -19,7 +19,8 @@ gem 'puma', '~> 5.0'
 gem 'bcrypt', '~> 3.1.7'
 # Repository for collecting Locale data for Ruby on Rails I18n as well as other interesting, Rails related I18n stuff
 gem 'rails-i18n', '~> 6.0.0'
-
+# A ruby implementation of the RFC 7519 OAuth JSON Web Token (JWT) standard.
+gem 'jwt'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -27,7 +28,7 @@ gem 'rails-i18n', '~> 6.0.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
