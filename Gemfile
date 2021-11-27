@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -27,14 +29,31 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  # RSpec for Rails 5+
+  gem 'rspec-rails', '~> 5.0.0'
+  # A library for generating fake data such as names, addresses, and phone numbers.
+  gem 'faker'
+  # Factory Bot hearts Rails
+  gem 'factory_bot_rails'
+  # Seamlessly adds a Swagger to Rails-based API's
+  gem 'rswag'
 end
 
 group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  # Generate Entity-Relationship Diagrams for Rails applications
+  gem 'rails-erd'
+end
+
+group :test do
+  # Simple one-liner tests for common Rails functionality
+  gem 'shoulda-matchers', '~> 5.0'
+  # Strategies for cleaning databases in Ruby. Can be used to ensure a clean state for testing.
+  gem 'database_cleaner-active_record'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
