@@ -41,5 +41,9 @@ module StudioApi
 
     # Enable PgCrypto
     config.generators { |g| g.orm :active_record, primary_key_type: :uuid }
+
+    # Locale
+    config.time_zone = 'Brasilia'
+    config.i18n.default_locale = :"pt-BR"
   end
 end
