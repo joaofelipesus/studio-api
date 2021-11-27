@@ -38,5 +38,8 @@ module StudioApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Enable PgCrypto
+    config.generators { |g| g.orm :active_record, primary_key_type: :uuid }
   end
 end
