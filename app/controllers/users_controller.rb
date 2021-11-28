@@ -2,19 +2,17 @@
 
 class UsersController < ApplicationController
   def login
-    user = User.find_by(email: login_params[:email])
-    return render json: { message: I18n.t('messages.invalid_credentials') }, status: :unauthorized unless user
-
-    if user.password == login_params[:password]
-      render json: {}, status: :ok
-    else
-      render json: { message: I18n.t('messages.invalid_credentials') }, status: :unauthorized unless user
-    end
+    token = Services::Users::Login.new(email: login_params[:email], password: login_params[:password]).call
+    render json: { token: token }, status: :ok
   end
 
   private
 
   def login_params
     params.permit(:email, :password)
+  end
+
+  rescue_from Services::Users::Exceptions::InvalidCredentials do |e|
+    render json: { message: e.message }, status: :forbidden
   end
 end
