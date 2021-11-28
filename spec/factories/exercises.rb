@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :exercise do
-    name { 'MyString' }
-    muscular_group { nil }
-    status { 'MyString' }
+    name { 'Supino' }
+    muscular_group { create(:muscular_group) }
+    status { :active }
   end
 end

@@ -8,6 +8,6 @@ class Exercise < ApplicationRecord
 
   enum status: {
     active: 'ACTIVE',
-    invactive: 'INACTIVE'
+    inactive: 'INACTIVE'
   }
 end
