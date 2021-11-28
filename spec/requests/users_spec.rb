@@ -6,7 +6,7 @@ RSpec.describe 'Users', type: :request do
   let(:response_body) { JSON.parse(response.body) }
 
   describe 'POST /users/login' do
-    let(:params) { { email: 'asuka@nerv.com', password: '123123123'} }
+    let(:params) { { email: 'asuka@nerv.com', password: '123123123' } }
 
     context 'when credentials are valid' do
       let(:login_service) { double(:login_service) }
