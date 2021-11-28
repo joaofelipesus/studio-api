@@ -2,7 +2,6 @@
 
 class ExercisesController < ApplicationController
   # TODO: adicionar autenticacao
-  # TODO: Rota create
 
   def create
     exercise = Exercise.new(exercise_params)
