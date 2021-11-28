@@ -7,3 +7,6 @@
         kind: 'Tipo'
         status: 'Status'
         name: 'Nome'
+  messages:
+    user:
+      invalid_credentials: 'Email e/ou senha inválido(s).'
