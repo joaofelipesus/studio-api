@@ -40,7 +40,7 @@ RSpec.describe 'Users', type: :request do
 
       it { expect(response).to have_http_status(:forbidden) }
 
-      it { expect(response_body['error_message']).to match('Email e/ou senha inválido(s).') }
+      it { expect(response_body['message']).to match('Email e/ou senha inválido(s).') }
     end
   end
 end

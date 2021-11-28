@@ -13,6 +13,6 @@ class UsersController < ApplicationController
   end
 
   rescue_from Services::Users::Exceptions::InvalidCredentials do |e|
-    render json: { error_message: e.message }, status: :forbidden
+    render json: { message: e.message }, status: :forbidden
   end
 end
