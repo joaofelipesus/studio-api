@@ -16,7 +16,7 @@ module Services
       #   confirmed and active user or received password doesn't match.
       def call
         return invalid_credentials unless user  # NOTE: maybe use & in only one clause ?
-        return invalid_credentials unless user.password == password
+        return invalid_credentials unless user.authenticate(password)
 
         Services::Auth::JwtHandler.encode({ user_id: user.id, kind: user.kind })
       end
