@@ -2,9 +2,11 @@
 
 class ExercisesController < ApplicationController
   before_action :authenticate
-  # TODO: adicionar autenticacao
 
-  # TODO: swagger
+  def index
+    exercises = Exercise.joins(:muscular_group).all.order(:name).page(params[:page])
+    render('exercises/index', formats: :json, locals: { exercises: exercises }, status: :ok)
+  end
 
   def show
     exercise = Exercise.find(params[:id])
@@ -15,6 +17,15 @@ class ExercisesController < ApplicationController
     exercise = Exercise.new(exercise_params)
     if exercise.save
       render_success(exercise, status: :created)
+    else
+      render_error_messages(exercise)
+    end
+  end
+
+  def update
+    exercise = Exercise.find(params[:id])
+    if exercise.update(exercise_params)
+      render_success(exercise)
     else
       render_error_messages(exercise)
     end
