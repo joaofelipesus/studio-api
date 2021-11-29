@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :muscular_group do
-    name { 'MyString' }
+    name { Faker::Games::Zelda.character }
   end
 end

@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :personal do
-    user { nil }
+    user { create(:user, :personal) }
   end
 end

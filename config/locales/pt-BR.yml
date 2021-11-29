@@ -7,6 +7,10 @@
         kind: 'Tipo'
         status: 'Status'
         name: 'Nome'
+      exercise:
+        name: 'Nome'
+        muscular_group_id: 'Grupo muscular'
+        status: 'Status'
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'
