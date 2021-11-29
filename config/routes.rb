@@ -6,5 +6,6 @@ Rails.application.routes.draw do
 
   scope :api do
     post '/users/login', to: 'users#login', as: :login
+    resources :exercises, only: %i[create update show index]
   end
 end

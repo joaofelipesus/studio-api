@@ -11,8 +11,6 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
@@ -23,7 +21,10 @@ gem 'rails-i18n', '~> 6.0.0'
 gem 'jwt'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+# Jbuilder: generate JSON objects with a Builder-style DSL
+gem 'jbuilder'
+# A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps
+gem 'kaminari'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 

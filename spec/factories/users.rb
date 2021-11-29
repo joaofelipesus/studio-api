@@ -9,5 +9,9 @@ FactoryBot.define do
     confirmation_token { nil }
     last_login { '2021-11-27 18:30:13' }
     kind { :personal }
+
+    trait :personals do
+      kind { :personal }
+    end
   end
 end
