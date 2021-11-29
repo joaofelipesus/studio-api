@@ -17,12 +17,12 @@ class ExerciseWorkoutPlansController < ApplicationController
     render_success(exercise_workout_plan)
   end
 
-  def created
+  def create
     exercise_workout_plan = ExerciseWorkoutPlan.new(exercise_workout_plan_params)
     if exercise_workout_plan.save
       render_success(exercise_workout_plan, status: :created)
     else
-      render_errors(exercise_workout_plan)
+      render_error_messages(exercise_workout_plan)
     end
   end
 
@@ -31,7 +31,7 @@ class ExerciseWorkoutPlansController < ApplicationController
     if exercise_workout_plan.update(exercise_workout_plan_params)
       render_success(exercise_workout_plan)
     else
-      render_errors(exercise_workout_plan)
+      render_error_messages(exercise_workout_plan)
     end
   end
 

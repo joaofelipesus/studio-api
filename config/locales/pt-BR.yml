@@ -15,6 +15,14 @@
         name: 'Nome'
         personal_id: 'Personal'
         status: 'Status'
+      exercise_workout_plan:
+        exercise_id: 'Exercício'
+        exercise: 'Exercício'
+        workout_plan_id: 'Plano de treino'
+        rest: 'Tempo de descanso'
+        repetitions: 'Repetições'
+        exercise_sequence: 'Sequência'
+
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'
