@@ -10,13 +10,13 @@ class ExercisesController < ApplicationController
 
   def show
     exercise = Exercise.find(params[:id])
-    render_success(exercise)
+    render_success(exercise, model: :exercise)
   end
 
   def create
     exercise = Exercise.new(exercise_params)
     if exercise.save
-      render_success(exercise, status: :created)
+      render_success(exercise, status: :created, model: :exercise)
     else
       render_error_messages(exercise)
     end
@@ -25,7 +25,7 @@ class ExercisesController < ApplicationController
   def update
     exercise = Exercise.find(params[:id])
     if exercise.update(exercise_params)
-      render_success(exercise)
+      render_success(exercise, model: :exercise)
     else
       render_error_messages(exercise)
     end
@@ -38,9 +38,5 @@ class ExercisesController < ApplicationController
       :name,
       :muscular_group_id
     )
-  end
-
-  def render_success(exercise, status: :ok)
-    render('exercises/show', formats: :json, locals: { exercise: exercise }, status: status)
   end
 end
