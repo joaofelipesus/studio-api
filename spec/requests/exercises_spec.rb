@@ -13,7 +13,16 @@ RSpec.describe 'Exercises', type: :request do
     }
   end
 
-  describe 'SHOW /api/exercises/:id' do
+  describe 'GET /api/exercises' do
+    let!(:create_exercises) { 3.times { create(:exercise) } }
+
+    before(:each) { get('/api/exercises', headers: headers(user: personal.user)) }
+
+    it { expect(response).to have_http_status(:ok) }
+    it { expect(response_body['exercises'].size).to match(3) }
+  end
+
+  describe 'GET /api/exercises/:id' do
     before(:each) { get("/api/exercises/#{exercise_id}", headers: headers(user: personal.user)) }
 
     context 'when exercise exist' do
@@ -43,6 +52,32 @@ RSpec.describe 'Exercises', type: :request do
       it { expect(response).to have_http_status(:created) }
 
       it 'returns created exercise' do
+        expect(response_body['exercise']).to match(exercise_json)
+      end
+    end
+
+    context 'when params has errors' do
+      let(:params) { { name: nil, muscular_group_id: muscular_group.id } }
+
+      it { expect(response).to have_http_status(:bad_request) }
+
+      it { expect(response_body['errors']).to match(['Nome não pode ficar em branco']) }
+    end
+  end
+
+  describe 'PUT/PATCH /api/exercises/:id' do
+    let!(:muscular_group) { create(:muscular_group) }
+    let!(:exercise) { create(:exercise) }
+
+    before(:each) { put("/api/exercises/#{exercise.id}", params: params, headers: headers(user: personal.user)) }
+
+    context 'when params are ok' do
+      let(:params) { { name: 'Some name', muscular_group_id: muscular_group.id } }
+
+      it { expect(response).to have_http_status(:ok) }
+
+      it 'returns updated exercise' do
+        exercise.reload
         expect(response_body['exercise']).to match(exercise_json)
       end
     end

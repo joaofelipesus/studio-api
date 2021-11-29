@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :exercise do
-    name { 'Supino' }
+    name { Faker::Games::Zelda.character }
     muscular_group { create(:muscular_group) }
     status { :active }
   end
