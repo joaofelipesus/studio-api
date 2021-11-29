@@ -5,11 +5,7 @@ class ExerciseWorkoutPlansController < ApplicationController
 
   def index
     exercise_workout_plans = ExerciseWorkoutPlan.all.order(created_at: :desc).page(params[:page])
-    render(
-      'exercise_workout_plans/index',
-      formats: :json,
-      locals: { exercise_workout_plans: exercise_workout_plans }
-    )
+    render_all(exercise_workout_plans, model: :exercise_workout_plan)
   end
 
   def show
