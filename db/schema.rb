@@ -12,10 +12,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_211_129_142_950) do
+ActiveRecord::Schema.define(version: 20_211_129_180_016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pgcrypto'
   enable_extension 'plpgsql'
+
+  create_table 'exercise_workout_plans', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.uuid 'workout_plan_id', null: false
+    t.uuid 'exercise_id', null: false
+    t.integer 'exercise_sequence'
+    t.string 'rest'
+    t.string 'repetitions'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.index ['exercise_id'], name: 'index_exercise_workout_plans_on_exercise_id'
+    t.index ['workout_plan_id'], name: 'index_exercise_workout_plans_on_workout_plan_id'
+  end
 
   create_table 'exercises', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.string 'name'
@@ -61,6 +73,8 @@ ActiveRecord::Schema.define(version: 20_211_129_142_950) do
     t.index ['personal_id'], name: 'index_workout_plans_on_personal_id'
   end
 
+  add_foreign_key 'exercise_workout_plans', 'exercises'
+  add_foreign_key 'exercise_workout_plans', 'workout_plans'
   add_foreign_key 'exercises', 'muscular_groups'
   add_foreign_key 'personals', 'users'
   add_foreign_key 'workout_plans', 'personals'

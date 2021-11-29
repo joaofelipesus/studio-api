@@ -108,6 +108,128 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/exercise_workout_plans":
+    post:
+      summary: create exercise_workout_plan
+      tags:
+      - Exercise Workout Plan
+      consumes:
+      - application/json
+      parameters:
+      - name: exercise_workout_plan
+        in: body
+        schema:
+          type: object
+          properties:
+            workout_plan_id:
+              type: string
+            exercise_id:
+              type: string
+            repetitions:
+              type: string
+            rest:
+              type: string
+            exercise_sequence:
+              type: integer
+          required:
+          - workout_plan_id
+          - exercise_id
+          - repetitions
+          - rest
+          - exercise_sequence
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '201':
+          description: successful
+    get:
+      summary: List exercise_workout_plans
+      tags:
+      - Exercise Workout Plan
+      consumes:
+      - application/json
+      parameters:
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: successful
+  "/api/exercise_workout_plans/{id}":
+    get:
+      summary: Show exercise workout plan
+      tags:
+      - Exercise Workout Plan
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        type: string
+        name: id
+        required: true
+        description: ID
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: Update exercise_workout_plan
+      tags:
+      - Exercise Workout Plan
+      consumes:
+      - application/json
+      parameters:
+      - name: exercise_workout_plan
+        in: body
+        schema:
+          type: object
+          properties:
+            workout_plan_id:
+              type: string
+            exercise_id:
+              type: string
+            repetitions:
+              type: string
+            rest:
+              type: string
+            exercise_sequence:
+              type: integer
+          required:
+          - workout_plan_id
+          - exercise_id
+          - repetitions
+          - rest
+          - exercise_sequence
+      - in: path
+        type: string
+        name: id
+        required: true
+        description: ID
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: successful
   "/api/users/login":
     post:
       summary: authenticate user
