@@ -21,4 +21,8 @@ class ApplicationController < ActionController::API
   rescue_from JWT::VerificationError, JWT::DecodeError do
     render json: {}, status: :unauthorized
   end
+
+  def current_personal
+    Personal.find_by(user: current_user)
+  end
 end
