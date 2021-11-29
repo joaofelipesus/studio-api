@@ -2,12 +2,12 @@
 
 require 'swagger_helper'
 
-RSpec.describe 'List exercises' do
-  let!(:current_user) { create(:user, :personal) }
+RSpec.describe 'List workout plans' do
+  let!(:current_user) { create(:personal).user }
 
-  path '/api/exercises' do
-    get('List exercises') do
-      tags 'Exercise'
+  path '/api/workout_plans' do
+    get('List workout_plans') do
+      tags 'Workout Plan'
       consumes 'application/json'
 
       parameter(
