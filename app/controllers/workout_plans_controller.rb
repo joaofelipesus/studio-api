@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class WorkoutPlansController < ApplicationController
+  before_action :authenticate
 
   def index
     workout_plans = WorkoutPlan.all.order(:name).page(params[:page])
