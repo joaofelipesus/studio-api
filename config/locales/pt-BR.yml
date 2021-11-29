@@ -11,6 +11,10 @@
         name: 'Nome'
         muscular_group_id: 'Grupo muscular'
         status: 'Status'
+      workout_plan:
+        name: 'Nome'
+        personal_id: 'Personal'
+        status: 'Status'
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'

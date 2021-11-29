@@ -2,7 +2,7 @@
 
 module AuthHelper
   def headers(user:)
-    { Authorization: "Bearer #{auth_token(user)}"}
+    { Authorization: "Bearer #{auth_token(user)}" }
   end
 
   def auth_token(user)
