@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2021_11_29_142950) do
   create_table "workout_plans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "personal_id", null: false
     t.string "name"
-    t.string "status"
+    t.string "status", default: "ACTIVE"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["personal_id"], name: "index_workout_plans_on_personal_id"

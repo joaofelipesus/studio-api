@@ -5,7 +5,7 @@ class CreateWorkoutPlans < ActiveRecord::Migration[6.1]
     create_table :workout_plans, id: :uuid do |t|
       t.references :personal, null: false, foreign_key: true, type: :uuid
       t.string :name
-      t.string :status
+      t.string :status, default: 'ACTIVE'
 
       t.timestamps
     end

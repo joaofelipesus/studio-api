@@ -2,8 +2,8 @@
 
 FactoryBot.define do
   factory :workout_plan do
-    personal { nil }
-    name { 'MyString' }
-    status { 'MyString' }
+    personal { create(:personal) }
+    name { Faker::Games::Zelda.character }
+    status { :active }
   end
 end
