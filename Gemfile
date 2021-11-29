@@ -23,6 +23,8 @@ gem 'rails-i18n', '~> 6.0.0'
 gem 'jwt'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+# Jbuilder: generate JSON objects with a Builder-style DSL
+gem 'jbuilder'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
