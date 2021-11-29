@@ -34,6 +34,23 @@ paths:
       responses:
         '201':
           description: successful
+    get:
+      summary: List exercises
+      tags:
+      - Exercise
+      consumes:
+      - application/json
+      parameters:
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: successful
   "/api/exercises/{id}":
     get:
       summary: Show exercise
@@ -42,6 +59,40 @@ paths:
       consumes:
       - application/json
       parameters:
+      - in: path
+        type: string
+        name: id
+        required: true
+        description: ID
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: Update exercise
+      tags:
+      - Exercise
+      consumes:
+      - application/json
+      parameters:
+      - name: exercise
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            muscular_group_id:
+              type: string
+          required:
+          - name
+          - muscular_group_id
       - in: path
         type: string
         name: id

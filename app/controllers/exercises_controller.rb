@@ -4,7 +4,7 @@ class ExercisesController < ApplicationController
   before_action :authenticate
 
   def index
-    exercises = Exercise.joins(:muscular_group).all.order(:name).page(params[:page])
+    exercises = Exercise.all.order(:name).page(params[:page])
     render('exercises/index', formats: :json, locals: { exercises: exercises }, status: :ok)
   end
 
