@@ -25,4 +25,31 @@ class ApplicationController < ActionController::API
   def current_personal
     Personal.find_by(user: current_user)
   end
+
+  # Render default index return.
+  # @param registers [List<Model>] a list of a model.
+  # @param model [Symbol] symbol with model class name without capital chars.
+  def render_all(registers, model:)
+    locals = { "#{model}s".to_sym => registers }
+    render(
+      "#{model}s/index",
+      formats: :json,
+      status: :ok,
+      locals: locals
+    )
+  end
+
+  # Render default show return.
+  # @param register [Model] active model object.
+  # @param model [Symbol] symbol with model class name without capital chars.
+  # @param status [Symbol] http status returned.
+  def render_success(register, model:, status: :ok)
+    locals = { model => register }
+    render(
+      "#{model}s/show",
+      formats: :json,
+      status: status,
+      locals: locals
+    )
+  end
 end
