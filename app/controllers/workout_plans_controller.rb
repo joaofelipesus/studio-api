@@ -5,7 +5,7 @@ class WorkoutPlansController < ApplicationController
 
   def index
     workout_plans = WorkoutPlan.all.order(:name).page(params[:page])
-    render_all(workout_plans, model: :workout_plan)
+    render_all(workout_plans)
   end
 
   def show

@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
 
   def index
     students = Student.joins(:user).all.order(:name)
-    render_all(students, model: :student)
+    render_all(students)
   end
 
   def show
