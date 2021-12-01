@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :student do
-    personal { nil }
-    user { nil }
+    personal { create(:personal) }
+    user { create(:user, :student) }
   end
 end

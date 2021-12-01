@@ -13,5 +13,9 @@ FactoryBot.define do
     trait :personals do
       kind { :personal }
     end
+
+    trait :students do
+      kidn { :student }
+    end
   end
 end
