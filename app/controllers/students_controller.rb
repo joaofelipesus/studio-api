@@ -10,13 +10,13 @@ class StudentsController < ApplicationController
 
   def show
     student = Student.find(params[:id])
-    render_success(student, model: :student)
+    render_success(student)
   end
 
   def create
     student = Student.new(student_params)
     if student.save
-      render_success(student, status: :created, model: :student)
+      render_success(student, status: :created)
     else
       render_error_messages(student)
     end
@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
   def update
     student = Student.find(params[:id])
     if student.update(student_params)
-      render_success(student, model: :student)
+      render_success(student)
     else
       render_error_messages(student)
     end

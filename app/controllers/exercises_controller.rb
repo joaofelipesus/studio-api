@@ -10,13 +10,13 @@ class ExercisesController < ApplicationController
 
   def show
     exercise = Exercise.find(params[:id])
-    render_success(exercise, model: :exercise)
+    render_success(exercise)
   end
 
   def create
     exercise = Exercise.new(exercise_params)
     if exercise.save
-      render_success(exercise, status: :created, model: :exercise)
+      render_success(exercise, status: :created)
     else
       render_error_messages(exercise)
     end
@@ -25,7 +25,7 @@ class ExercisesController < ApplicationController
   def update
     exercise = Exercise.find(params[:id])
     if exercise.update(exercise_params)
-      render_success(exercise, model: :exercise)
+      render_success(exercise)
     else
       render_error_messages(exercise)
     end

@@ -41,12 +41,12 @@ class ApplicationController < ActionController::API
 
   # Render default show return.
   # @param register [Model] active model object.
-  # @param model [Symbol] symbol with model class name without capital chars.
   # @param status [Symbol] http status returned.
-  def render_success(register, model:, status: :ok)
-    locals = { model => register }
+  def render_success(register, status: :ok)
+    model_name = self.class.name.split('Controller').first.underscore[...-1]
+    locals = { model_name.to_sym => register }
     render(
-      "#{model}s/show",
+      "#{model_name}s/show",
       formats: :json,
       status: status,
       locals: locals
