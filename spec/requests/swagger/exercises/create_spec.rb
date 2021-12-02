@@ -4,7 +4,6 @@ require 'swagger_helper'
 
 RSpec.describe 'Create new exercise' do
   let!(:current_user) { create(:user, kind: :personal) }
-  # let(:headers) { authenticate(user: current_user) }
   let!(:muscular_group) { create(:muscular_group) }
 
   path '/api/exercises' do
