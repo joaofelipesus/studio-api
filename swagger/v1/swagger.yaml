@@ -230,6 +230,118 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/students":
+    post:
+      summary: create student
+      tags:
+      - Student
+      consumes:
+      - application/json
+      parameters:
+      - name: student
+        in: body
+        schema:
+          type: object
+          properties:
+            user_attributes:
+              type: object
+              in: body
+              properties:
+                email:
+                  type: string
+                  format: email
+                name:
+                  type: string
+          required:
+          - user_attributes
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '201':
+          description: successful
+    get:
+      summary: List students
+      tags:
+      - Student
+      consumes:
+      - application/json
+      parameters:
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: successful
+  "/api/students/{id}":
+    get:
+      summary: Show student
+      tags:
+      - Student
+      consumes:
+      - application/json
+      parameters:
+      - in: path
+        type: string
+        name: id
+        required: true
+        description: ID
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: Update student
+      tags:
+      - Student
+      consumes:
+      - application/json
+      parameters:
+      - name: student
+        in: body
+        schema:
+          type: object
+          properties:
+            user_attributes:
+              type: object
+              in: body
+              properties:
+                email:
+                  type: string
+                  format: email
+                name:
+                  type: string
+          required:
+          - user_attributes
+      - in: path
+        type: string
+        name: id
+        required: true
+        description: ID
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: successful
   "/api/users/login":
     post:
       summary: authenticate user
