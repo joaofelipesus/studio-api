@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     resources :workout_plans, only: %i[create update show index]
     resources :exercise_workout_plans, only: %i[create update show index]
     resources :students, only: %i[create update show index]
+    resources :schedules, only: %i[create update show index]
   end
 end

@@ -2,10 +2,10 @@
 
 FactoryBot.define do
   factory :schedule do
-    student { nil }
-    status { 'MyString' }
-    personal { nil }
-    start_at { '2021-12-02 21:14:47' }
-    workout_plan { nil }
+    student { create(:student) }
+    status { :pending }
+    personal { create(:personal) }
+    start_at { 2.days.ago }
+    workout_plan { create(:workout_plan) }
   end
 end

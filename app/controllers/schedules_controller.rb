@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SchedulesController < ApplicationController
+  before_action :authenticate
+
   def index
     schedules = Schedule
                 .where(personal_id: current_personal.id)

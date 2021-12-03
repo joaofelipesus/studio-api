@@ -22,7 +22,14 @@
         rest: 'Tempo de descanso'
         repetitions: 'Repetições'
         exercise_sequence: 'Sequência'
-
+      schedule:
+        workout_plan: 'Treino'
+        workout_plan_id: 'Treino'
+        student_id: 'Aluno'
+        student: 'Aluno'
+        personal: 'Personal'
+        personal_id: 'Personal'
+        start_at: 'Horário de início'
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'
