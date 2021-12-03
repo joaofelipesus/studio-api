@@ -20,6 +20,7 @@ RSpec.describe Services::Auth::CreateSession do
 
         it { expect { subject.call }.not_to raise_error }
         it { expect(subject.call).to be_a User }
+        it { expect(subject.call.last_login).not_to be_nil }
       end
     end
 
