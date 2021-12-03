@@ -2,7 +2,10 @@
 
 class SchedulesController < ApplicationController
   def index
-    schedules = Schedule.where(personal_id: current_personal.id).order(start_at: :desc).page(params[:page])
+    schedules = Schedule
+                .where(personal_id: current_personal.id)
+                .order(start_at: :desc)
+                .page(params[:page])
     render_all(schedules)
   end
 
@@ -36,7 +39,7 @@ class SchedulesController < ApplicationController
       :student_id,
       :workout_plan_id,
       :start_at,
-      :status,
+      :status
     ).merge(personal_id: current_personal.id)
   end
 end
