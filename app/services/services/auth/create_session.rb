@@ -12,16 +12,22 @@ module Services
       # @throws [JWT::VerificationError] jwt exception.
       # @throws [JWT::DecodeError] when received token is invalid.
       def call
-        User.find(decoded_token[:user_id])
+        @user = User.find(decoded_token[:user_id])
+        track_login if user
+        user
       end
 
       private
 
-      attr_reader :authorization
+      attr_reader :authorization, :user
 
       def decoded_token
         token = authorization.split(' ').last
         Services::Auth::JwtHandler.decode(token)
+      end
+
+      def track_login
+        user.update(last_login: DateTime.current)
       end
     end
   end
