@@ -188,10 +188,6 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-support (3.10.3)
-    rswag (2.4.0)
-      rswag-api (= 2.4.0)
-      rswag-specs (= 2.4.0)
-      rswag-ui (= 2.4.0)
     rswag-api (2.4.0)
       railties (>= 3.1, < 7.0)
     rswag-specs (2.4.0)
@@ -248,7 +244,9 @@ DEPENDENCIES
   rails-erd
   rails-i18n (~> 6.0.0)
   rspec-rails (~> 5.0.0)
-  rswag
+  rswag-api
+  rswag-specs
+  rswag-ui
   shoulda-matchers (~> 5.0)
   simplecov
   spring

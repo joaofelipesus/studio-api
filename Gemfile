@@ -27,11 +27,12 @@ gem 'jbuilder'
 gem 'kaminari'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
-# Seamlessly adds a Swagger to Rails-based API's
-gem 'rswag'
 
+gem 'rswag-api'
+gem 'rswag-ui'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -42,6 +43,7 @@ group :development, :test do
   gem 'faker'
   # Factory Bot hearts Rails
   gem 'factory_bot_rails'
+  gem 'rswag-specs'
 end
 
 group :development do
