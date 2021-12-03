@@ -2,24 +2,26 @@
 
 require 'swagger_helper'
 
-RSpec.describe 'Create new exercise' do
-  let!(:current_user) { create(:user, kind: :personal) }
-  let!(:muscular_group) { create(:muscular_group) }
+RSpec.describe 'Create new schedule' do
+  let!(:current_user) { create(:personal).user }
+  let!(:student) { create(:student) }
+  let!(:workout_plan) { create(:workout_plan) }
 
-  path '/api/exercises' do
-    post('create exercise') do
-      tags 'Exercise'
+  path '/api/schedules' do
+    post('create schedule') do
+      tags 'Schedule'
       consumes 'application/json'
       parameter(
-        name: :exercise,
+        name: :schedule,
         in: :body,
         schema: {
           type: :object,
           properties: {
-            name: { type: :string },
-            muscular_group_id: { type: :string }
+            student_id: { type: :string },
+            workout_plan_id: { type: :string },
+            start_at: { type: :string, format: :datetime }
           },
-          required: %w[name muscular_group_id]
+          required: %w[student_id workout_plan_id start_at]
         }
       )
 
@@ -34,10 +36,11 @@ RSpec.describe 'Create new exercise' do
       security [Bearer: {}]
 
       response(201, 'successful') do
-        let(:exercise) do
+        let(:schedule) do
           {
-            name: 'NERV',
-            muscular_group_id: muscular_group.id
+            student_id: student.id,
+            workout_plan_id: workout_plan.id,
+            start_at: 3.hours.from_now
           }
         end
 
