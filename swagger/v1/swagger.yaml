@@ -230,6 +230,24 @@ paths:
       responses:
         '200':
           description: successful
+  "/api/muscular_groups":
+    get:
+      summary: List muscular groups
+      tags:
+      - Muscular Group
+      consumes:
+      - application/json
+      parameters:
+      - in: header
+        type: string
+        name: Authorization
+        required: true
+        description: Auth token
+      security:
+      - Bearer: {}
+      responses:
+        '200':
+          description: successful
   "/api/schedules":
     post:
       summary: create schedule
