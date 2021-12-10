@@ -10,6 +10,7 @@
       exercise:
         name: 'Nome'
         muscular_group_id: 'Grupo muscular'
+        muscular_group: 'Grupo muscular'
         status: 'Status'
       workout_plan:
         name: 'Nome'
