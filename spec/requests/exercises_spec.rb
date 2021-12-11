@@ -21,6 +21,7 @@ RSpec.describe 'Exercises', type: :request do
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['exercises'].size).to match(3) }
+    it { expect(response_body['total_pages']).to match(1) }
   end
 
   describe 'GET /api/exercises/:id' do

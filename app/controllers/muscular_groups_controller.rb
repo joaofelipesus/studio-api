@@ -5,6 +5,6 @@ class MuscularGroupsController < ApplicationController
 
   def index
     muscular_groups = MuscularGroup.all.order(name: :asc)
-    render_all(muscular_groups)
+    render_all(muscular_groups, paginate: false)
   end
 end

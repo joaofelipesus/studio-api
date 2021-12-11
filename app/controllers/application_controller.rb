@@ -28,9 +28,15 @@ class ApplicationController < ActionController::API
 
   # Render default index return.
   # @param registers [List<Model>] a list of a model.
-  def render_all(registers)
-    model_name = self.class.name.split('Controller').first.underscore
-    locals = { model_name.to_sym => registers }
+  def render_all(registers, paginate: true)
+    model_class_name = self.class.name.split('Controller').first[...-1]
+    model_name = "#{model_class_name.underscore}s"
+    if paginate
+      total_pages = model_class_name.constantize.page(1).total_pages
+      locals = { model_name.to_sym => registers, total_pages: total_pages }
+    else
+      locals = { model_name.to_sym => registers }
+    end
     render(
       "#{model_name}/index",
       formats: :json,
