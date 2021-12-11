@@ -29,19 +29,11 @@ class ApplicationController < ActionController::API
   # Render default index return.
   # @param registers [List<Model>] a list of a model.
   def render_all(registers, paginate: true)
-    model_class_name = self.class.name.split('Controller').first[...-1]
-    model_name = "#{model_class_name.underscore}s"
-    if paginate
-      total_pages = model_class_name.constantize.page(1).total_pages
-      locals = { model_name.to_sym => registers, total_pages: total_pages }
-    else
-      locals = { model_name.to_sym => registers }
-    end
     render(
-      "#{model_name}/index",
+      "#{model_name}s/index",
       formats: :json,
       status: :ok,
-      locals: locals
+      locals: setup_locals(registers, paginate)
     )
   end
 
@@ -49,7 +41,6 @@ class ApplicationController < ActionController::API
   # @param register [Model] active model object.
   # @param status [Symbol] http status returned.
   def render_success(register, status: :ok)
-    model_name = self.class.name.split('Controller').first.underscore[...-1]
     locals = { model_name.to_sym => register }
     render(
       "#{model_name}s/show",
@@ -57,5 +48,22 @@ class ApplicationController < ActionController::API
       status: status,
       locals: locals
     )
+  end
+
+  def model_class_name
+    self.class.name.split('Controller').first[...-1]
+  end
+
+  def model_name
+    model_class_name.underscore
+  end
+
+  def setup_locals(registers, paginate)
+    if paginate
+      total_pages = model_class_name.constantize.page(1).total_pages
+      { "#{model_name}s".to_sym => registers, total_pages: total_pages }
+    else
+      { "#{model_name}s".to_sym => registers }
+    end
   end
 end
