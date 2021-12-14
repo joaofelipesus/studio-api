@@ -9,7 +9,8 @@ RSpec.describe 'Exercises', type: :request do
     {
       'id' => exercise.id,
       'name' => exercise.name,
-      'muscular_group_id' => exercise.muscular_group_id
+      'muscular_group_id' => exercise.muscular_group_id,
+      'muscular_group' => { 'name' => exercise.muscular_group.name }
     }
   end
 
@@ -20,6 +21,7 @@ RSpec.describe 'Exercises', type: :request do
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['exercises'].size).to match(3) }
+    it { expect(response_body['total_pages']).to match(1) }
   end
 
   describe 'GET /api/exercises/:id' do

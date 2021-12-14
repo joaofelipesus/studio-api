@@ -5,3 +5,4 @@ json.exercise_workout_plans do
     json.partial! 'exercise_workout_plans/exercise_workout_plan', exercise_workout_plan: exercise_workout_plan
   end
 end
+json.total_pages total_pages

@@ -4,8 +4,8 @@ class WorkoutPlansController < ApplicationController
   before_action :authenticate
 
   def index
-    workout_plans = WorkoutPlan.all.order(:name).page(params[:page])
-    render_all(workout_plans)
+    paginated_data = Services::Pagination::Index.new(klass: WorkoutPlan, params: params).call
+    render_all(paginated_data)
   end
 
   def show
