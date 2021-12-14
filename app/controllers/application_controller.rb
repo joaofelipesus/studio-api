@@ -28,12 +28,12 @@ class ApplicationController < ActionController::API
 
   # Render default index return.
   # @param registers [List<Model>] a list of a model.
-  def render_all(registers, paginate: true)
+  def render_all(registers)
     render(
       "#{model_name}s/index",
       formats: :json,
       status: :ok,
-      locals: setup_locals(registers, paginate)
+      locals: registers
     )
   end
 
@@ -58,12 +58,12 @@ class ApplicationController < ActionController::API
     model_class_name.underscore
   end
 
-  def setup_locals(registers, paginate)
-    if paginate
-      total_pages = model_class_name.constantize.page(1).total_pages
-      { "#{model_name}s".to_sym => registers, total_pages: total_pages }
-    else
-      { "#{model_name}s".to_sym => registers }
-    end
-  end
+  # def setup_locals(registers, paginate)
+  #   if paginate
+  #     total_pages = model_class_name.constantize.page(1).total_pages
+  #     { "#{model_name}s".to_sym => registers, total_pages: total_pages }
+  #   else
+  #     { "#{model_name}s".to_sym => registers }
+  #   end
+  # end
 end

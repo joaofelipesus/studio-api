@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Services::Paginator do
+RSpec.describe Services::Pagination::Paginator do
   describe '#call' do
     let(:page) { nil }
     let(:order_by) { nil }
