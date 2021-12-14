@@ -4,8 +4,13 @@ class ExerciseWorkoutPlansController < ApplicationController
   before_action :authenticate
 
   def index
-    exercise_workout_plans = ExerciseWorkoutPlan.all.order(created_at: :desc).page(params[:page])
-    render_all(exercise_workout_plans)
+    # exercise_workout_plans = ExerciseWorkoutPlan.all.order(created_at: :desc).page(params[:page])
+    paginated_data = Services::Pagination::Index.new(
+      klass: ExerciseWorkoutPlan,
+      params: params,
+      order_by: { created_at: :desc }
+    ).call
+    render_all(paginated_data)
   end
 
   def show

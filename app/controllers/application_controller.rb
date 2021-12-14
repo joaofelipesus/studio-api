@@ -27,13 +27,13 @@ class ApplicationController < ActionController::API
   end
 
   # Render default index return.
-  # @param registers [List<Model>] a list of a model.
-  def render_all(registers)
+  # @param paginated_data [List<Model>] a list of a model.
+  def render_all(paginated_data)
     render(
       "#{model_name}s/index",
       formats: :json,
       status: :ok,
-      locals: registers
+      locals: paginated_data
     )
   end
 

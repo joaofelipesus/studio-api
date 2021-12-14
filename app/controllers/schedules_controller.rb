@@ -8,7 +8,7 @@ class SchedulesController < ApplicationController
                 .where(personal_id: current_personal.id)
                 .order(start_at: :desc)
                 .page(params[:page])
-    render_all(schedules)
+    render_all({ schedules: schedules })
   end
 
   def show
