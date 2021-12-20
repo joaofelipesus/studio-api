@@ -5,6 +5,7 @@ class E2eSupportController < ApplicationController
   def setup
     puts '############  e2e setup data  ############'
     setup_personal
+    setup_create_exercise if params[:new_exercise].present?
     puts '##########################################'
     render json: {}, status: :ok
   end
@@ -23,5 +24,15 @@ class E2eSupportController < ApplicationController
     )
     Personal.create(user: user)
     puts '=> create personal'
+  end
+
+  def setup_create_exercise
+    puts '=> CREATE exercise'
+    Exercise.find_by(name: 'Supino e2e').destroy
+  end
+
+  def setup_show_exercise
+    puts '=> SHOW exercise'
+    # Exercise.create(id: ,)
   end
 end
