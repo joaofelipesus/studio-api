@@ -6,6 +6,7 @@ class E2eSupportController < ApplicationController
     puts '############  e2e setup data  ############'
     setup_personal
     setup_create_exercise if params[:new_exercise].present?
+    setup_update_exercise if params[:update_exercise].present?
     puts '##########################################'
     render json: {}, status: :ok
   end
@@ -28,11 +29,16 @@ class E2eSupportController < ApplicationController
 
   def setup_create_exercise
     puts '=> CREATE exercise'
-    Exercise.find_by(name: 'Supino e2e').destroy
+    Exercise.find_by(name: 'Supino e2e')&.destroy
   end
 
-  def setup_show_exercise
-    puts '=> SHOW exercise'
-    # Exercise.create(id: ,)
+  def setup_update_exercise
+    puts '=> UPDATE exercise'
+    Exercise.find_by(id: 'f518aca0-61b9-11ec-90d6-0242ac120003')&.destroy
+    Exercise.create(
+      id: 'f518aca0-61b9-11ec-90d6-0242ac120003',
+      name: '0 Some cool name',
+      muscular_group: MuscularGroup.first
+    )
   end
 end

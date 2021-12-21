@@ -5,10 +5,11 @@ module Services
     class Index
       # @param klass [ActiveModelClass]
       # @param params [ActionController::Parameters] request params.
-      def initialize(klass:, params:, order_by: { name: :asc })
+      def initialize(klass:, params:, order_by: { name: :asc }, join_table: nil)
         @klass = klass
         @params = params
         @order_by = order_by
+        @join_table = join_table
       end
 
       # Returns list with paginated data.
@@ -20,7 +21,7 @@ module Services
 
       private
 
-      attr_reader :klass, :params, :order_by
+      attr_reader :klass, :params, :order_by, :join_table
 
       def paginate(data)
         Services::Pagination::Paginator.new(
@@ -32,7 +33,9 @@ module Services
       end
 
       def raw_registers
-        klass.all
+        klass.all unless join_table
+
+        klass.joins(join_table).all
       end
 
       def search_by_name?
