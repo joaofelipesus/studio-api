@@ -4,12 +4,11 @@ class StudentsController < ApplicationController
   before_action :authenticate
 
   def index
-    students = Student.joins(:user).all
-    paginated_data = Services::Pagination::Paginator.new(
-      data: students,
-      response_key: :students,
-      page: params[:page],
-      order_by: { 'users.name' => :asc }
+    paginated_data = Services::Pagination::Index.new(
+      klass: Student,
+      params: params,
+      order_by: { 'users.name' => :asc },
+      join_table: :user
     ).call
     render_all(paginated_data)
   end

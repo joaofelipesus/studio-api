@@ -5,5 +5,6 @@ json.student do
   json.personal_id student.personal_id
   json.user do
     json.name student.user.name
+    json.email student.user.email
   end
 end
