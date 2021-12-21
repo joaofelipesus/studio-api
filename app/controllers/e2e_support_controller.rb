@@ -7,6 +7,8 @@ class E2eSupportController < ApplicationController
     setup_personal
     setup_create_exercise if params[:new_exercise].present?
     setup_update_exercise if params[:update_exercise].present?
+    setup_create_student if params[:create_student].present?
+    setup_update_student if params[:update_student].present?
     puts '##########################################'
     render json: {}, status: :ok
   end
@@ -40,5 +42,20 @@ class E2eSupportController < ApplicationController
       name: '0 Some cool name',
       muscular_group: MuscularGroup.first
     )
+  end
+
+  def setup_create_student
+    puts '=> CREATE student'
+    user = User.find_by(email: 'create.student@e2e.com')
+    if user
+      Student.find_by(user: user).destroy
+      user.delete
+    end
+  end
+
+  def setup_update_student
+    puts '=> UPDATE student'
+    user = User.create(email: 'student@email.e2e', name: 'Student e2e', kind: :student)
+    Student.create(id: '55797f6a-6265-11ec-90d6-0242ac120003', user: user)
   end
 end
