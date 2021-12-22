@@ -5,3 +5,5 @@ json.schedules do
     json.partial! 'schedules/schedule', schedule: schedule
   end
 end
+json.current_page current_page
+json.total_pages total_pages

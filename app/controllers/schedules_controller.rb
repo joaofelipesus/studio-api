@@ -4,11 +4,12 @@ class SchedulesController < ApplicationController
   before_action :authenticate
 
   def index
-    schedules = Schedule
-                .where(personal_id: current_personal.id)
-                .order(start_at: :desc)
-                .page(params[:page])
-    render_all({ schedules: schedules })
+    paginated_schedules = Services::Pagination::Index.new(
+      klass: Schedule,
+      params: params,
+      order_by: { start_at: :desc }
+    ).call
+    render_all(paginated_schedules)
   end
 
   def show
