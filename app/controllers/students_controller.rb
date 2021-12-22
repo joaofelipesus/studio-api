@@ -4,6 +4,8 @@ class StudentsController < ApplicationController
   before_action :authenticate
 
   def index
+    return render_all_students if params[:all]
+
     paginated_data = Services::Pagination::Index.new(
       klass: Student,
       params: params,
@@ -42,5 +44,10 @@ class StudentsController < ApplicationController
     params.permit(
       user_attributes: %i[email name]
     ).merge(personal_id: current_personal.id)
+  end
+
+  def render_all_students
+    students = Student.joins(:user).where(personal: current_personal).order('users.name' => :asc)
+    render_all({ students: students }, paginate: false)
   end
 end

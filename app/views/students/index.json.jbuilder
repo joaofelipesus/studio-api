@@ -5,5 +5,7 @@ json.students do
     json.partial! 'students/student', student: student
   end
 end
-json.total_pages total_pages
-json.current_page current_page
+if paginate
+  json.total_pages total_pages
+  json.current_page current_page
+end

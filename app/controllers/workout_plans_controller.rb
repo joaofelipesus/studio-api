@@ -4,6 +4,8 @@ class WorkoutPlansController < ApplicationController
   before_action :authenticate
 
   def index
+    return render_all_workout_plans if params[:all]
+
     paginated_data = Services::Pagination::Index.new(klass: WorkoutPlan, params: params).call
     render_all(paginated_data)
   end
@@ -37,5 +39,10 @@ class WorkoutPlansController < ApplicationController
     params.permit(
       :name
     ).merge(personal_id: current_personal.id)
+  end
+
+  def render_all_workout_plans
+    workout_plans = WorkoutPlan.where(personal: current_personal).order(name: :asc)
+    render_all({ workout_plans: workout_plans }, paginate: false)
   end
 end

@@ -22,6 +22,15 @@ RSpec.describe 'Students', type: :request do
     it { expect(response_body['students'].size).to match(3) }
   end
 
+  describe 'GET /api/students?all=true' do
+    let!(:create_students) { 11.times { create(:student, personal: personal) } }
+
+    before(:each) { get('/api/students?all=true', headers: headers(user: personal.user)) }
+
+    it { expect(response).to have_http_status(:ok) }
+    it { expect(response_body['students'].size).to match(11) }
+  end
+
   describe 'GET /api/students/:id' do
     before(:each) { get("/api/students/#{student_id}", headers: headers(user: personal.user)) }
 

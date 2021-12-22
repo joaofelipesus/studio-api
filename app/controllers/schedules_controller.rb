@@ -3,6 +3,7 @@
 class SchedulesController < ApplicationController
   before_action :authenticate
 
+  # TODO: limit by schedules of current personal.
   def index
     paginated_schedules = Services::Pagination::Index.new(
       klass: Schedule,

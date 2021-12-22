@@ -28,7 +28,8 @@ class ApplicationController < ActionController::API
 
   # Render default index return.
   # @param paginated_data [List<Model>] a list of a model.
-  def render_all(paginated_data)
+  def render_all(paginated_data, paginate: true)
+    paginated_data[:paginate] = paginate
     render(
       "#{model_name}s/index",
       formats: :json,
@@ -57,13 +58,4 @@ class ApplicationController < ActionController::API
   def model_name
     model_class_name.underscore
   end
-
-  # def setup_locals(registers, paginate)
-  #   if paginate
-  #     total_pages = model_class_name.constantize.page(1).total_pages
-  #     { "#{model_name}s".to_sym => registers, total_pages: total_pages }
-  #   else
-  #     { "#{model_name}s".to_sym => registers }
-  #   end
-  # end
 end
