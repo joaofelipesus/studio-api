@@ -6,3 +6,4 @@ json.workout_plans do
   end
 end
 json.total_pages total_pages
+json.current_page current_page

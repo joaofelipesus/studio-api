@@ -9,6 +9,8 @@ class E2eSupportController < ApplicationController
     setup_update_exercise if params[:update_exercise].present?
     setup_create_student if params[:create_student].present?
     setup_update_student if params[:update_student].present?
+    setup_create_workout_plan if params[:create_workout_plan].present?
+    setup_update_workout_plan if params[:update_workout_plan].present?
     puts '##########################################'
     render json: {}, status: :ok
   end
@@ -55,7 +57,35 @@ class E2eSupportController < ApplicationController
 
   def setup_update_student
     puts '=> UPDATE student'
-    user = User.create(email: 'student@email.e2e', name: 'Student e2e', kind: :student)
-    Student.create(id: '55797f6a-6265-11ec-90d6-0242ac120003', user: user)
+    puts 'MALAKOI DO HEBRAICO'
+    Student.find_by(id: '55797f6a-6265-11ec-90d6-0242ac120003')&.destroy
+    User.find_by(id: '3a1b25b0-62ca-11ec-90d6-0242ac120003')&.destroy
+    e2e_user = User.find_by(email: 'personal@e2e.com')
+    personal = Personal.find_by(user: e2e_user)
+    user = User.create!(
+      id: '3a1b25b0-62ca-11ec-90d6-0242ac120003',
+      email: 'student@email.e2e',
+      name: '000 Student',
+      password: '123123123',
+      kind: :student
+    )
+    Student.create!(id: '55797f6a-6265-11ec-90d6-0242ac120003', user: user, personal: personal)
+  end
+
+  def setup_create_workout_plan
+    puts '=> CREATE workout-plan'
+    WorkoutPlan.find_by(name: 'Workout routine e2e')&.destroy
+  end
+
+  def setup_update_workout_plan
+    puts '=> UPDATE workout-plan'
+    WorkoutPlan.find('5b4c3a64-62c8-11ec-90d6-0242ac120003')&.destroy
+    e2e_user = User.find_by(email: 'personal@e2e.com')
+    personal = Personal.find_by(user: e2e_user)
+    WorkoutPlan.create(
+      id: '5b4c3a64-62c8-11ec-90d6-0242ac120003',
+      name: '000 Workout routine update e2e',
+      personal_id: personal.id
+    )
   end
 end
