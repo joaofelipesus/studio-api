@@ -12,8 +12,6 @@ Rails.application.routes.draw do
     resources :students, only: %i[create update show index]
     resources :schedules, only: %i[create update show index]
     resources :muscular_groups, only: %i[index]
-    if Rails.env.development?
-      post 'e2e/setup', to: 'e2e_support#setup'
-    end
+    post 'e2e/setup', to: 'e2e_support#setup' if Rails.env.development?
   end
 end

@@ -19,7 +19,8 @@ RSpec.describe 'Create new schedule' do
           properties: {
             student_id: { type: :string },
             workout_plan_id: { type: :string },
-            start_at: { type: :string, format: :datetime }
+            start_at: { type: :string },
+            date: { type: :date, format: :date }
           },
           required: %w[student_id workout_plan_id start_at]
         }
@@ -40,7 +41,8 @@ RSpec.describe 'Create new schedule' do
           {
             student_id: student.id,
             workout_plan_id: workout_plan.id,
-            start_at: 3.hours.from_now
+            start_at: '19:00',
+            date: Date.current
           }
         end
 
