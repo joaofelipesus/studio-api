@@ -7,5 +7,6 @@ FactoryBot.define do
     personal { create(:personal) }
     start_at { 2.days.ago }
     workout_plan { create(:workout_plan) }
+    date { Date.current }
   end
 end

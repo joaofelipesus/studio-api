@@ -8,6 +8,7 @@ RSpec.describe Schedule, type: :model do
   it { should belong_to(:personal) }
 
   it { should validate_presence_of(:start_at) }
+  it { should validate_presence_of(:date) }
 
   it do
     should define_enum_for(:status).with_values(

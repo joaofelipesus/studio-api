@@ -5,7 +5,9 @@ class Schedule < ApplicationRecord
   belongs_to :personal
   belongs_to :workout_plan
 
-  validates :start_at, presence: true
+  # TODO: validate start_at pattern HH:mm
+
+  validates :start_at, :date, presence: true
 
   enum status: {
     pending: 'PENDING',

@@ -43,7 +43,8 @@ class SchedulesController < ApplicationController
       :student_id,
       :workout_plan_id,
       :start_at,
-      :status
+      :status,
+      :date
     ).merge(personal_id: current_personal.id)
   end
 end

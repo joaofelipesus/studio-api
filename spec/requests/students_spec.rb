@@ -9,7 +9,7 @@ RSpec.describe 'Students', type: :request do
     {
       'id' => student.id,
       'personal_id' => student.personal_id,
-      'user' => { 'name' => student.user.name , 'email' => student.user.email }
+      'user' => { 'name' => student.user.name, 'email' => student.user.email }
     }
   end
 
