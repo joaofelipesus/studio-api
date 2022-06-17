@@ -1,25 +1,25 @@
-name: Rubocop
+# name: Rubocop
 
-on:
-  pull_request:
-    branches: [ main ]
-jobs:
-  rubocop:
-    runs-on: ubuntu-latest
-    env:
-      RAILS_ENV: test
-    steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
+# on:
+#   pull_request:
+#     branches: [ main ]
+# jobs:
+#   rubocop:
+#     runs-on: ubuntu-latest
+#     env:
+#       RAILS_ENV: test
+#     steps:
+#     - name: Checkout Repository
+#       uses: actions/checkout@v3
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.1.2'
+#     - name: Set up Ruby
+#       uses: ruby/setup-ruby@v1
+#       with:
+#         ruby-version: '3.1.2'
 
-    - name: Cache bundle
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-    - name: Running rubocop
-      run: bundle exec rubocop
+#     - name: Cache bundle
+#       uses: ruby/setup-ruby@v1
+#       with:
+#         bundler-cache: true
+#     - name: Running rubocop
+#       run: bundle exec rubocop
