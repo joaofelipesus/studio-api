@@ -1,0 +1,74 @@
+name: Ruby
+
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+        RAILS_ENV: test
+        TEST_DATABASE_HOST: 127.0.0.1
+        ENV: test
+        ENVIRONMENT: test
+    services:
+      postgresql:
+        image: postgres
+        ports: ['5432:5432']
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: passwd
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Branch-Name
+      uses: nelonoel/branch-name@v1.0.1
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0.3'
+
+    - name: Cache gems # You can cache your gems to make the workflow run faster
+      uses: actions/cache@v3.0.3
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+    # - name: Setup Chrome
+    #   uses: browser-actions/setup-chrome@latest
+    #   with:
+    #     chrome-version: stable
+
+    # - name: Setup Node
+    #   uses: actions/setup-node@v3.3.0
+    #   with:
+    #     node-version: '12'
+
+    # - name: Yarn install
+    #   uses: borales/actions-yarn@v2.3.0
+    #   with:
+    #     cmd: install # will run `yarn install` command
+
+    - name: Run Install
+      run: |
+        date
+        sudo apt-get -yqq install libpq-dev
+        gem update --system
+        gem install bundler -v "~>2.0"
+        bundle config path vendor/bundle
+        bundle install --jobs 4 --retry 3
+        bundle exec rails db:create
+        bundle exec rails db:migrate
+        bundle exec rails db:seed
+    - name: Run Test
+      run: |
+        bundle exec rspec
