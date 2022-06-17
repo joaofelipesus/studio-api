@@ -4,16 +4,11 @@ on:
     branches:
       - main
 jobs:
-  Version-check:
+  build:
     runs-on: ubuntu-latest
-    name: Bump-N-Tag Version
     steps:
     - uses: actions/checkout@master
-    - name: Increment version
-      id: version
-      uses: vinodhraj/Bump-N-Tag-Version@master
-      with:
-        file_name: './VERSION'
-        tag_version: "true"
+    - name: Bump version and push tag
+      uses: wiktorj/github-tag-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
