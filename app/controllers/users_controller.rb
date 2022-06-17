@@ -2,8 +2,10 @@
 
 class UsersController < ApplicationController
   def login
-    token = Services::Users::Login.new(email: login_params[:email],
-                                       password: login_params[:password]).call
+    token = Users::LoginService.new(
+      email: login_params[:email],
+      password: login_params[:password]
+    ).call
     render json: { token: }, status: :ok
   end
 
@@ -13,7 +15,7 @@ class UsersController < ApplicationController
     params.permit(:email, :password)
   end
 
-  rescue_from Services::Users::Exceptions::InvalidCredentials do |e|
+  rescue_from Users::Exceptions::InvalidCredentials do |e|
     render json: { errors: e.message }, status: :forbidden
   end
 end
