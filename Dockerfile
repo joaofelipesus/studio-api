@@ -1,4 +1,4 @@
-FROM ruby:3.0.3
+FROM ruby:3.1.2
 
 # add nodejs and yarn dependencies for the frontend
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \

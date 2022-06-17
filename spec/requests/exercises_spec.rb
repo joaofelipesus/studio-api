@@ -45,7 +45,7 @@ RSpec.describe 'Exercises', type: :request do
   describe 'POST /api/exercises' do
     let!(:muscular_group) { create(:muscular_group) }
 
-    before(:each) { post('/api/exercises', params: params, headers: headers(user: personal.user)) }
+    before(:each) { post('/api/exercises', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do
       let(:params) { { name: 'Some name', muscular_group_id: muscular_group.id } }
@@ -72,7 +72,7 @@ RSpec.describe 'Exercises', type: :request do
     let!(:exercise) { create(:exercise) }
 
     before(:each) do
-      put("/api/exercises/#{exercise.id}", params: params, headers: headers(user: personal.user))
+      put("/api/exercises/#{exercise.id}", params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do

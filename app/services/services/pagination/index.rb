@@ -25,10 +25,10 @@ module Services
 
       def paginate(data)
         Services::Pagination::Paginator.new(
-          data: data,
+          data:,
           response_key: elements_key,
           page: params[:page],
-          order_by: order_by
+          order_by:
         ).call
       end
 
@@ -44,7 +44,7 @@ module Services
 
       def filtered_data
         Services::Pagination::SearchByName.new(
-          klass: klass,
+          klass:,
           name_pattern: params[:name]
         ).call
       end

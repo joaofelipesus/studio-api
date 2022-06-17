@@ -48,8 +48,8 @@ class ApplicationController < ActionController::API
     render(
       "#{model_name}s/show",
       formats: :json,
-      status: status,
-      locals: locals
+      status:,
+      locals:
     )
   end
 

@@ -12,7 +12,7 @@ RSpec.describe Services::Users::Login do
       expect { subject.call }.to raise_error(invalid_credentials_error).with_message(error_message)
     end
 
-    subject { described_class.new(email: email, password: password) }
+    subject { described_class.new(email:, password:) }
 
     context 'when received email is present on database' do
       context 'when user is confirmed' do

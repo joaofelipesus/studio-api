@@ -23,7 +23,7 @@ RSpec.describe 'Students', type: :request do
   end
 
   describe 'GET /api/students?all=true' do
-    let!(:create_students) { 11.times { create(:student, personal: personal) } }
+    let!(:create_students) { 11.times { create(:student, personal:) } }
 
     before(:each) { get('/api/students?all=true', headers: headers(user: personal.user)) }
 
@@ -50,7 +50,7 @@ RSpec.describe 'Students', type: :request do
   end
 
   describe 'POST /api/students' do
-    before(:each) { post('/api/students', params: params, headers: headers(user: personal.user)) }
+    before(:each) { post('/api/students', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do
       let(:params) do
@@ -83,7 +83,7 @@ RSpec.describe 'Students', type: :request do
     let!(:student) { create(:student) }
 
     before(:each) do
-      put("/api/students/#{student.id}", params: params, headers: headers(user: personal.user))
+      put("/api/students/#{student.id}", params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do

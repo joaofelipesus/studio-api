@@ -31,7 +31,7 @@ RSpec.describe 'Schedules', type: :request do
   end
 
   describe 'GET /api/schedules' do
-    let!(:create_schedules) { 3.times { create(:schedule, personal: personal) } }
+    let!(:create_schedules) { 3.times { create(:schedule, personal:) } }
 
     before(:each) { get('/api/schedules', headers: headers(user: personal.user)) }
 
@@ -61,7 +61,7 @@ RSpec.describe 'Schedules', type: :request do
     let!(:workout_plan) { create(:workout_plan) }
     let!(:student) { create(:student) }
 
-    before(:each) { post('/api/schedules', params: params, headers: headers(user: personal.user)) }
+    before(:each) { post('/api/schedules', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do
       let(:params) do
@@ -102,7 +102,7 @@ RSpec.describe 'Schedules', type: :request do
     let!(:schedule) { create(:schedule) }
 
     before(:each) do
-      put("/api/schedules/#{schedule.id}", params: params, headers: headers(user: personal.user))
+      put("/api/schedules/#{schedule.id}", params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do

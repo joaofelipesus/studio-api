@@ -6,7 +6,7 @@ class WorkoutPlansController < ApplicationController
   def index
     return render_all_workout_plans if params[:all]
 
-    paginated_data = Services::Pagination::Index.new(klass: WorkoutPlan, params: params).call
+    paginated_data = Services::Pagination::Index.new(klass: WorkoutPlan, params:).call
     render_all(paginated_data)
   end
 
@@ -43,6 +43,6 @@ class WorkoutPlansController < ApplicationController
 
   def render_all_workout_plans
     workout_plans = WorkoutPlan.where(personal: current_personal).order(name: :asc)
-    render_all({ workout_plans: workout_plans }, paginate: false)
+    render_all({ workout_plans: }, paginate: false)
   end
 end

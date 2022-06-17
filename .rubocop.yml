@@ -4,7 +4,7 @@ require:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.0.3
+  TargetRubyVersion: 3.1.2
   Exclude:
     - db/**/*
     - vendor/**/*

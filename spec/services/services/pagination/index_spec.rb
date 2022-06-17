@@ -13,7 +13,7 @@ RSpec.describe Services::Pagination::Index do
       create(:exercise, name: 'rei')
     end
 
-    subject { described_class.new(klass: klass, params: params) }
+    subject { described_class.new(klass:, params:) }
 
     context 'when params contains name param' do
       let(:params) { { name: 'a' } }

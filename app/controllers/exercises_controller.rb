@@ -4,7 +4,7 @@ class ExercisesController < ApplicationController
   before_action :authenticate
 
   def index
-    paginated_data = Services::Pagination::Index.new(klass: Exercise, params: params).call
+    paginated_data = Services::Pagination::Index.new(klass: Exercise, params:).call
     render_all(paginated_data)
   end
 

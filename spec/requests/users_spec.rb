@@ -18,7 +18,7 @@ RSpec.describe 'Users', type: :request do
 
         allow(login_service).to receive(:call).and_return(token)
 
-        post('/api/users/login', params: params)
+        post('/api/users/login', params:)
       end
 
       it { expect(response).to have_http_status(:ok) }
@@ -36,7 +36,7 @@ RSpec.describe 'Users', type: :request do
         allow(login_service).to receive(:call)
           .and_raise(Services::Users::Exceptions::InvalidCredentials)
 
-        post('/api/users/login', params: params)
+        post('/api/users/login', params:)
       end
 
       it { expect(response).to have_http_status(:forbidden) }

@@ -7,7 +7,7 @@ class SchedulesController < ApplicationController
   def index
     paginated_schedules = Services::Pagination::Index.new(
       klass: Schedule,
-      params: params,
+      params:,
       order_by: { date: :desc, start_at: :desc }
     ).call
     render_all(paginated_schedules)

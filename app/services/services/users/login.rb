@@ -27,7 +27,7 @@ module Services
       attr_reader :email, :password
 
       def user
-        @user ||= User.find_by(email: email, status: :confirmed)
+        @user ||= User.find_by(email:, status: :confirmed)
       end
 
       def invalid_credentials
