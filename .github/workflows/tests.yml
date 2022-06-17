@@ -11,6 +11,7 @@ jobs:
         TEST_DATABASE_HOST: 127.0.0.1
         ENV: test
         ENVIRONMENT: test
+        JWT_SECRET_KEY: 5c0cdf4faa89019628d06c39f9b1f8e6c8168d1c8cf70d7a9ba86c75d20a0caa10d49f15660cdacf1a1c2984a798577781d3025485f26e2176e3abe23a265380
     services:
       postgresql:
         image: postgres
