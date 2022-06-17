@@ -20,6 +20,8 @@ AllCops:
     - storage/**/*
     - 'lib/tasks/**/*'
     - 'app/controllers/e2e_support_controller.rb'
+    - config/boot.rb
+    - config/environment.rb
 
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
