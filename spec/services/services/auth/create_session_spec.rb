@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Services::Auth::CreateSession do
   describe '#call' do
-    subject { described_class.new(authorization: authorization) }
+    subject { described_class.new(authorization:) }
 
     context 'when when received a token' do
       context 'when token is invalid' do

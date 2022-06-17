@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
 
     paginated_data = Services::Pagination::Index.new(
       klass: Student,
-      params: params,
+      params:,
       order_by: { 'users.name' => :asc },
       join_table: :user
     ).call
@@ -48,6 +48,6 @@ class StudentsController < ApplicationController
 
   def render_all_students
     students = Student.joins(:user).where(personal: current_personal).order('users.name' => :asc)
-    render_all({ students: students }, paginate: false)
+    render_all({ students: }, paginate: false)
   end
 end

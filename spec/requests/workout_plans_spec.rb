@@ -23,7 +23,7 @@ RSpec.describe 'WorkoutPlans', type: :request do
   end
 
   describe 'GET /api/workout_plans?all=true' do
-    let!(:create_workout_plans) { 12.times { create(:workout_plan, personal: personal) } }
+    let!(:create_workout_plans) { 12.times { create(:workout_plan, personal:) } }
 
     before(:each) { get('/api/workout_plans?all=true', headers: headers(user: personal.user)) }
 
@@ -55,7 +55,7 @@ RSpec.describe 'WorkoutPlans', type: :request do
     let(:workout_plan) { WorkoutPlan.last }
 
     before(:each) do
-      post('/api/workout_plans', params: params, headers: headers(user: personal.user))
+      post('/api/workout_plans', params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do
@@ -83,7 +83,7 @@ RSpec.describe 'WorkoutPlans', type: :request do
     before(:each) do
       put(
         "/api/workout_plans/#{workout_plan.id}",
-        params: params,
+        params:,
         headers: headers(user: personal.user)
       )
     end

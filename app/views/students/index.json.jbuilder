@@ -2,7 +2,9 @@
 
 json.students do
   json.array! students do |student|
+    # rubocop:disable Style/HashSyntax
     json.partial! 'students/student', student: student
+    # rubocop:enable Style/HashSyntax
   end
 end
 if paginate

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def login
     token = Services::Users::Login.new(email: login_params[:email],
                                        password: login_params[:password]).call
-    render json: { token: token }, status: :ok
+    render json: { token: }, status: :ok
   end
 
   private

@@ -21,7 +21,7 @@ module Services
         {
           response_key => paginated_data,
           current_page: page,
-          total_pages: total_pages
+          total_pages:
         }
       end
 

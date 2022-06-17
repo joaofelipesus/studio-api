@@ -6,7 +6,7 @@ class ExerciseWorkoutPlansController < ApplicationController
   def index
     paginated_data = Services::Pagination::Index.new(
       klass: ExerciseWorkoutPlan,
-      params: params,
+      params:,
       order_by: { created_at: :desc }
     ).call
     render_all(paginated_data)
