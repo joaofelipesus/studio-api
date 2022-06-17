@@ -13,3 +13,6 @@ development:
 test:
   <<: *default
   database: studio_api_test
+  user: postgres
+  password: passwd
+  host: <%= ENV['TEST_DATABASE_HOST'] %>
