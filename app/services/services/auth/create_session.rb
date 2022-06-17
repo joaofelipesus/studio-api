@@ -3,7 +3,8 @@
 module Services
   module Auth
     class CreateSession
-      # Process JWT token received and if it is valid return a User object, otherwise raises one exception
+      # Process JWT token received and if it is valid return a User object, otherwise raises one
+      #   exception
       def initialize(authorization:)
         @authorization = authorization
       end
@@ -22,7 +23,7 @@ module Services
       attr_reader :authorization, :user
 
       def decoded_token
-        token = authorization.split(' ').last
+        token = authorization.split.last
         Services::Auth::JwtHandler.decode(token)
       end
 

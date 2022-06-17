@@ -4,7 +4,7 @@ module Services
   module Auth
     class JwtHandler
       def self.encode(payload)
-        payload[:exp] = Time.now.to_i + 4 * 3600
+        payload[:exp] = Time.now.to_i + (4 * 3600)
         JWT.encode(payload, ENV.fetch('JWT_SECRET_KEY'))
       end
 

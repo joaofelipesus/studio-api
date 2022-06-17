@@ -44,6 +44,11 @@ group :development, :test do
   # Factory Bot hearts Rails
   gem 'factory_bot_rails'
   gem 'rswag-specs'
+  # linter
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
 end
 
 group :development do
@@ -61,6 +66,8 @@ group :test do
   gem 'database_cleaner-active_record'
   # Code coverage for Ruby with a powerful configuration library and automatic merging of coverage across test suites
   gem 'simplecov'
+  # Simple console output formatter for SimpleCov
+  gem 'simplecov-console', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

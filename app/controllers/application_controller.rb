@@ -4,7 +4,9 @@ class ApplicationController < ActionController::API
   attr_reader :current_user
 
   def authenticate
-    @current_user = Services::Auth::CreateSession.new(authorization: request.headers[:Authorization]).call
+    @current_user = Services::Auth::CreateSession.new(
+      authorization: request.headers[:Authorization]
+    ).call
   end
 
   # Method used to handle create and update methods errors, defines a error return pattern.

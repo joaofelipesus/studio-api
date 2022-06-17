@@ -26,7 +26,9 @@ RSpec.describe 'ExerciseWorkoutPlans', type: :request do
   end
 
   describe 'GET /api/exercise_workout_plans/:id' do
-    before(:each) { get("/api/exercise_workout_plans/#{id}", headers: headers(user: personal.user)) }
+    before(:each) do
+      get("/api/exercise_workout_plans/#{id}", headers: headers(user: personal.user))
+    end
 
     context 'when exercise_workout_plan exist' do
       let!(:exercise_workout_plan) { create(:exercise_workout_plan) }
@@ -46,7 +48,9 @@ RSpec.describe 'ExerciseWorkoutPlans', type: :request do
   describe 'POST /api/exercise_workout_plans' do
     let!(:exercise) { create(:exercise) }
     let!(:workout_plan) { create(:workout_plan) }
-    before(:each) { post('/api/exercise_workout_plans', params: params, headers: headers(user: personal.user)) }
+    before(:each) do
+      post('/api/exercise_workout_plans', params: params, headers: headers(user: personal.user))
+    end
 
     context 'when params are ok' do
       let(:params) do
@@ -89,7 +93,10 @@ RSpec.describe 'ExerciseWorkoutPlans', type: :request do
     let(:exercise_workout_plan) { create(:exercise_workout_plan) }
     let(:id) { exercise_workout_plan.id }
 
-    before(:each) { put("/api/exercise_workout_plans/#{id}", params: params, headers: headers(user: personal.user)) }
+    before(:each) do
+      put("/api/exercise_workout_plans/#{id}", params: params,
+                                               headers: headers(user: personal.user))
+    end
 
     context 'when params are ok' do
       let(:params) do

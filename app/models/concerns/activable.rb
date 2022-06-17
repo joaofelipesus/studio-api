@@ -3,7 +3,8 @@
 module Activable
   extend ActiveSupport::Concern
 
-  # Module used to set status of active or invacitve to a model, check presence and set enum to status attribute.
+  # Module used to set status of active or invacitve to a model, check presence and set enum to
+  #   status attribute.
   included do
     validates :status, presence: true
 

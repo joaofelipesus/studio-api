@@ -55,7 +55,8 @@ RSpec.describe 'Students', type: :request do
     context 'when params are ok' do
       let(:params) do
         {
-          user_attributes: { name: Faker::Games::Zelda.unique.character, email: Faker::Internet.free_email }
+          user_attributes: { name: Faker::Games::Zelda.unique.character,
+                             email: Faker::Internet.free_email }
         }
       end
       let(:student) { Student.last }
@@ -81,7 +82,9 @@ RSpec.describe 'Students', type: :request do
   describe 'PUT/PATCH /api/students/:id' do
     let!(:student) { create(:student) }
 
-    before(:each) { put("/api/students/#{student.id}", params: params, headers: headers(user: personal.user)) }
+    before(:each) do
+      put("/api/students/#{student.id}", params: params, headers: headers(user: personal.user))
+    end
 
     context 'when params are ok' do
       let(:params) do
