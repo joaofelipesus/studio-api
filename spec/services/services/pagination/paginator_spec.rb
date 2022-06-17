@@ -8,7 +8,9 @@ RSpec.describe Services::Pagination::Paginator do
     let(:order_by) { nil }
     let(:data) { User.all }
 
-    subject { described_class.new(data: data, response_key: :users, page: page, order_by: order_by) }
+    subject do
+      described_class.new(data: data, response_key: :users, page: page, order_by: order_by)
+    end
 
     it { expect(subject.call).to be_a Hash }
     it { expect(subject.call.keys).to contain_exactly(:users, :total_pages, :current_page) }

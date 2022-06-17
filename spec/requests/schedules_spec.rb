@@ -98,7 +98,9 @@ RSpec.describe 'Schedules', type: :request do
   describe 'PUT/PATCH /api/schedules/:id' do
     let!(:schedule) { create(:schedule) }
 
-    before(:each) { put("/api/schedules/#{schedule.id}", params: params, headers: headers(user: personal.user)) }
+    before(:each) do
+      put("/api/schedules/#{schedule.id}", params: params, headers: headers(user: personal.user))
+    end
 
     context 'when params are ok' do
       let(:params) do
@@ -128,7 +130,9 @@ RSpec.describe 'Schedules', type: :request do
 
       it { expect(response).to have_http_status(:bad_request) }
 
-      it { expect(response_body['errors']).to match(['Horário de início não pode ficar em branco']) }
+      it {
+        expect(response_body['errors']).to match(['Horário de início não pode ficar em branco'])
+      }
     end
   end
 end

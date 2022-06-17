@@ -33,7 +33,8 @@ RSpec.describe 'Users', type: :request do
         allow(Services::Users::Login).to receive(:new)
           .with(email: anything, password: anything).and_return(login_service)
 
-        allow(login_service).to receive(:call).and_raise(Services::Users::Exceptions::InvalidCredentials)
+        allow(login_service).to receive(:call)
+          .and_raise(Services::Users::Exceptions::InvalidCredentials)
 
         post('/api/users/login', params: params)
       end
