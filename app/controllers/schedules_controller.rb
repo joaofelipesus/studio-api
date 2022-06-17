@@ -8,7 +8,7 @@ class SchedulesController < ApplicationController
     paginated_schedules = Services::Pagination::Index.new(
       klass: Schedule,
       params: params,
-      order_by: { start_at: :desc }
+      order_by: { date: :desc, start_at: :desc }
     ).call
     render_all(paginated_schedules)
   end
@@ -43,7 +43,8 @@ class SchedulesController < ApplicationController
       :student_id,
       :workout_plan_id,
       :start_at,
-      :status
+      :status,
+      :date
     ).merge(personal_id: current_personal.id)
   end
 end

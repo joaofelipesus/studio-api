@@ -10,7 +10,8 @@ RSpec.describe 'Schedules', type: :request do
       'id' => schedule.id,
       'workout_plan_id' => schedule.workout_plan_id,
       'student_id' => schedule.student_id,
-      'start_at' => schedule.start_at.to_s,
+      'start_at' => schedule.start_at,
+      'date' => schedule.date.to_s,
       'status' => schedule.status,
       'personal_id' => schedule.personal_id,
       'student' => {
@@ -67,7 +68,8 @@ RSpec.describe 'Schedules', type: :request do
         {
           student_id: student.id,
           workout_plan_id: workout_plan.id,
-          start_at: 2.hours.ago
+          start_at: '19:00',
+          date: Date.current
         }
       end
 
@@ -85,7 +87,8 @@ RSpec.describe 'Schedules', type: :request do
         {
           student_id: nil,
           workout_plan_id: workout_plan.id,
-          start_at: 2.hours.ago
+          start_at: '18:45',
+          date: Date.current
         }
       end
 
@@ -107,7 +110,8 @@ RSpec.describe 'Schedules', type: :request do
         {
           student_id: schedule.student_id,
           workout_plan_id: schedule.workout_plan_id,
-          start_at: 2.hours.from_now
+          start_at: '19:00',
+          date: Date.current
         }
       end
 

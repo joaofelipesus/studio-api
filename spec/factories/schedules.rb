@@ -5,7 +5,8 @@ FactoryBot.define do
     student { create(:student) }
     status { :pending }
     personal { create(:personal) }
-    start_at { 2.days.ago }
+    start_at { '18:30' }
     workout_plan { create(:workout_plan) }
+    date { Date.current }
   end
 end

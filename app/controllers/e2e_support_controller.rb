@@ -11,7 +11,9 @@ class E2eSupportController < ApplicationController
     setup_update_student if params[:update_student].present?
     setup_create_workout_plan if params[:create_workout_plan].present?
     setup_update_workout_plan if params[:update_workout_plan].present?
-    Rails.logger.debug '##########################################'
+    setup_create_schedule if params[:create_schedule].present?
+    setup_update_schedule if params[:update_schedule].present?
+    puts '##########################################'
     render json: {}, status: :ok
   end
 
@@ -56,8 +58,8 @@ class E2eSupportController < ApplicationController
   end
 
   def setup_update_student
-    Rails.logger.debug '=> UPDATE student'
-    Rails.logger.debug 'MALAKOI DO HEBRAICO'
+    puts '=> UPDATE student'
+    Schedule.where(personal: personal_e2e)&.delete_all
     Student.find_by(id: '55797f6a-6265-11ec-90d6-0242ac120003')&.destroy
     User.find_by(id: '3a1b25b0-62ca-11ec-90d6-0242ac120003')&.destroy
     e2e_user = User.find_by(email: 'personal@e2e.com')
@@ -69,7 +71,7 @@ class E2eSupportController < ApplicationController
       password: '123123123',
       kind: :student
     )
-    Student.create!(id: '55797f6a-6265-11ec-90d6-0242ac120003', user: user, personal: personal)
+    Student.create(id: '55797f6a-6265-11ec-90d6-0242ac120003', user: user, personal: personal)
   end
 
   def setup_create_workout_plan
@@ -78,7 +80,8 @@ class E2eSupportController < ApplicationController
   end
 
   def setup_update_workout_plan
-    Rails.logger.debug '=> UPDATE workout-plan'
+    puts '=> UPDATE workout-plan'
+    Schedule.where(personal: personal_e2e)&.delete_all
     WorkoutPlan.find('5b4c3a64-62c8-11ec-90d6-0242ac120003')&.destroy
     e2e_user = User.find_by(email: 'personal@e2e.com')
     personal = Personal.find_by(user: e2e_user)
@@ -87,5 +90,32 @@ class E2eSupportController < ApplicationController
       name: '000 Workout routine update e2e',
       personal_id: personal.id
     )
+  end
+
+  def setup_create_schedule
+    puts '=> CREATE schedule'
+    Schedule.where(personal: personal_e2e)&.delete_all
+    setup_update_student
+    setup_update_workout_plan
+  end
+
+  def setup_update_schedule
+    puts '=> UPDATE schedule'
+    Schedule.where(personal: personal_e2e)&.delete_all
+    student = setup_update_student
+    workout_plan = setup_update_workout_plan
+    Schedule.create(
+      id: '58a32a7a-ab63-4b9c-86f3-152b6f514b00',
+      student: student,
+      workout_plan: workout_plan,
+      personal: personal_e2e,
+      date: Date.current,
+      start_at: '15:45'
+    )
+  end
+
+  def personal_e2e
+    e2e_user = User.find_by(email: 'personal@e2e.com')
+    Personal.find_by(user: e2e_user)
   end
 end

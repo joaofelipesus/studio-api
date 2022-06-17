@@ -19,7 +19,8 @@ RSpec.describe 'Update schedule' do
           properties: {
             student_id: { type: :string },
             workout_plan_id: { type: :string },
-            start_at: { type: :string, format: :datetime }
+            start_at: { type: :string },
+            date: { type: :string, format: :date }
           },
           required: %w[student_id workout_plan_id start_at]
         }
@@ -48,7 +49,8 @@ RSpec.describe 'Update schedule' do
           {
             student_id: schedule_record.student_id,
             workout_plan_id: schedule_record.workout_plan_id,
-            start_at: 3.hours.from_now
+            start_at: '19:30',
+            date: Date.current
           }
         end
 
