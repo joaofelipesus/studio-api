@@ -19,7 +19,7 @@ AllCops:
     - tmp/**/*
     - storage/**/*
     - 'lib/tasks/**/*'
-    - app/views/custom_projects/pets/home/export.xlsx.axlsx
+    - 'app/controllers/e2e_support_controller.rb'
 
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
