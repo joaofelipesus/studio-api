@@ -2,9 +2,9 @@
 
 require 'rails_helper'
 
-RSpec.describe Services::Users::Login do
+RSpec.describe Users::LoginService do
   describe '#call' do
-    let(:invalid_credentials_error) { Services::Users::Exceptions::InvalidCredentials }
+    let(:invalid_credentials_error) { Users::Exceptions::InvalidCredentials }
     let(:error_message) { 'Email e/ou senha inválido(s).' }
     let(:email) { user.email }
     let(:password) { user.password }

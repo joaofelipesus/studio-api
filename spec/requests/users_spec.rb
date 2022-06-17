@@ -13,7 +13,7 @@ RSpec.describe 'Users', type: :request do
       let(:token) { '1q2w3e4r' }
 
       before(:each) do
-        allow(Services::Users::Login).to receive(:new)
+        allow(Users::LoginService).to receive(:new)
           .with(email: anything, password: anything).and_return(login_service)
 
         allow(login_service).to receive(:call).and_return(token)
@@ -30,11 +30,11 @@ RSpec.describe 'Users', type: :request do
       let(:login_service) { double(:login_service) }
 
       before(:each) do
-        allow(Services::Users::Login).to receive(:new)
+        allow(Users::LoginService).to receive(:new)
           .with(email: anything, password: anything).and_return(login_service)
 
         allow(login_service).to receive(:call)
-          .and_raise(Services::Users::Exceptions::InvalidCredentials)
+          .and_raise(Users::Exceptions::InvalidCredentials)
 
         post('/api/users/login', params:)
       end
