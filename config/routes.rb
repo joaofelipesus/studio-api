@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  mount Rswag::Ui::Engine => '/api-docs'
-  mount Rswag::Api::Engine => '/api-docs'
-
   scope :api do
     post 'e2e/setup', to: 'e2e_support#setup' if Rails.env.development? # e2e tests route.
     post '/users/login', to: 'users#login', as: :login
