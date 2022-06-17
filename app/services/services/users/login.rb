@@ -12,7 +12,8 @@ module Services
 
       # Check received user credentials and if it is valid return a JWT token.
       # @return String [String] encoded JWT token.
-      # @raise [Services::Users::Exceptions::InvalidCredentials] when received email does't match with any
+      # @raise [Services::Users::Exceptions::InvalidCredentials] when received email does't match
+      #   with any
       #   confirmed and active user or received password doesn't match.
       def call
         return invalid_credentials unless user  # NOTE: maybe use & in only one clause ?
