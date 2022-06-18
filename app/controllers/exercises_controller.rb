@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ExercisesController < ApplicationController
-  before_action :authenticate
+  include Secure
 
   def index
     paginated_data = Services::Pagination::Index.new(klass: Exercise, params:).call

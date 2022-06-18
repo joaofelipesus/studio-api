@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SchedulesController < ApplicationController
-  before_action :authenticate
+  include Secure
 
   # TODO: limit by schedules of current personal.
   def index

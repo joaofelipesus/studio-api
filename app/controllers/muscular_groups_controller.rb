@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MuscularGroupsController < ApplicationController
-  before_action :authenticate
+  include Secure
 
   def index
     muscular_groups = MuscularGroup.all.order(name: :asc)

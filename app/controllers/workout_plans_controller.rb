@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WorkoutPlansController < ApplicationController
-  before_action :authenticate
+  include Secure
 
   def index
     return render_all_workout_plans if params[:all]
