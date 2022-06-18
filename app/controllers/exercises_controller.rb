@@ -4,12 +4,11 @@ class ExercisesController < ApplicationController
   include Secure
 
   def index
-    paginated_data = Services::Pagination::Index.new(klass: Exercise, params:).call
-    render_all(paginated_data)
+    render('exercises/index', formats: :json, locals: { paginated_data: paginated_exercises })
   end
 
   def show
-    exercise = Exercise.find(params[:id])
+    exercise = Exercise.find_by!(id: params[:id], personal_id: current_personal.id)
     render_success(exercise)
   end
 
@@ -38,5 +37,14 @@ class ExercisesController < ApplicationController
       :name,
       :muscular_group_id
     ).merge(personal_id: current_personal.id)
+  end
+
+  def paginated_exercises
+    ExercisesQuery.call(
+      params: {
+        page: params[:page],
+        personal_id: current_personal.id
+      }
+    )
   end
 end
