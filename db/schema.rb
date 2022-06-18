@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[6.1].define(version: 2021_12_23_001717) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_06_18_204630) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -22,8 +21,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_12_23_001717) do
     t.integer "exercise_sequence"
     t.string "rest"
     t.string "repetitions"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["exercise_id"], name: "index_exercise_workout_plans_on_exercise_id"
     t.index ["workout_plan_id"], name: "index_exercise_workout_plans_on_workout_plan_id"
   end
@@ -32,21 +31,23 @@ ActiveRecord::Schema[6.1].define(version: 2021_12_23_001717) do
     t.string "name"
     t.uuid "muscular_group_id", null: false
     t.string "status", default: "ACTIVE"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "personals_id"
     t.index ["muscular_group_id"], name: "index_exercises_on_muscular_group_id"
+    t.index ["personals_id"], name: "index_exercises_on_personals_id"
   end
 
   create_table "muscular_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "personals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_personals_on_user_id"
   end
 
@@ -55,8 +56,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_12_23_001717) do
     t.string "status", default: "PENDING"
     t.uuid "personal_id", null: false
     t.uuid "workout_plan_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.date "date"
     t.string "start_at"
     t.index ["personal_id"], name: "index_schedules_on_personal_id"
@@ -67,8 +68,8 @@ ActiveRecord::Schema[6.1].define(version: 2021_12_23_001717) do
   create_table "students", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "personal_id", null: false
     t.uuid "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["personal_id"], name: "index_students_on_personal_id"
     t.index ["user_id"], name: "index_students_on_user_id"
   end
@@ -79,19 +80,19 @@ ActiveRecord::Schema[6.1].define(version: 2021_12_23_001717) do
     t.string "status", default: "PENDING"
     t.string "name"
     t.string "confirmation_token"
-    t.datetime "last_login"
-    t.datetime "confirmed_at"
+    t.datetime "last_login", precision: nil
+    t.datetime "confirmed_at", precision: nil
     t.string "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "workout_plans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "personal_id", null: false
     t.string "name"
     t.string "status", default: "ACTIVE"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["personal_id"], name: "index_workout_plans_on_personal_id"
   end
 
