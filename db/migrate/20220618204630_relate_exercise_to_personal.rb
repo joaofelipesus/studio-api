@@ -2,6 +2,6 @@
 
 class RelateExerciseToPersonal < ActiveRecord::Migration[7.0]
   def change
-    add_reference :exercises, :personals, type: :uuid, index: true
+    add_reference :exercises, :personal, type: :uuid, index: true
   end
 end

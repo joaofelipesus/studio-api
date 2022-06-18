@@ -33,9 +33,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_18_204630) do
     t.string "status", default: "ACTIVE"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "personals_id"
+    t.uuid "personal_id"
     t.index ["muscular_group_id"], name: "index_exercises_on_muscular_group_id"
-    t.index ["personals_id"], name: "index_exercises_on_personals_id"
+    t.index ["personal_id"], name: "index_exercises_on_personal_id"
   end
 
   create_table "muscular_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
