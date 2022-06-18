@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
-class ExercisesQuery
-  # def self.base_relation
-  #   Exercise.all
-  # end
-
-  def initialize(params:)
-    @params = params
-    @relation = Exercise.all
+class ExercisesQuery < BaseQuery
+  def base_relation
+    Exercise.all
   end
 
-  def self.call(params:)
-    new(params:).call
-  end
-
+  # rubocop:disable Metrics/MethodLength
   def call
     joins
     apply_filters
@@ -27,6 +19,7 @@ class ExercisesQuery
       }
     }
   end
+  # rubocop:enable Metrics/MethodLength
 
   private
 
@@ -48,22 +41,5 @@ class ExercisesQuery
 
   def order
     @relation = @relation.order(name: :asc)
-  end
-
-  # TODO: extract pagination.
-  ELEMENTS_PER_PAGE = 10
-
-  def paginate
-    @relation = @relation.page(current_page).per(ELEMENTS_PER_PAGE)
-  end
-
-  def total_pages
-    @relation.total_pages
-  end
-
-  def current_page
-    return 1 if params[:page].blank?
-
-    params[:page]
   end
 end
