@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StudentsController < ApplicationController
-  before_action :authenticate
+  include Secure
 
   def index
     return render_all_students if params[:all]
