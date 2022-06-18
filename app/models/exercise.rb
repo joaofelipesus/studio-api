@@ -4,6 +4,7 @@ class Exercise < ApplicationRecord
   include Activable
 
   belongs_to :muscular_group
+  belongs_to :personal
 
   validates :name, presence: true
   validates :name, uniqueness: true
