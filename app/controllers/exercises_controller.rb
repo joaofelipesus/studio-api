@@ -37,6 +37,6 @@ class ExercisesController < ApplicationController
     params.permit(
       :name,
       :muscular_group_id
-    )
+    ).merge(personal_id: current_personal.id)
   end
 end
