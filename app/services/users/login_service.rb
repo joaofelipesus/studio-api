@@ -18,7 +18,13 @@ module Users
       return invalid_credentials unless user  # NOTE: maybe use & in only one clause ?
       return invalid_credentials unless user.authenticate(password)
 
-      Services::Auth::JwtHandler.encode({ user_id: user.id, kind: user.kind })
+      Services::Auth::JwtHandler.encode(
+        {
+          user_id: user.id,
+          kind: user.kind,
+          email: user.email
+        }
+      )
     end
 
     private

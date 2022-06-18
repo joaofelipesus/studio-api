@@ -16,6 +16,8 @@ services:
       - "mailcatcher"
     build: .
     command: bash -c "(bundle check || bundle install) && bundle exec puma -C config/puma.rb"
+    stdin_open: true
+    tty: true
     ports:
       - "3000:3000"
     volumes:
