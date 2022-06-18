@@ -6,6 +6,7 @@ RSpec.describe Exercise, type: :model do
   subject { create(:exercise) }
 
   it { should belong_to(:muscular_group) }
+  it { should belong_to(:personal) }
 
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:status) }

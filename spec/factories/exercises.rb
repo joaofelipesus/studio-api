@@ -5,5 +5,6 @@ FactoryBot.define do
     name { Faker::Games::Zelda.unique.character }
     muscular_group { create(:muscular_group) }
     status { :active }
+    personal
   end
 end

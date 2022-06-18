@@ -15,7 +15,7 @@ RSpec.describe 'Exercises', type: :request do
   end
 
   describe 'GET /api/exercises' do
-    let!(:create_exercises) { 3.times { create(:exercise) } }
+    let!(:create_exercises) { 3.times { create(:exercise, personal:) } }
 
     before(:each) { get('/api/exercises', headers: headers(user: personal.user)) }
 
@@ -28,7 +28,7 @@ RSpec.describe 'Exercises', type: :request do
     before(:each) { get("/api/exercises/#{exercise_id}", headers: headers(user: personal.user)) }
 
     context 'when exercise exist' do
-      let!(:exercise) { create(:exercise) }
+      let!(:exercise) { create(:exercise, personal:) }
       let(:exercise_id) { exercise.id }
 
       it { expect(response).to have_http_status(:ok) }
