@@ -69,7 +69,7 @@ RSpec.describe 'Exercises', type: :request do
 
   describe 'PUT/PATCH /api/exercises/:id' do
     let!(:muscular_group) { create(:muscular_group) }
-    let!(:exercise) { create(:exercise) }
+    let!(:exercise) { create(:exercise, personal:) }
 
     before(:each) do
       put("/api/exercises/#{exercise.id}", params:, headers: headers(user: personal.user))
