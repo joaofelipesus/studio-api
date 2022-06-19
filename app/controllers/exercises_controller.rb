@@ -2,7 +2,7 @@
 
 class ExercisesController < ApplicationController
   include Secure
-  before_action :set_exercise, only: %i[show update]
+  before_action :set_exercise, only: %i[show update destroy]
 
   def index
     render('exercises/index', formats: :json, locals: { paginated_data: paginated_exercises })
@@ -27,6 +27,11 @@ class ExercisesController < ApplicationController
     else
       render_error_messages(@exercise)
     end
+  end
+
+  def destroy
+    @exercise.destroy
+    render(json: {}, status: :ok)
   end
 
   private
