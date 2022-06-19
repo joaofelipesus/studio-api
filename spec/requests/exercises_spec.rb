@@ -69,7 +69,7 @@ RSpec.describe 'Exercises', type: :request do
 
   describe 'PUT/PATCH /api/exercises/:id' do
     let!(:muscular_group) { create(:muscular_group) }
-    let!(:exercise) { create(:exercise) }
+    let!(:exercise) { create(:exercise, personal:) }
 
     before(:each) do
       put("/api/exercises/#{exercise.id}", params:, headers: headers(user: personal.user))
@@ -92,6 +92,24 @@ RSpec.describe 'Exercises', type: :request do
       it { expect(response).to have_http_status(:bad_request) }
 
       it { expect(response_body['errors']).to match(['Nome não pode ficar em branco']) }
+    end
+  end
+
+  describe 'DELETE /api/exercises/:id' do
+    before(:each) { delete("/api/exercises/#{exercise_id}", headers: headers(user: personal.user)) }
+
+    context 'when exercise exist' do
+      let!(:exercise) { create(:exercise, personal:) }
+      let(:exercise_id) { exercise.id }
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(Exercise.count).to be(0) }
+    end
+
+    context 'when exercise dont exist' do
+      let(:exercise_id) { '1q2w3e4r' }
+
+      it { expect(response).to have_http_status(:not_found) }
     end
   end
 end
