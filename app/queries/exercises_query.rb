@@ -30,6 +30,7 @@ class ExercisesQuery < BaseQuery
   end
 
   def apply_filters
+    filter_by_name
     filter_by_personal
   end
 
@@ -41,5 +42,11 @@ class ExercisesQuery < BaseQuery
 
   def order
     @relation = @relation.order(name: :asc)
+  end
+
+  def filter_by_name
+    return if params[:name].blank?
+
+    @relation = @relation.where('exercises.name ILIKE ?', "%#{params[:name]}%")
   end
 end
