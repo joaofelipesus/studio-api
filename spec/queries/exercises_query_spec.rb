@@ -21,5 +21,27 @@ RSpec.describe ExercisesQuery do
         }
       )
     end
+
+    context 'when searching by name' do
+      before do
+        create(:exercise, personal:, name: 'supino barra')
+        create(:exercise, personal:, name: 'supino halter')
+      end
+
+      it 'renturns exercises which name matches with params[:name]' do
+        params = {
+          personal_id: personal.id,
+          page: 1,
+          name: 'supino'
+        }
+        expect(described_class.call(params:)[:exercises].size).to match(2)
+        expect(described_class.call(params:)[:meta]).to match(
+          {
+            total_pages: 1,
+            current_page: 1
+          }
+        )
+      end
+    end
   end
 end
