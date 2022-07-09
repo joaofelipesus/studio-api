@@ -16,3 +16,10 @@ MuscularGroup.create(
     { name: 'Abdomên' }
   ]
 )
+
+Objective.create(
+  [
+    { name: 'Ganho de massa magra' },
+    { name: 'Emagrecimento' }
+  ]
+)

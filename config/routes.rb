@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     resources :students, only: %i[create update show index]
     resources :schedules, only: %i[create update show index]
     resources :muscular_groups, only: %i[index]
+    resources :objectives, only: %i[index]
   end
 end
