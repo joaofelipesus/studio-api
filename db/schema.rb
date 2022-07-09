@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_152907) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.bigint "objective_id"
+    t.uuid "objective_id"
     t.index ["objective_id"], name: "index_students_on_objective_id"
     t.index ["personal_id"], name: "index_students_on_personal_id"
   end

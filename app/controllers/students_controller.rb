@@ -4,15 +4,15 @@ class StudentsController < ApplicationController
   include Secure
 
   def index
-    return render_all_students if params[:all]
+    # return render_all_students if params[:all]
 
-    paginated_data = Services::Pagination::Index.new(
-      klass: Student,
-      params:,
-      order_by: { 'users.name' => :asc },
-      join_table: :user
-    ).call
-    render_all(paginated_data)
+    # paginated_data = Services::Pagination::Index.new(
+    #   klass: Student,
+    #   params:,
+    #   order_by: { 'users.name' => :asc },
+    #   join_table: :user
+    # ).call
+    render('students/index', formats: :json, locals: { paginated_data: paginated_students })
   end
 
   def show
@@ -21,7 +21,7 @@ class StudentsController < ApplicationController
   end
 
   def create
-    student = Student.new(student_params).build
+    student = Student.new(student_params)
     if student.save
       render_success(student, status: :created)
     else
@@ -47,8 +47,19 @@ class StudentsController < ApplicationController
     ).merge(personal_id: current_personal.id)
   end
 
-  def render_all_students
-    students = Student.joins(:user).where(personal: current_personal).order('users.name' => :asc)
-    render_all({ students: }, paginate: false)
+  # def render_all_students
+  #   students = Student.joins(:user).where(personal: current_personal).order('users.name' => :asc)
+  #   render_all({ students: }, paginate: false)
+  # end
+
+  def paginated_students
+    StudentsQuery.call(
+      params: {
+        page: params[:page],
+        personal_id: current_personal.id,
+        name: params[:name],
+        all: params[:all]
+      }
+    )
   end
 end

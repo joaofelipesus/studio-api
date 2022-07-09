@@ -5,6 +5,6 @@ class RecreateStudent < ActiveRecord::Migration[7.0]
     remove_reference :students, :user
 
     add_column :students, :name, :string
-    add_reference :students, :objective
+    add_reference :students, :objective, type: :uuid, index: true
   end
 end

@@ -32,6 +32,9 @@
         personal_id: 'Personal'
         start_at: 'Horário de início'
         date: 'Data'
+      student:
+        name: 'Nome'
+        objective_id: 'Objetivo'
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'
