@@ -5,6 +5,7 @@ require 'simplecov'
 #   add_filter %w[app/channels app/mailers app/jobs lib app/controllers/e2e_support_controller]
 # end
 
+# TODO: YOLO
 require 'simplecov-console'
 
 SimpleCov.start 'rails' do
