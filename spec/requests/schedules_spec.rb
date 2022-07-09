@@ -17,10 +17,7 @@ RSpec.describe 'Schedules', type: :request do
       'student' => {
         'id' => schedule.student.id,
         'personal_id' => schedule.student.personal_id,
-        'user' => {
-          'name' => schedule.student.user.name,
-          'email' => schedule.student.user.email
-        }
+        'name' => schedule.student.name
       },
       'workout_plan' => {
         'id' => schedule.workout_plan.id,
