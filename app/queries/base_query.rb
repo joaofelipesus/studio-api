@@ -18,16 +18,24 @@ class BaseQuery
   def order; end
 
   def paginate
+    return if dont_paginate?
+
     @relation = @relation.page(current_page).per(ELEMENTS_PER_PAGE)
   end
 
   def total_pages
+    return 1 if dont_paginate?
+
     @relation.total_pages
   end
 
   def current_page
-    return 1 if params[:page].blank?
+    return 1 if params[:page].blank? || dont_paginate?
 
     params[:page]
+  end
+
+  def dont_paginate?
+    params[:all] == 'true'
   end
 end
