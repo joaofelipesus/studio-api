@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
 require 'simplecov'
-# SimpleCov.start 'rails' do
-#   add_filter %w[app/channels app/mailers app/jobs lib app/controllers/e2e_support_controller]
-# end
-
 require 'simplecov-console'
+
 
 SimpleCov.start 'rails' do
   formatter SimpleCov::Formatter::MultiFormatter.new(
