@@ -3,8 +3,10 @@
 json.student do
   json.id student.id
   json.personal_id student.personal_id
-  json.user do
-    json.name student.user.name
-    json.email student.user.email
+  json.name student.name
+  json.objective_id student.objective_id
+  json.objective do
+    json.id student.objective.id
+    json.name student.objective.name
   end
 end

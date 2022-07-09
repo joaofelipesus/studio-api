@@ -1,20 +1,24 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
-
 RSpec.describe 'Students', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
+  let!(:objective) { create(:objective) }
   let(:student_json) do
     {
       'id' => student.id,
       'personal_id' => student.personal_id,
-      'user' => { 'name' => student.user.name, 'email' => student.user.email }
+      'name' => student.name,
+      'objective_id' => objective.id,
+      'objective' => {
+        'id' => objective.id,
+        'name' => objective.name
+      }
     }
   end
 
   describe 'GET /api/students' do
-    let!(:create_students) { 3.times { create(:student) } }
+    let!(:create_students) { 3.times { create(:student, objective:, personal:) } }
 
     before(:each) { get('/api/students', headers: headers(user: personal.user)) }
 
@@ -35,7 +39,7 @@ RSpec.describe 'Students', type: :request do
     before(:each) { get("/api/students/#{student_id}", headers: headers(user: personal.user)) }
 
     context 'when student exist' do
-      let!(:student) { create(:student) }
+      let!(:student) { create(:student, objective:) }
       let(:student_id) { student.id }
 
       it { expect(response).to have_http_status(:ok) }
@@ -55,8 +59,8 @@ RSpec.describe 'Students', type: :request do
     context 'when params are ok' do
       let(:params) do
         {
-          user_attributes: { name: Faker::Games::Zelda.unique.character,
-                             email: Faker::Internet.free_email }
+          name: Faker::Games::Zelda.unique.character,
+          objective_id: objective.id
         }
       end
       let(:student) { Student.last }
@@ -70,7 +74,7 @@ RSpec.describe 'Students', type: :request do
 
     context 'when params has errors' do
       let(:params) do
-        { user_attributes: { name: nil, email: Faker::Internet.free_email } }
+        { name: nil, objective_id: objective.id }
       end
 
       it { expect(response).to have_http_status(:bad_request) }
@@ -80,7 +84,7 @@ RSpec.describe 'Students', type: :request do
   end
 
   describe 'PUT/PATCH /api/students/:id' do
-    let!(:student) { create(:student) }
+    let!(:student) { create(:student, objective:) }
 
     before(:each) do
       put("/api/students/#{student.id}", params:, headers: headers(user: personal.user))
@@ -88,7 +92,7 @@ RSpec.describe 'Students', type: :request do
 
     context 'when params are ok' do
       let(:params) do
-        { user_attributes: { name: 'Some new name', email: Faker::Internet.free_email } }
+        { name: 'Some new name' }
       end
 
       it { expect(response).to have_http_status(:ok) }
@@ -101,7 +105,7 @@ RSpec.describe 'Students', type: :request do
 
     context 'when params has errors' do
       let(:params) do
-        { user_attributes: { name: nil, email: Faker::Internet.free_email } }
+        { name: nil }
       end
 
       it { expect(response).to have_http_status(:bad_request) }
