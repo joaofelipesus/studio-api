@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+
 require 'simplecov'
+require 'rails_helper'
 require 'simplecov-console'
 
 SimpleCov.start 'rails' do
