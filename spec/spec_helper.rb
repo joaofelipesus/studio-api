@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'simplecov'
 require 'simplecov-console'
 
-
 SimpleCov.start 'rails' do
   formatter SimpleCov::Formatter::MultiFormatter.new(
     [

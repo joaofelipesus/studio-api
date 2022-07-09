@@ -30,7 +30,7 @@ class BaseQuery
   end
 
   def current_page
-    return 1 if params[:page].blank? ||dont_paginate?
+    return 1 if params[:page].blank? || dont_paginate?
 
     params[:page]
   end

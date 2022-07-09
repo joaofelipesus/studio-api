@@ -19,7 +19,7 @@ RSpec.describe 'Schedules', type: :request do
         'personal_id' => schedule.student.personal_id,
         'name' => schedule.student.name,
         'objective_id' => schedule.student.objective_id,
-        'objective' =>{
+        'objective' => {
           'id' => schedule.student.objective_id,
           'name' => schedule.student.objective.name
         }
