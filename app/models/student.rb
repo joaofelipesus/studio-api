@@ -2,7 +2,8 @@
 
 class Student < ApplicationRecord
   belongs_to :personal
-  belongs_to :user
+  belongs_to :objective
 
-  accepts_nested_attributes_for :user, update_only: true
+  validates :name, uniqueness: true
+  validates :name, presence: true
 end

@@ -3,8 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe Student, type: :model do
-  it { should belong_to(:personal) }
-  it { should belong_to(:user) }
+  subject(:student) { build(:student) }
 
-  it { should accept_nested_attributes_for(:user) }
+  it { should belong_to(:personal) }
+  it { is_expected.to belong_to(:objective) }
+
+  it { is_expected.to validate_presence_of(:name) }
+  it { is_expected.to validate_presence_of(:name) }
 end
