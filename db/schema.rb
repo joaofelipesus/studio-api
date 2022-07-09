@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_18_204630) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_09_152907) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -44,6 +44,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_18_204630) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "objectives", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "personals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.datetime "created_at", null: false
@@ -67,11 +73,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_18_204630) do
 
   create_table "students", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "personal_id", null: false
-    t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.bigint "objective_id"
+    t.index ["objective_id"], name: "index_students_on_objective_id"
     t.index ["personal_id"], name: "index_students_on_personal_id"
-    t.index ["user_id"], name: "index_students_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -104,6 +111,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_18_204630) do
   add_foreign_key "schedules", "students"
   add_foreign_key "schedules", "workout_plans"
   add_foreign_key "students", "personals"
-  add_foreign_key "students", "users"
   add_foreign_key "workout_plans", "personals"
 end
