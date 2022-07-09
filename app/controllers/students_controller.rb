@@ -21,7 +21,7 @@ class StudentsController < ApplicationController
   end
 
   def create
-    student = StudentBuilder.new(student_params).build
+    student = Student.new(student_params).build
     if student.save
       render_success(student, status: :created)
     else
@@ -42,7 +42,8 @@ class StudentsController < ApplicationController
 
   def student_params
     params.permit(
-      user_attributes: %i[email name]
+      :name,
+      :objective_id
     ).merge(personal_id: current_personal.id)
   end
 
