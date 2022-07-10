@@ -113,4 +113,21 @@ RSpec.describe 'Students', type: :request do
       it { expect(response_body['errors']).to match(['Nome não pode ficar em branco']) }
     end
   end
+
+  describe 'DELETE /api/students/:id' do
+    before(:each) { delete("/api/students/#{student_id}", headers: headers(user: personal.user)) }
+
+    context 'when student exist' do
+      let!(:student) { create(:student, objective:) }
+      let(:student_id) { student.id }
+
+      it { expect(response).to have_http_status(:ok) }
+    end
+
+    context 'when student dont exist' do
+      let(:student_id) { '1q2w3e4r' }
+
+      it { expect(response).to have_http_status(:not_found) }
+    end
+  end
 end
