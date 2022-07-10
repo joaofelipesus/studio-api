@@ -14,7 +14,7 @@ RSpec.describe 'WorkoutPlans', type: :request do
   end
 
   describe 'GET /api/workout_plans' do
-    let!(:create_workout_plans) { 3.times { create(:workout_plan) } }
+    let!(:create_workout_plans) { 3.times { create(:workout_plan, personal:) } }
 
     before(:each) { get('/api/workout_plans', headers: headers(user: personal.user)) }
 

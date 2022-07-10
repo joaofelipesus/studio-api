@@ -4,10 +4,11 @@ class WorkoutPlansController < ApplicationController
   include Secure
 
   def index
-    return render_all_workout_plans if params[:all]
-
-    paginated_data = Services::Pagination::Index.new(klass: WorkoutPlan, params:).call
-    render_all(paginated_data)
+    render(
+      'workout_plans/index',
+      formats: :json,
+      locals: { paginated_data: paginated_workout_plans }
+    )
   end
 
   def show
@@ -41,8 +42,14 @@ class WorkoutPlansController < ApplicationController
     ).merge(personal_id: current_personal.id)
   end
 
-  def render_all_workout_plans
-    workout_plans = WorkoutPlan.where(personal: current_personal).order(name: :asc)
-    render_all({ workout_plans: }, paginate: false)
+  def paginated_workout_plans
+    WorkoutPlansQuery.call(
+      params: {
+        page: params[:page],
+        personal_id: current_personal.id,
+        name: params[:name],
+        all: params[:all]
+      }
+    )
   end
 end
