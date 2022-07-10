@@ -7,6 +7,8 @@ RSpec.describe WorkoutPlan, type: :model do
 
   it { should belong_to(:personal) }
 
+  it { is_expected.to have_many(:exercise_workout_plans) }
+
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:status) }
 
