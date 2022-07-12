@@ -48,7 +48,8 @@ class ExercisesController < ApplicationController
       params: {
         page: params[:page],
         personal_id: current_personal.id,
-        name: params[:name]
+        name: params[:name],
+        all: params[:all]
       }
     )
   end
