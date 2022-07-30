@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :exercises_group do
-    workout_plan { nil }
+    workout_plan
     execution_sequence { 1 }
   end
 end

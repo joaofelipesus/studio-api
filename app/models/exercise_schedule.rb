@@ -5,7 +5,7 @@ class ExerciseSchedule < ApplicationRecord
   belongs_to :exercises_group
 
   validates :exercise_sequence, :rest, :repetitions, presence: true
-  validates :exercise_sequence, uniqueness: { scope: %i[workout_plan_id] }
+  validates :exercise_sequence, uniqueness: { scope: %i[exercises_group_id] }
   validates :exercise_sequence, length: { minimum: 1 }
 
   enum rest: {
