@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :student do
     personal { create(:personal) }
-    name { Faker::Games::Zelda.unique.character }
+    name { Faker::Name.unique.name }
 
     objective
   end

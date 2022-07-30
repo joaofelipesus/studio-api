@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :objective do
-    name { Faker::Games::Zelda.unique.character }
+    name { Faker::JapaneseMedia::Naruto.character }
   end
 end

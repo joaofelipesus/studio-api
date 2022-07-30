@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :workout_plan do
     personal { create(:personal) }
-    name { Faker::Games::Zelda.unique.character }
+    name { Faker::Address.unique.country }
     status { :active }
   end
 end

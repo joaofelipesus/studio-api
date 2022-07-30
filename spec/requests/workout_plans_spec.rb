@@ -23,12 +23,12 @@ RSpec.describe 'WorkoutPlans', type: :request do
   end
 
   describe 'GET /api/workout_plans?all=true' do
-    let!(:create_workout_plans) { 12.times { create(:workout_plan, personal:) } }
+    let!(:create_workout_plans) { 3.times { create(:workout_plan, personal:) } }
 
     before(:each) { get('/api/workout_plans?all=true', headers: headers(user: personal.user)) }
 
     it { expect(response).to have_http_status(:ok) }
-    it { expect(response_body['workout_plans'].size).to match(12) }
+    it { expect(response_body['workout_plans'].size).to match(3) }
   end
 
   describe 'GET /api/workout_plans/:id' do
