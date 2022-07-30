@@ -6,6 +6,7 @@ RSpec.describe WorkoutPlan, type: :model do
   subject { create(:workout_plan) }
 
   it { should belong_to(:personal) }
+  it { should have_many(:exercises_groups) }
 
   it { is_expected.to have_many(:exercise_workout_plans) }
 
