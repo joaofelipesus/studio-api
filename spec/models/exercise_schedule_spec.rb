@@ -3,7 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe ExerciseSchedule, type: :model do
-  subject { create(:exercise_schedule, exercises_group: create(:exercises_group, workout_plan: create(:workout_plan, name: 'Yolo'))) }
+  subject do
+    create(:exercise_schedule,
+           exercises_group: create(:exercises_group,
+                                   workout_plan: create(:workout_plan, name: 'Yolo')))
+  end
 
   it { should belong_to(:exercises_group) }
   it { should belong_to(:exercise) }
