@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_09_152907) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_30_144020) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "exercise_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "workout_plan_id", null: false
+    t.integer "execution_sequence"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["workout_plan_id"], name: "index_exercise_groups_on_workout_plan_id"
+  end
 
   create_table "exercise_workout_plans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "workout_plan_id", null: false
@@ -103,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_09_152907) do
     t.index ["personal_id"], name: "index_workout_plans_on_personal_id"
   end
 
+  add_foreign_key "exercise_groups", "workout_plans"
   add_foreign_key "exercise_workout_plans", "exercises"
   add_foreign_key "exercise_workout_plans", "workout_plans"
   add_foreign_key "exercises", "muscular_groups"
