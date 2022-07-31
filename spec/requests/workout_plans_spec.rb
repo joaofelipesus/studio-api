@@ -9,7 +9,8 @@ RSpec.describe 'WorkoutPlans', type: :request do
     {
       'id' => workout_plan.id,
       'name' => workout_plan.name,
-      'personal_id' => workout_plan.personal_id
+      'personal_id' => workout_plan.personal_id,
+      'exercises_groups' => []
     }
   end
 

@@ -27,7 +27,8 @@ RSpec.describe 'Schedules', type: :request do
       'workout_plan' => {
         'id' => schedule.workout_plan.id,
         'name' => schedule.workout_plan.name,
-        'personal_id' => schedule.workout_plan.personal_id
+        'personal_id' => schedule.workout_plan.personal_id,
+        'exercises_groups' => []
       }
     }
   end
