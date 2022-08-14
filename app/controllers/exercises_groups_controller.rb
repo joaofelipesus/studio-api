@@ -5,7 +5,7 @@ class ExercisesGroupsController < ApplicationController
 
   def create
     exercises_group = ExercisesGroups::CreateService.call(exercises_group_params)
-    if exercises_group
+    if exercises_group.valid?
       render_success(exercises_group, status: :created)
     else
       render json: {}, status: :bad_request

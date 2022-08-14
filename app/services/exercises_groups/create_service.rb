@@ -4,7 +4,7 @@ module ExercisesGroups
   class CreateService
     def initialize(params)
       @params = params
-      @exercises_group = nil
+      @exercises_group = ExercisesGroup.new
     end
 
     def self.call(params)
@@ -16,7 +16,8 @@ module ExercisesGroups
         @exercises_group = ExercisesGroup.create!(exercises_group_params)
         create_exercises_schedules
         @exercises_group
-      rescue ActiveRecord::RecordInvalid
+      rescue ActiveRecord::RecordInvalid => exception
+        @exercises_group.errors.add(:base, message: exception.message)
         @exercises_group
       end
     end

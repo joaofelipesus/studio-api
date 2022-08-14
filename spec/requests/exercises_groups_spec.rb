@@ -27,23 +27,25 @@ RSpec.describe 'ExercisesGroups', type: :request do
         expect(response).to have_http_status(:created)
         expect(ExercisesGroup.count).to match(1)
         expect(ExerciseSchedule.count).to match(1)
-        expect(response.parsed_body).to match({
-          "exercises_group" => {
-            "id"=> ExercisesGroup.last.id,
-            "execution_sequence" => 1,
-            "exercise_schedules" => [
-              {
-                "exercise_schedule" => {
-                "id" => exercise_schedule.id,
-                "exercises_group_id" => exercise_schedule.exercises_group_id,
-                "rest" => exercise_schedule.rest,
-                "repetitions" => exercise_schedule.repetitions,
-                "exercise_sequence" => 1
+        expect(response.parsed_body).to match(
+          {
+            'exercises_group' => {
+              'id' => ExercisesGroup.last.id,
+              'execution_sequence' => 1,
+              'exercise_schedules' => [
+                {
+                  'exercise_schedule' => {
+                    'id' => exercise_schedule.id,
+                    'exercises_group_id' => exercise_schedule.exercises_group_id,
+                    'rest' => exercise_schedule.rest,
+                    'repetitions' => exercise_schedule.repetitions,
+                    'exercise_sequence' => 1
+                  }
                 }
-              }
-            ]
+              ]
+            }
           }
-        })
+        )
       end
     end
 
