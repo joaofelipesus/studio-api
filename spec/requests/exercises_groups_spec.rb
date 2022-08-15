@@ -39,7 +39,11 @@ RSpec.describe 'ExercisesGroups', type: :request do
                     'exercises_group_id' => exercise_schedule.exercises_group_id,
                     'rest' => exercise_schedule.rest,
                     'repetitions' => exercise_schedule.repetitions,
-                    'exercise_sequence' => 1
+                    'exercise_sequence' => 1,
+                    'exercise_id' => exercise_schedule.exercise_id,
+                    'exercise' => {
+                      'name' => exercise_schedule.exercise.name
+                    }
                   }
                 }
               ]
