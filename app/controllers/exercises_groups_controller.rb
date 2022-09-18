@@ -12,6 +12,11 @@ class ExercisesGroupsController < ApplicationController
     end
   end
 
+  def destroy
+    ExercisesGroups::DestroyService.call(id: params[:id])
+    render json: {}, status: :ok
+  end
+
   private
 
   def exercises_group_params

@@ -62,4 +62,21 @@ RSpec.describe 'ExercisesGroups', type: :request do
       end
     end
   end
+
+  describe 'destroy' do
+    it 'destroys exercises group' do
+      workout_plan = create(:workout_plan)
+      create(:exercises_group, workout_plan:, execution_sequence: 1)
+      second_exercises_group = create(:exercises_group, workout_plan:, execution_sequence: 2)
+      create(:exercises_group, workout_plan:, execution_sequence: 3)
+
+      delete(
+        "/api/exercises_groups/#{second_exercises_group.id}",
+        headers: headers(user: personal.user)
+      )
+
+      expect(response).to have_http_status(:ok)
+      expect(ExercisesGroup.count).to be(2)
+    end
+  end
 end
