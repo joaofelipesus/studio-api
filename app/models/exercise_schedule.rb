@@ -10,7 +10,7 @@ class ExerciseSchedule < ApplicationRecord
 
   enum rest: {
     free: 'FREE',
-    thirty_seconds: 'THIRTHY_SECONDS',
+    thirthy_seconds: 'THIRTHY_SECONDS',
     one_minute: 'ONE_MINUTE'
   }
 

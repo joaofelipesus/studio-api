@@ -23,7 +23,7 @@ RSpec.describe ExerciseSchedule, type: :model do
   it do
     should define_enum_for(:rest).with_values(
       free: 'FREE',
-      thirty_seconds: 'THIRTHY_SECONDS',
+      thirthy_seconds: 'THIRTHY_SECONDS',
       one_minute: 'ONE_MINUTE'
     ).backed_by_column_of_type(:string)
   end
