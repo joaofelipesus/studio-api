@@ -27,12 +27,12 @@ RSpec.describe 'Students', type: :request do
   end
 
   describe 'GET /api/students?all=true' do
-    let!(:create_students) { 11.times { create(:student, personal:) } }
+    let!(:create_students) { 3.times { create(:student, personal:) } }
 
     before(:each) { get('/api/students?all=true', headers: headers(user: personal.user)) }
 
     it { expect(response).to have_http_status(:ok) }
-    it { expect(response_body['students'].size).to match(11) }
+    it { expect(response_body['students'].size).to match(3) }
   end
 
   describe 'GET /api/students/:id' do
@@ -59,7 +59,7 @@ RSpec.describe 'Students', type: :request do
     context 'when params are ok' do
       let(:params) do
         {
-          name: Faker::Games::Zelda.unique.character,
+          name: Faker::JapaneseMedia::DragonBall.character,
           objective_id: objective.id
         }
       end
