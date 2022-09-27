@@ -9,7 +9,8 @@ class SchedulesController < ApplicationController
     paginated_schedules = SchedulesQuery.call(
       params: {
         page: params[:page],
-        personal_id: current_personal.id
+        personal_id: current_personal.id,
+        date: params[:date]
       }
     )
 

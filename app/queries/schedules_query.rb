@@ -27,12 +27,19 @@ class SchedulesQuery < BaseQuery
 
   def apply_filters
     filter_by_personal
+    filter_by_date
   end
 
   def filter_by_personal
     return if params[:personal_id].blank?
 
     @relation = @relation.where(personal_id: params[:personal_id])
+  end
+
+  def filter_by_date
+    return if params[:date].blank?
+
+    @relation = @relation.where(date: params[:date])
   end
 
   def order

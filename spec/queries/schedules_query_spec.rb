@@ -6,9 +6,9 @@ RSpec.describe SchedulesQuery do
 
     before do
       student = create(:student, personal:, name: 'Du')
-      create(:schedule, personal:, student:)
-      create(:schedule, personal:, student:)
-      create(:schedule, personal:, student:)
+      create(:schedule, personal:, student:, date: 1.day.ago.to_date)
+      create(:schedule, personal:, student:, date: 1.day.ago.to_date)
+      create(:schedule, personal:, student:, date: 2.days.ago.to_date)
 
       other_personal_student = create(:student, name: 'Dudu')
       create(:schedule, student: other_personal_student)
@@ -27,6 +27,23 @@ RSpec.describe SchedulesQuery do
           current_page: 1
         }
       )
+    end
+
+    context 'when searching by date' do
+      it 'renturns students which name matches with params[:date]' do
+        params = {
+          personal_id: personal.id,
+          page: 1,
+          date: 1.day.ago.to_date
+        }
+        expect(described_class.call(params:)[:schedules].size).to match(2)
+        expect(described_class.call(params:)[:meta]).to match(
+          {
+            total_pages: 1,
+            current_page: 1
+          }
+        )
+      end
     end
   end
 end
