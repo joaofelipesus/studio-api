@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :workout_plans, only: %i[create update show index]
     resources :exercise_workout_plans, only: %i[create update show index]
     resources :students, only: %i[create update show index destroy]
-    resources :schedules, only: %i[create update show index]
+    resources :schedules, only: %i[create update show index destroy]
     resources :muscular_groups, only: %i[index]
     resources :objectives, only: %i[index]
     resources :exercises_groups, only: %i[create destroy]
