@@ -7,12 +7,20 @@ class SchedulesController < ApplicationController
 
   # TODO: limit by schedules of current personal.
   def index
-    paginated_schedules = Services::Pagination::Index.new(
-      klass: Schedule,
-      params:,
-      order_by: { date: :desc, start_at: :desc }
-    ).call
-    render_all(paginated_schedules)
+    # paginated_schedules = Services::Pagination::Index.new(
+    #   klass: Schedule,
+    #   params:,
+    #   order_by: { date: :desc, start_at: :desc }
+    # ).call
+
+    paginated_schedules = SchedulesQuery.call(
+      params: {
+        page: params[:page],
+        personal_id: current_personal.id
+      }
+    )
+
+    render('schedules/index', formats: :json, locals: { paginated_data: paginated_schedules })
   end
 
   def show
