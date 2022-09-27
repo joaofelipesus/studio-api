@@ -3,8 +3,17 @@
 RSpec.describe SchedulesQuery do
   describe '#call' do
     let(:personal) { create(:personal) }
-    let!(:create_schedules) { 3.times { create(:schedule, personal:) } }
-    let!(:create_more_schedule) { 2.times { create(:schedule) } }
+
+    before do
+      student = create(:student, personal:, name: 'Du')
+      create(:schedule, personal:, student:)
+      create(:schedule, personal:, student:)
+      create(:schedule, personal:, student:)
+
+      other_personal_student = create(:student, name: 'Dudu')
+      create(:schedule, student: other_personal_student)
+      create(:schedule, student: other_personal_student)
+    end
 
     it 'renturns schedules paginated' do
       params = {

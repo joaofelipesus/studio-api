@@ -5,14 +5,7 @@ class SchedulesController < ApplicationController
 
   before_action :set_schedule, only: %i[show update destroy]
 
-  # TODO: limit by schedules of current personal.
   def index
-    # paginated_schedules = Services::Pagination::Index.new(
-    #   klass: Schedule,
-    #   params:,
-    #   order_by: { date: :desc, start_at: :desc }
-    # ).call
-
     paginated_schedules = SchedulesQuery.call(
       params: {
         page: params[:page],
