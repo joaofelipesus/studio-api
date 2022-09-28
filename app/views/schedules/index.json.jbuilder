@@ -7,5 +7,5 @@ json.schedules do
     # rubocop:enable Style/HashSyntax
   end
 end
-json.current_page paginated_data[:current_page]
-json.total_pages paginated_data[:total_pages]
+json.current_page paginated_data[:meta][:current_page]
+json.total_pages paginated_data[:meta][:total_pages]
