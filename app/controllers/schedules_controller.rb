@@ -10,7 +10,9 @@ class SchedulesController < ApplicationController
       params: {
         page: params[:page],
         personal_id: current_personal.id,
-        date: params[:date]
+        date: params[:date],
+        status: params[:status],
+        student_id: params[:student_id]
       }
     )
 
