@@ -29,6 +29,7 @@ class SchedulesQuery < BaseQuery
     filter_by_personal
     filter_by_student
     filter_by_date
+    filter_by_status
   end
 
   def filter_by_personal
@@ -47,6 +48,12 @@ class SchedulesQuery < BaseQuery
     return if params[:student_id].blank?
 
     @relation = @relation.where(student_id: params[:student_id])
+  end
+
+  def filter_by_status
+    return if params[:status].blank?
+
+    @relation = @relation.where(status: params[:status])
   end
 
   def order
