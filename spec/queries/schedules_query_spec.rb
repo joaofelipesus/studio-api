@@ -6,7 +6,6 @@ RSpec.describe SchedulesQuery do
     let(:student) { create(:student, personal:, name: 'Du') }
 
     before do
-      # student = create(:student, personal:, name: 'Du')
       create(:schedule, personal:, student:, date: 1.day.ago.to_date, status: 'done')
       create(:schedule, personal:, student:, date: 1.day.ago.to_date, status: 'pending')
       create(:schedule, personal:, student:, date: 2.days.ago.to_date, status: 'done')

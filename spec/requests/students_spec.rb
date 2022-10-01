@@ -39,7 +39,7 @@ RSpec.describe 'Students', type: :request do
     before(:each) { get("/api/students/#{student_id}", headers: headers(user: personal.user)) }
 
     context 'when student exist' do
-      let!(:student) { create(:student, objective:) }
+      let!(:student) { create(:student, objective:, name: 'Asuka') }
       let(:student_id) { student.id }
 
       it { expect(response).to have_http_status(:ok) }
@@ -84,7 +84,7 @@ RSpec.describe 'Students', type: :request do
   end
 
   describe 'PUT/PATCH /api/students/:id' do
-    let!(:student) { create(:student, objective:) }
+    let!(:student) { create(:student, objective:, name: 'Shinji') }
 
     before(:each) do
       put("/api/students/#{student.id}", params:, headers: headers(user: personal.user))
@@ -118,7 +118,7 @@ RSpec.describe 'Students', type: :request do
     before(:each) { delete("/api/students/#{student_id}", headers: headers(user: personal.user)) }
 
     context 'when student exist' do
-      let!(:student) { create(:student, objective:) }
+      let!(:student) { create(:student, objective:, name: 'Rei') }
       let(:student_id) { student.id }
 
       it { expect(response).to have_http_status(:ok) }

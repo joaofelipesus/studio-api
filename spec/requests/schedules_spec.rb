@@ -62,7 +62,7 @@ RSpec.describe 'Schedules', type: :request do
 
   describe 'POST /api/schedules' do
     let!(:workout_plan) { create(:workout_plan) }
-    let!(:student) { create(:student) }
+    let!(:student) { create(:student, name: 'Du') }
 
     before(:each) { post('/api/schedules', params:, headers: headers(user: personal.user)) }
 
