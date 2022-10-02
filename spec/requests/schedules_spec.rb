@@ -46,7 +46,7 @@ RSpec.describe 'Schedules', type: :request do
     before(:each) { get("/api/schedules/#{schedule_id}", headers: headers(user: personal.user)) }
 
     context 'when schedule exist' do
-      let!(:schedule) { create(:schedule) }
+      let!(:schedule) { create(:schedule, personal:) }
       let(:schedule_id) { schedule.id }
 
       it { expect(response).to have_http_status(:ok) }
@@ -62,7 +62,7 @@ RSpec.describe 'Schedules', type: :request do
 
   describe 'POST /api/schedules' do
     let!(:workout_plan) { create(:workout_plan) }
-    let!(:student) { create(:student) }
+    let!(:student) { create(:student, name: 'Du') }
 
     before(:each) { post('/api/schedules', params:, headers: headers(user: personal.user)) }
 
@@ -102,7 +102,7 @@ RSpec.describe 'Schedules', type: :request do
   end
 
   describe 'PUT/PATCH /api/schedules/:id' do
-    let!(:schedule) { create(:schedule) }
+    let!(:schedule) { create(:schedule, personal:) }
 
     before(:each) do
       put("/api/schedules/#{schedule.id}", params:, headers: headers(user: personal.user))
@@ -140,6 +140,23 @@ RSpec.describe 'Schedules', type: :request do
       it {
         expect(response_body['errors']).to match(['Horário de início não pode ficar em branco'])
       }
+    end
+  end
+
+  describe 'DELETE /api/schedules/:id' do
+    before(:each) { delete("/api/schedules/#{schedule_id}", headers: headers(user: personal.user)) }
+
+    context 'when schedule exist' do
+      let!(:schedule) { create(:schedule, personal:) }
+      let(:schedule_id) { schedule.id }
+
+      it { expect(response).to have_http_status(:ok) }
+    end
+
+    context 'when schedule dont exist' do
+      let(:schedule_id) { '1q2w3e4r' }
+
+      it { expect(response).to have_http_status(:not_found) }
     end
   end
 end

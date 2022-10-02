@@ -3,19 +3,24 @@
 class SchedulesController < ApplicationController
   include Secure
 
-  # TODO: limit by schedules of current personal.
+  before_action :set_schedule, only: %i[show update destroy]
+
   def index
-    paginated_schedules = Services::Pagination::Index.new(
-      klass: Schedule,
-      params:,
-      order_by: { date: :desc, start_at: :desc }
-    ).call
-    render_all(paginated_schedules)
+    paginated_schedules = SchedulesQuery.call(
+      params: {
+        page: params[:page],
+        personal_id: current_personal.id,
+        date: params[:date],
+        status: params[:status],
+        student_id: params[:student_id]
+      }
+    )
+
+    render('schedules/index', formats: :json, locals: { paginated_data: paginated_schedules })
   end
 
   def show
-    schedule = Schedule.find(params[:id])
-    render_success(schedule)
+    render_success(@schedule)
   end
 
   def create
@@ -28,15 +33,23 @@ class SchedulesController < ApplicationController
   end
 
   def update
-    schedule = Schedule.find(params[:id])
-    if schedule.update(schedule_params)
-      render_success(schedule)
+    if @schedule.update(schedule_params)
+      render_success(@schedule)
     else
-      render_error_messages(schedule)
+      render_error_messages(@schedule)
     end
   end
 
+  def destroy
+    @schedule.destroy
+    render(json: {}, status: :ok)
+  end
+
   private
+
+  def set_schedule
+    @schedule = Schedule.find_by!(id: params[:id], personal: current_personal)
+  end
 
   def schedule_params
     params.permit(
