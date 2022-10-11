@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     resources :schedules, only: %i[create update show index destroy]
     resources :muscular_groups, only: %i[index]
     resources :objectives, only: %i[index]
-    resources :exercises_groups, only: %i[create destroy]
+    resources :exercises_groups, only: %i[create destroy show]
   end
 end
