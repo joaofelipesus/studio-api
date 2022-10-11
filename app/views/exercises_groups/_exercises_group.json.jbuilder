@@ -3,6 +3,7 @@
 json.exercises_group do
   json.id exercises_group.id
   json.execution_sequence exercises_group.execution_sequence
+  json.workout_plan_id exercises_group.workout_plan_id
   json.exercise_schedules do
     json.array! exercises_group.exercise_schedules do |exercise_schedule|
       # rubocop:disable Style/HashSyntax

@@ -32,6 +32,7 @@ RSpec.describe 'ExercisesGroups', type: :request do
             'exercises_group' => {
               'id' => ExercisesGroup.last.id,
               'execution_sequence' => 1,
+              'workout_plan_id' => workout_plan.id,
               'exercise_schedules' => [
                 {
                   'exercise_schedule' => {
