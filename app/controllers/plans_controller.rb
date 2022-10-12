@@ -44,7 +44,8 @@ class PlansController < ApplicationController
     PlansQuery.call(
       params: {
         page: params[:page],
-        personal_id: current_personal.id
+        personal_id: current_personal.id,
+        all: params[:all]
       }
     )
   end
