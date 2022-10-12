@@ -82,6 +82,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_12_143716) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.float "value"
+    t.integer "duration_in_months"
     t.uuid "personal_id", null: false
     t.index ["personal_id"], name: "index_plans_on_personal_id"
   end
