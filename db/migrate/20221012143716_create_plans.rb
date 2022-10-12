@@ -4,7 +4,7 @@ class CreatePlans < ActiveRecord::Migration[7.0]
       t.timestamps
 
       t.string :name
-      t.float :value
+      t.float :price
       t.integer :duration_in_months
 
       t.references :personal, null: false, foreign_key: true, type: :uuid
