@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     resources :objectives, only: %i[index]
     resources :exercises_groups, only: %i[create destroy show]
     resources :plans, only: %i[create update index show]
+    resources :student_plans, only: %i[create update]
   end
 end
