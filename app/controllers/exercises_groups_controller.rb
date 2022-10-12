@@ -12,6 +12,11 @@ class ExercisesGroupsController < ApplicationController
     end
   end
 
+  def show
+    exercises_group = ExercisesGroup.find(params[:id])
+    render_success(exercises_group)
+  end
+
   def destroy
     ExercisesGroups::DestroyService.call(id: params[:id])
     render json: {}, status: :ok

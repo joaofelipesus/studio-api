@@ -32,6 +32,7 @@ RSpec.describe 'ExercisesGroups', type: :request do
             'exercises_group' => {
               'id' => ExercisesGroup.last.id,
               'execution_sequence' => 1,
+              'workout_plan_id' => workout_plan.id,
               'exercise_schedules' => [
                 {
                   'exercise_schedule' => {
@@ -77,6 +78,26 @@ RSpec.describe 'ExercisesGroups', type: :request do
 
       expect(response).to have_http_status(:ok)
       expect(ExercisesGroup.count).to be(2)
+    end
+  end
+
+  describe 'GET /api/exercises_groups/:id' do
+    before do
+      get("/api/exercises_groups/#{exercises_group_id}", headers: headers(user: personal.user))
+    end
+
+    context 'when exercises_group exist' do
+      let(:workout_plan) { create(:workout_plan) }
+      let!(:exercises_group) { create(:exercises_group, workout_plan:) }
+      let(:exercises_group_id) { exercises_group.id }
+
+      it { expect(response).to have_http_status(:ok) }
+    end
+
+    context 'when exercises_group dont exist' do
+      let(:exercises_group_id) { '1q2w3e4r' }
+
+      it { expect(response).to have_http_status(:not_found) }
     end
   end
 end
