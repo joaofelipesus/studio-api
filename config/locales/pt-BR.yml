@@ -35,6 +35,10 @@
       student:
         name: 'Nome'
         objective_id: 'Objetivo'
+      plan:
+        name: 'Nome'
+        duration_in_months: 'Duração em meses'
+        price: 'Preço'
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'

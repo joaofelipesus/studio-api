@@ -42,24 +42,22 @@ RSpec.describe 'Plans', type: :request do
     end
   end
 
-  xdescribe 'POST /api/plans' do
-    let!(:muscular_group) { create(:muscular_group) }
-
+  describe 'POST /api/plans' do
     before(:each) { post('/api/plans', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do
-      let(:params) { { name: 'Some name', muscular_group_id: muscular_group.id } }
-      let(:exercise) { Exercise.last }
+      let(:params) { { name: 'Some name', price: 300.0, duration_in_months: 6 } }
+      let(:plan) { Plan.last }
 
       it { expect(response).to have_http_status(:created) }
 
-      it 'returns created exercise' do
-        expect(response_body['exercise']).to match(plan_json)
+      it 'returns created plan' do
+        expect(response_body['plan']).to match(plan_json)
       end
     end
 
     context 'when params has errors' do
-      let(:params) { { name: nil, muscular_group_id: muscular_group.id } }
+      let(:params) { { name: nil, price: 300, duration_in_months: 999 } }
 
       it { expect(response).to have_http_status(:bad_request) }
 
@@ -67,27 +65,26 @@ RSpec.describe 'Plans', type: :request do
     end
   end
 
-  xdescribe 'PUT/PATCH /api/plans/:id' do
-    let!(:muscular_group) { create(:muscular_group) }
-    let!(:exercise) { create(:exercise, personal:) }
+  describe 'PUT/PATCH /api/plans/:id' do
+    let!(:plan) { create(:plan, personal:) }
 
     before(:each) do
-      put("/api/plans/#{exercise.id}", params:, headers: headers(user: personal.user))
+      put("/api/plans/#{plan.id}", params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do
-      let(:params) { { name: 'Some name', muscular_group_id: muscular_group.id } }
+      let(:params) { { name: 'Some name', price: 400.0, duration_in_months: 12 } }
 
       it { expect(response).to have_http_status(:ok) }
 
-      it 'returns updated exercise' do
-        exercise.reload
-        expect(response_body['exercise']).to match(plan_json)
+      it 'returns updated plan' do
+        plan.reload
+        expect(response_body['plan']).to match(plan_json)
       end
     end
 
-    xcontext 'when params has errors' do
-      let(:params) { { name: nil, muscular_group_id: muscular_group.id } }
+    context 'when params has errors' do
+      let(:params) { { name: nil, price: 300.0, duration_in_months: 6 } }
 
       it { expect(response).to have_http_status(:bad_request) }
 
