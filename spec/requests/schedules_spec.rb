@@ -34,7 +34,9 @@ RSpec.describe 'Schedules', type: :request do
   end
 
   describe 'GET /api/schedules' do
-    let!(:create_schedules) { 3.times { create(:schedule, personal:) } }
+    let!(:create_schedules) do
+      3.times { create(:schedule, personal:, student: create(:student, name: Faker::Name.name)) }
+    end
 
     before(:each) { get('/api/schedules', headers: headers(user: personal.user)) }
 

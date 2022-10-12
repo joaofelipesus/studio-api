@@ -32,12 +32,6 @@ class SchedulesQuery < BaseQuery
     filter_by_status
   end
 
-  def filter_by_personal
-    return if params[:personal_id].blank?
-
-    @relation = @relation.where(personal_id: params[:personal_id])
-  end
-
   def filter_by_date
     return if params[:date].blank?
 

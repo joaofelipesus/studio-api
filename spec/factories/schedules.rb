@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :schedule do
-    student { create(:student) }
+    student { create(:student, name: 'Asuka') }
     status { :pending }
     personal { create(:personal) }
     start_at { '18:30' }

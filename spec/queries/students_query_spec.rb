@@ -3,8 +3,14 @@
 RSpec.describe StudentsQuery do
   describe '#call' do
     let(:personal) { create(:personal) }
-    let!(:create_student) { 3.times { create(:student, personal:) } }
-    let!(:create_more_student) { 2.times { create(:student) } }
+
+    before do
+      create(:student, personal:, name: 'Charmander')
+      create(:student, personal:, name: 'Charmeleon')
+      create(:student, personal:, name: 'Charizard')
+      create(:student, name: 'Shinji Ikari')
+      create(:student, name: 'Asuka Langley')
+    end
 
     it 'renturns student paginated' do
       params = {

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class WorkoutPlansQuery < BaseQuery
+class PlansQuery < BaseQuery
   def base_relation
-    WorkoutPlan.all
+    Plan.all
   end
 
   # rubocop:disable Metrics/MethodLength
@@ -12,7 +12,7 @@ class WorkoutPlansQuery < BaseQuery
     order
     paginate
     {
-      workout_plans: @relation,
+      plans: @relation,
       meta: {
         total_pages:,
         current_page:
@@ -25,22 +25,11 @@ class WorkoutPlansQuery < BaseQuery
 
   attr_reader :params
 
-  def joins
-    @relation = @relation.includes(:exercise_workout_plans)
-  end
-
   def apply_filters
-    filter_by_name
     filter_by_personal
   end
 
   def order
     @relation = @relation.order(name: :asc)
-  end
-
-  def filter_by_name
-    return if params[:name].blank?
-
-    @relation = @relation.where('workout_plans.name ILIKE ?', "%#{params[:name]}%")
   end
 end
