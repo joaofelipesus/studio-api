@@ -38,4 +38,10 @@ class BaseQuery
   def dont_paginate?
     params[:all] == 'true'
   end
+
+  def filter_by_personal
+    return if params[:personal_id].blank?
+
+    @relation = @relation.where(personal_id: params[:personal_id])
+  end
 end

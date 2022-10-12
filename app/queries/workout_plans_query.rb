@@ -34,12 +34,6 @@ class WorkoutPlansQuery < BaseQuery
     filter_by_personal
   end
 
-  def filter_by_personal
-    return if params[:personal_id].blank?
-
-    @relation = @relation.where(personal_id: params[:personal_id])
-  end
-
   def order
     @relation = @relation.order(name: :asc)
   end
