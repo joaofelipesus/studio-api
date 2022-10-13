@@ -29,7 +29,7 @@ class StudentPlansController < ApplicationController
   private
 
   def set_student_plan
-    @student_plan = StudentPlan.find_by!(id: params[:id])
+    @student_plan = StudentPlan.find(params[:id])
   end
 
   def student_plan_params
