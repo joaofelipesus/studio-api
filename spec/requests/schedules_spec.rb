@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Schedules', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
+  # rubocop:disable Metrics/BlockLength
   let(:schedule_json) do
     {
       'id' => schedule.id,
@@ -33,6 +34,7 @@ RSpec.describe 'Schedules', type: :request do
       }
     }
   end
+  # rubocop:enable Metrics/BlockLength
 
   describe 'GET /api/schedules' do
     before(:each) do

@@ -16,11 +16,11 @@ module StudentPlans
     end
 
     def call
-        @student_plan = StudentPlan.create!(student_plan_params)
-        @student_plan
-      rescue ActiveRecord::RecordInvalid => exception
-        @student_plan.errors.add(:base, message: exception.message)
-        @student_plan
+      @student_plan = StudentPlan.create!(student_plan_params)
+      @student_plan
+    rescue ActiveRecord::RecordInvalid => exception
+      @student_plan.errors.add(:base, message: exception.message)
+      @student_plan
     end
 
     private
