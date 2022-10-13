@@ -5,6 +5,10 @@ class StudentPlansController < ApplicationController
 
   before_action :set_student_plan, only: %i[update]
 
+  def student_plans
+    render('student_plans/index', formats: :json, locals: { paginated_data: student_plans })
+  end
+
   def create
     student_plan = StudentPlan.new(student_plan_params)
     if student_plan.save
@@ -34,6 +38,16 @@ class StudentPlansController < ApplicationController
       :plan_id,
       :started_at,
       :status
+    )
+  end
+
+  def student_plans
+    StudentPlansQuery.call(
+      params: {
+        personal_id: current_personal.id,
+        student_id: params[:student_id],
+        all: params[:all]
+      }
     )
   end
 end
