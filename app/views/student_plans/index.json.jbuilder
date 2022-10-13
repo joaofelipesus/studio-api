@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-json.schedules do
-  json.array! paginated_data[:schedules] do |schedule|
+json.student_plans do
+  json.array! paginated_data[:student_plans] do |student_plan|
     # rubocop:disable Style/HashSyntax
-    json.partial! 'schedules/schedule', schedule: schedule
+    json.partial! 'student_plans/student_plan', student_plan: student_plan
     # rubocop:enable Style/HashSyntax
   end
 end

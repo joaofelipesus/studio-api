@@ -17,10 +17,27 @@ RSpec.describe 'StudentPlans', type: :request do
     }
   end
 
-  describe 'POST /api/student_plans' do
-    # let!(:plan) { create(:plan, personal:) }
-    # let!(:student) { create(:student, name: 'Du', personal:) }
+  describe 'GET /api/student_plans/student/:student_id' do
+    before(:each) do
+      create(:student_plan, student:, plan:)
+      get(
+        "/api/student_plans/student/#{student.id}",
+        headers: headers(user: personal.user)
+      )
+    end
 
+    context 'when params are ok' do
+      let(:student_plan) { StudentPlan.last }
+
+      it { expect(response).to have_http_status(:ok) }
+
+      it 'returns created student_plan' do
+        expect(response_body['student_plans'].size).to be(1)
+      end
+    end
+  end
+
+  describe 'POST /api/student_plans' do
     before(:each) { post('/api/student_plans', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do

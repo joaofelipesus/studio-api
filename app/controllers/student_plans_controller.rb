@@ -6,7 +6,7 @@ class StudentPlansController < ApplicationController
   before_action :set_student_plan, only: %i[update]
 
   def student_plans
-    render('student_plans/index', formats: :json, locals: { paginated_data: student_plans })
+    render('student_plans/index', formats: :json, locals: { paginated_data: plans })
   end
 
   def create
@@ -41,7 +41,7 @@ class StudentPlansController < ApplicationController
     )
   end
 
-  def student_plans
+  def plans
     StudentPlansQuery.call(
       params: {
         personal_id: current_personal.id,
