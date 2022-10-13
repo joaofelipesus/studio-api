@@ -10,6 +10,7 @@ RSpec.describe 'Students', type: :request do
       'personal_id' => student.personal_id,
       'name' => student.name,
       'objective_id' => objective.id,
+      'active_plan' => student.active_plan?,
       'objective' => {
         'id' => objective.id,
         'name' => objective.name
