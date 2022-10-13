@@ -10,8 +10,8 @@ class StudentPlansController < ApplicationController
   end
 
   def create
-    student_plan = StudentPlan.new(student_plan_params)
-    if student_plan.save
+    student_plan = StudentPlans::CreateService.call(params: create_params)
+    if student_plan.id
       render_success(student_plan, status: :created)
     else
       render_error_messages(student_plan)
@@ -38,6 +38,14 @@ class StudentPlansController < ApplicationController
       :plan_id,
       :started_at,
       :status
+    )
+  end
+
+  def create_params
+    params.permit(
+      :student_id,
+      :plan_id,
+      :started_at
     )
   end
 
