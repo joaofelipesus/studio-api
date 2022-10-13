@@ -5,7 +5,6 @@ class SchedulesQuery < BaseQuery
     Schedule.all
   end
 
-  # rubocop:disable Metrics/MethodLength
   def call
     joins
     apply_filters
@@ -19,7 +18,6 @@ class SchedulesQuery < BaseQuery
       }
     }
   end
-  # rubocop:enable Metrics/MethodLength
 
   private
 
