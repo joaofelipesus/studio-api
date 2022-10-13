@@ -5,5 +5,6 @@ json.student_plan do
   json.plan_id student_plan.plan_id
   json.student_id student_plan.student_id
   json.started_at student_plan.started_at
+  json.finished_at student_plan.finished_at
   json.status student_plan.status
 end

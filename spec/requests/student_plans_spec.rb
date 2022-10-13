@@ -13,6 +13,7 @@ RSpec.describe 'StudentPlans', type: :request do
       'plan_id' => student_plan.plan_id,
       'student_id' => student_plan.student_id,
       'started_at' => student_plan.started_at.to_s,
+      'finished_at' => student_plan.finished_at.to_s,
       'status' => student_plan.status
     }
   end
@@ -45,8 +46,7 @@ RSpec.describe 'StudentPlans', type: :request do
         {
           student_id: student.id,
           plan_id: plan.id,
-          started_at: Date.current.to_date.to_s,
-          status: :progress
+          started_at: Date.current.to_date.to_s
         }
       end
 
@@ -64,14 +64,15 @@ RSpec.describe 'StudentPlans', type: :request do
         {
           student_id: nil,
           plan_id: plan.id,
-          started_at: Date.current,
-          status: :progress
+          started_at: Date.current.to_s
         }
       end
 
       it { expect(response).to have_http_status(:bad_request) }
 
-      it { expect(response_body['errors']).to match(['Aluno é obrigatório(a)']) }
+      it do
+        expect(response_body['errors']).to match(['A validação falhou: Aluno é obrigatório(a)'])
+      end
     end
   end
 
