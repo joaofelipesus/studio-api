@@ -34,11 +34,13 @@ RSpec.describe 'Schedules', type: :request do
   end
 
   describe 'GET /api/schedules' do
-    let!(:create_schedules) do
-      3.times { create(:schedule, personal:, student: create(:student, name: Faker::Name.name)) }
+    before(:each) do
+      student = create(:student, name: 'Rock Lee')
+      create(:schedule, personal:, student:)
+      create(:schedule, personal:, student:)
+      create(:schedule, personal:, student:)
+      get('/api/schedules', headers: headers(user: personal.user))
     end
-
-    before(:each) { get('/api/schedules', headers: headers(user: personal.user)) }
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['schedules'].size).to match(3) }
