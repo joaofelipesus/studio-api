@@ -14,7 +14,13 @@ RSpec.describe 'StudentPlans', type: :request do
       'student_id' => student_plan.student_id,
       'started_at' => student_plan.started_at.to_s,
       'finished_at' => student_plan.finished_at.to_s,
-      'status' => student_plan.status
+      'status' => student_plan.status,
+      'plan' => {
+        'id' => plan.id,
+        'name' => plan.name,
+        'price' => plan.price,
+        'duration_in_months' => plan.duration_in_months
+      }
     }
   end
 

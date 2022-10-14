@@ -7,4 +7,5 @@ json.student_plan do
   json.started_at student_plan.started_at
   json.finished_at student_plan.finished_at
   json.status student_plan.status
+  json.partial! 'plans/plan', plan: student_plan.plan
 end
