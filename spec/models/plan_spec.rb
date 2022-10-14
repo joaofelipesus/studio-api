@@ -8,7 +8,7 @@ describe Plan, type: :model do
   it { is_expected.to belong_to(:personal) }
 
   it { should validate_presence_of(:name) }
-  it { should validate_presence_of(:price) }
+  it { should validate_presence_of(:monthly_price) }
   it { should validate_presence_of(:duration_in_months) }
 
   it { should validate_uniqueness_of(:name) }

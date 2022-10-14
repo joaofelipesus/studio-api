@@ -38,7 +38,7 @@
       plan:
         name: 'Nome'
         duration_in_months: 'Duração em meses'
-        price: 'Preço'
+        monthly_price: 'Valor da mensalidade'
       student_plan:
         name: 'Nome'
         started_at: 'Data de início'

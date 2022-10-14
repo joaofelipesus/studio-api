@@ -9,7 +9,7 @@ RSpec.describe 'Plans', type: :request do
     {
       'id' => plan.id,
       'name' => plan.name,
-      'price' => plan.price,
+      'monthly_price' => plan.monthly_price,
       'duration_in_months' => plan.duration_in_months
     }
   end
@@ -46,7 +46,7 @@ RSpec.describe 'Plans', type: :request do
     before(:each) { post('/api/plans', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do
-      let(:params) { { name: 'Some name', price: 300.0, duration_in_months: 6 } }
+      let(:params) { { name: 'Some name', monthly_price: 300.0, duration_in_months: 6 } }
       let(:plan) { Plan.last }
 
       it { expect(response).to have_http_status(:created) }
@@ -57,7 +57,7 @@ RSpec.describe 'Plans', type: :request do
     end
 
     context 'when params has errors' do
-      let(:params) { { name: nil, price: 300, duration_in_months: 999 } }
+      let(:params) { { name: nil, monthly_price: 300, duration_in_months: 999 } }
 
       it { expect(response).to have_http_status(:bad_request) }
 
@@ -73,7 +73,7 @@ RSpec.describe 'Plans', type: :request do
     end
 
     context 'when params are ok' do
-      let(:params) { { name: 'Some name', price: 400.0, duration_in_months: 12 } }
+      let(:params) { { name: 'Some name', monthly_price: 400.0, duration_in_months: 12 } }
 
       it { expect(response).to have_http_status(:ok) }
 
@@ -84,7 +84,7 @@ RSpec.describe 'Plans', type: :request do
     end
 
     context 'when params has errors' do
-      let(:params) { { name: nil, price: 300.0, duration_in_months: 6 } }
+      let(:params) { { name: nil, monthly_price: 300.0, duration_in_months: 6 } }
 
       it { expect(response).to have_http_status(:bad_request) }
 

@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :plan do
     name { Faker::Name.name }
-    price { 300.0 }
+    monthly_price { 300.0 }
     duration_in_months { 6 }
 
     personal

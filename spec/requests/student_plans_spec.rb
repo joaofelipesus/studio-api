@@ -18,7 +18,7 @@ RSpec.describe 'StudentPlans', type: :request do
       'plan' => {
         'id' => plan.id,
         'name' => plan.name,
-        'price' => plan.price,
+        'monthly_price' => plan.monthly_price,
         'duration_in_months' => plan.duration_in_months
       }
     }

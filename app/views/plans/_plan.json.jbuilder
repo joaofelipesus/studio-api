@@ -3,6 +3,6 @@
 json.plan do
   json.id plan.id
   json.name plan.name
-  json.price plan.price
+  json.monthly_price plan.monthly_price
   json.duration_in_months plan.duration_in_months
 end
