@@ -2,6 +2,7 @@
 
 class Payment < ApplicationRecord
   belongs_to :student_plan
+  belongs_to :personal
 
   validates :payment_method, :date, :amount, presence: true
 

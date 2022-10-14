@@ -4,15 +4,18 @@ require 'rails_helper'
 
 RSpec.describe Payments::CreateService do
   describe '#call' do
+    let(:personal) { create(:personal) }
+
     context 'when student plan isn\'t settled' do
       it 'creates an payment but don\'t update student_plan payment status' do
-        plan = create(:plan, duration_in_months: 6, monthly_price: 200)
+        plan = create(:plan, duration_in_months: 6, monthly_price: 200, personal:)
         student_plan = create(:student_plan, plan:)
         params = {
           student_plan_id: student_plan.id,
           amount: 500,
           payment_method: :pix,
-          date: Date.current
+          date: Date.current,
+          personal_id: personal.id
         }
 
         expect do
@@ -31,7 +34,8 @@ RSpec.describe Payments::CreateService do
           student_plan_id: student_plan.id,
           amount: 200,
           payment_method: :pix,
-          date: Date.current
+          date: Date.current,
+          personal_id: personal.id
         }
 
         expect do
@@ -52,7 +56,8 @@ RSpec.describe Payments::CreateService do
           student_plan_id: student_plan.id,
           amount: nil,
           payment_method: :pix,
-          date: Date.current
+          date: Date.current,
+          personal_id: personal.id
         }
 
         expect do

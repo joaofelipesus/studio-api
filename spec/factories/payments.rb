@@ -2,8 +2,10 @@
 
 FactoryBot.define do
   factory :payment do
-    student_plan { nil }
-    payment_method { 'MyString' }
+    payment_method { :pix }
+    amount { 100 }
     date { '2022-10-14' }
+    student_plan
+    personal
   end
 end

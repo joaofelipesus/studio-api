@@ -74,9 +74,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_175306) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.uuid "student_plan_id", null: false
+    t.uuid "personal_id", null: false
     t.string "payment_method"
     t.date "date"
     t.decimal "amount", precision: 10, scale: 2
+    t.index ["personal_id"], name: "index_payments_on_personal_id"
     t.index ["student_plan_id"], name: "index_payments_on_student_plan_id"
   end
 
@@ -162,6 +164,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_175306) do
   add_foreign_key "exercise_workout_plans", "workout_plans"
   add_foreign_key "exercises", "muscular_groups"
   add_foreign_key "exercises_groups", "workout_plans"
+  add_foreign_key "payments", "personals"
   add_foreign_key "payments", "student_plans"
   add_foreign_key "personals", "users"
   add_foreign_key "plans", "personals"
