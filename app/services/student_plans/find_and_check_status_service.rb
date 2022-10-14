@@ -11,7 +11,6 @@ module StudentPlans
     end
 
     def call
-      # !student_plans.progress.empty?
       progress_plans.each do |student_plan|
         next if student_plan.canceled? || student_plan.finished?
 
