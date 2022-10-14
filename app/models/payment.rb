@@ -3,7 +3,7 @@
 class Payment < ApplicationRecord
   belongs_to :student_plan
 
-  validates :payment_method, :date, presence: true
+  validates :payment_method, :date, :amount, presence: true
 
   enum payment_method: {
     pix: 'PIX',
