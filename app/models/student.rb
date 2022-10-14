@@ -12,6 +12,7 @@ class Student < ApplicationRecord
   paginates_per 10
 
   def active_plan?
-    !student_plans.progress.empty?
+    # !student_plans.progress.empty?
+    StudentPlans::FindAndCheckStatusService.call(self)
   end
 end

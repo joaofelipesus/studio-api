@@ -24,7 +24,7 @@ RSpec.describe Student, type: :model do
     context 'when student has plans' do
       it 'returns true if one of them has status progress' do
         student = create(:student)
-        create(:student_plan, student:, status: :progress)
+        create(:student_plan, student:, status: :progress, finished_at: 3.days.from_now.to_date)
         expect(student.active_plan?).to be_truthy
       end
 
