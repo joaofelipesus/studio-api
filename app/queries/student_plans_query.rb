@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class PlansQuery < BaseQuery
+class StudentPlansQuery < BaseQuery
   def base_relation
-    Plan.all
+    StudentPlan.all
   end
 
   def call
@@ -11,7 +11,7 @@ class PlansQuery < BaseQuery
     order
     paginate
     {
-      plans: @relation,
+      student_plans: @relation,
       meta: {
         total_pages:,
         current_page:
@@ -24,10 +24,12 @@ class PlansQuery < BaseQuery
   attr_reader :params
 
   def apply_filters
-    filter_by_personal
+    filter_by_student
   end
 
-  def order
-    @relation = @relation.order(name: :asc)
+  def filter_by_student
+    return if params[:student_id].blank?
+
+    @relation = @relation.where(student_id: params[:student_id])
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_12_143716) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_12_200237) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -101,6 +101,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_12_143716) do
     t.index ["workout_plan_id"], name: "index_schedules_on_workout_plan_id"
   end
 
+  create_table "student_plans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "plan_id", null: false
+    t.uuid "student_id", null: false
+    t.date "started_at"
+    t.date "finished_at"
+    t.string "status"
+    t.index ["plan_id"], name: "index_student_plans_on_plan_id"
+    t.index ["student_id"], name: "index_student_plans_on_student_id"
+  end
+
   create_table "students", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "personal_id", null: false
     t.datetime "created_at", null: false
@@ -144,6 +156,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_12_143716) do
   add_foreign_key "schedules", "personals"
   add_foreign_key "schedules", "students"
   add_foreign_key "schedules", "workout_plans"
+  add_foreign_key "student_plans", "plans"
+  add_foreign_key "student_plans", "students"
   add_foreign_key "students", "personals"
   add_foreign_key "workout_plans", "personals"
 end

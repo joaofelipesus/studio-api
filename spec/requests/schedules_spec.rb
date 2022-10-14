@@ -5,6 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Schedules', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
+  # rubocop:disable Metrics/BlockLength
   let(:schedule_json) do
     {
       'id' => schedule.id,
@@ -19,6 +20,7 @@ RSpec.describe 'Schedules', type: :request do
         'personal_id' => schedule.student.personal_id,
         'name' => schedule.student.name,
         'objective_id' => schedule.student.objective_id,
+        'active_plan' => schedule.student.active_plan?,
         'objective' => {
           'id' => schedule.student.objective_id,
           'name' => schedule.student.objective.name
@@ -32,13 +34,16 @@ RSpec.describe 'Schedules', type: :request do
       }
     }
   end
+  # rubocop:enable Metrics/BlockLength
 
   describe 'GET /api/schedules' do
-    let!(:create_schedules) do
-      3.times { create(:schedule, personal:, student: create(:student, name: Faker::Name.name)) }
+    before(:each) do
+      student = create(:student, name: 'Rock Lee')
+      create(:schedule, personal:, student:)
+      create(:schedule, personal:, student:)
+      create(:schedule, personal:, student:)
+      get('/api/schedules', headers: headers(user: personal.user))
     end
-
-    before(:each) { get('/api/schedules', headers: headers(user: personal.user)) }
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['schedules'].size).to match(3) }

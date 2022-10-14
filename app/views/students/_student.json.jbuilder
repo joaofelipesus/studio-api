@@ -5,6 +5,7 @@ json.student do
   json.personal_id student.personal_id
   json.name student.name
   json.objective_id student.objective_id
+  json.active_plan student.active_plan?
   json.objective do
     json.id student.objective.id
     json.name student.objective.name

@@ -10,6 +10,7 @@ RSpec.describe 'Students', type: :request do
       'personal_id' => student.personal_id,
       'name' => student.name,
       'objective_id' => objective.id,
+      'active_plan' => student.active_plan?,
       'objective' => {
         'id' => objective.id,
         'name' => objective.name
@@ -18,18 +19,24 @@ RSpec.describe 'Students', type: :request do
   end
 
   describe 'GET /api/students' do
-    let!(:create_students) { 3.times { create(:student, objective:, personal:) } }
-
-    before(:each) { get('/api/students', headers: headers(user: personal.user)) }
+    before(:each) do
+      create(:student, objective:, personal:, name: 'Asuka')
+      create(:student, objective:, personal:, name: 'Langley')
+      create(:student, objective:, personal:, name: 'Sohryu')
+      get('/api/students', headers: headers(user: personal.user))
+    end
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['students'].size).to match(3) }
   end
 
   describe 'GET /api/students?all=true' do
-    let!(:create_students) { 3.times { create(:student, personal:) } }
-
-    before(:each) { get('/api/students?all=true', headers: headers(user: personal.user)) }
+    before(:each) do
+      create(:student, objective:, personal:, name: 'Asuka')
+      create(:student, objective:, personal:, name: 'Rei')
+      create(:student, objective:, personal:, name: 'Shinji')
+      get('/api/students?all=true', headers: headers(user: personal.user))
+    end
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['students'].size).to match(3) }

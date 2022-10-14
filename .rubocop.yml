@@ -102,6 +102,9 @@ Metrics/BlockLength:
     - 'config/routes.rb'
     - 'spec/requests/swagger/**/*'
 
+Metrics/MethodLength:
+  CountAsOne: ['array', 'hash']
+
 Naming/RescuedExceptionsVariableName:
   PreferredName: 'exception'
 

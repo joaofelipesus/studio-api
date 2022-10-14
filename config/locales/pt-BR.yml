@@ -39,6 +39,15 @@
         name: 'Nome'
         duration_in_months: 'Duração em meses'
         price: 'Preço'
+      student_plan:
+        name: 'Nome'
+        started_at: 'Data de início'
+        finished_at: 'Data de conclusão'
+        status: 'Status'
+        student_id: 'Aluno'
+        student: 'Aluno'
+        plan_id: 'Plano'
+        plan: 'Plano'
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'
