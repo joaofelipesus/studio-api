@@ -92,10 +92,8 @@ RSpec.describe 'StudentPlans', type: :request do
     context 'when params are ok' do
       let(:params) do
         {
-          student_id: student.id,
-          plan_id: plan.id,
-          started_at: Date.current.to_date.to_s,
-          status: :progress
+          finished_at: Date.current.to_date.to_s,
+          status: :canceled
         }
       end
 
@@ -110,17 +108,15 @@ RSpec.describe 'StudentPlans', type: :request do
     context 'when params has errors' do
       let(:params) do
         {
-          student_id: student.id,
-          plan_id: nil,
-          started_at: Date.current.to_date.to_s,
-          status: :progress
+          finished_at: Date.current.to_date.to_s,
+          status: nil
         }
       end
 
       it { expect(response).to have_http_status(:bad_request) }
 
       it {
-        expect(response_body['errors']).to match(['Plano é obrigatório(a)'])
+        expect(response_body['errors']).to match(['Status não pode ficar em branco'])
       }
     end
   end

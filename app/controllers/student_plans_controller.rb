@@ -19,7 +19,7 @@ class StudentPlansController < ApplicationController
   end
 
   def update
-    if @student_plan.update(student_plan_params)
+    if @student_plan.update(update_student_plan_params)
       render_success(@student_plan)
     else
       render_error_messages(@student_plan)
@@ -32,11 +32,9 @@ class StudentPlansController < ApplicationController
     @student_plan = StudentPlan.find(params[:id])
   end
 
-  def student_plan_params
+  def update_student_plan_params
     params.permit(
-      :student_id,
-      :plan_id,
-      :started_at,
+      :finished_at,
       :status
     )
   end
