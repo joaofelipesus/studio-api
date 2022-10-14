@@ -16,4 +16,11 @@ RSpec.describe StudentPlan, type: :model do
       canceled: 'canceled'
     ).backed_by_column_of_type(:string)
   end
+
+  it do
+    should define_enum_for(:payment_status).with_values(
+      pending: 'PENDING',
+      paid: 'PAID'
+    ).backed_by_column_of_type(:string)
+  end
 end

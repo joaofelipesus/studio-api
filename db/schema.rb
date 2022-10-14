@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_14_174815) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_14_175306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_174815) do
     t.date "started_at"
     t.date "finished_at"
     t.string "status"
+    t.string "payment_status", default: "PENDING", comment: "column with student_plan payment situation"
     t.index ["plan_id"], name: "index_student_plans_on_plan_id"
     t.index ["student_id"], name: "index_student_plans_on_student_id"
   end

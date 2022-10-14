@@ -11,4 +11,9 @@ class StudentPlan < ApplicationRecord
     finished: 'finished',
     canceled: 'canceled'
   }
+
+  enum payment_status: {
+    pending: 'PENDING',
+    paid: 'PAID'
+  }
 end
