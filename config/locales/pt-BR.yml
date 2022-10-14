@@ -48,6 +48,11 @@
         student: 'Aluno'
         plan_id: 'Plano'
         plan: 'Plano'
+      payment:
+        student_plan: 'Plano'
+        student_plan_id: 'Plano'
+        date: 'Data do recebimento'
+        amount: 'Valor'
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'
