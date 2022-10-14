@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_14_172506) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_14_174815) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -68,6 +68,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_172506) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "student_plan_id", null: false
+    t.string "payment_method"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_plan_id"], name: "index_payments_on_student_plan_id"
   end
 
   create_table "personals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -151,6 +160,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_172506) do
   add_foreign_key "exercise_workout_plans", "workout_plans"
   add_foreign_key "exercises", "muscular_groups"
   add_foreign_key "exercises_groups", "workout_plans"
+  add_foreign_key "payments", "student_plans"
   add_foreign_key "personals", "users"
   add_foreign_key "plans", "personals"
   add_foreign_key "schedules", "personals"
