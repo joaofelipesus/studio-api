@@ -11,12 +11,9 @@ RSpec.describe Payments::RemoveService do
         plan = create(:plan, duration_in_months: 6, monthly_price: 200, personal:)
         student_plan = create(:student_plan, plan:)
         payment = create(:payment, amount: 300, student_plan:)
-        params = {
-          id: payment.id
-        }
 
         expect do
-          described_class.call(params)
+          described_class.call(payment.id)
         end.to change(Payment, :count).by(-1)
 
         expect(student_plan.reload.payment_status).to match('pending')
@@ -29,12 +26,9 @@ RSpec.describe Payments::RemoveService do
         student_plan = create(:student_plan, plan:, payment_status: :paid)
         create(:payment, amount: 1000, student_plan:)
         payment = create(:payment, amount: 200, student_plan:)
-        params = {
-          id: payment.id
-        }
 
         expect do
-          described_class.call(params)
+          described_class.call(payment.id)
         end.to change(Payment, :count).by(-1)
 
         expect(student_plan.reload.payment_status).to match('pending')

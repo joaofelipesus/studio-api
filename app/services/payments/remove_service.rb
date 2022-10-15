@@ -2,12 +2,12 @@
 
 module Payments
   class RemoveService
-    def initialize(params)
-      @params = params
+    def initialize(payment_id)
+      @payment_id = payment_id
     end
 
-    def self.call(params)
-      new(params).call
+    def self.call(payment_id)
+      new(payment_id).call
     end
 
     def call
@@ -17,14 +17,14 @@ module Payments
 
     private
 
-    attr_reader :params
+    attr_reader :payment_id
 
     def student_plan
       @student_plan ||= payment.student_plan
     end
 
     def payment
-      @payment ||= Payment.find(params[:id])
+      @payment ||= Payment.find(payment_id)
     end
 
     def plan
