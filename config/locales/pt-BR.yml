@@ -53,6 +53,7 @@
         student_plan_id: 'Plano'
         date: 'Data do recebimento'
         amount: 'Valor'
+        payment_method: 'Método de pagamento'
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'
