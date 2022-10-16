@@ -11,7 +11,7 @@ json.student_plan do
   json.partial! 'plans/plan', plan: student_plan.plan
   json.payments do
     json.array! student_plan.payments do |payment|
-      json.partial! 'payments/payment', payment: student_plan.payment
+      json.partial! 'payments/payment', payment: payment
     end
   end
 end
