@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_12_200237) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_14_175306) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -70,6 +70,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_12_200237) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "student_plan_id", null: false
+    t.uuid "personal_id", null: false
+    t.string "payment_method"
+    t.date "date"
+    t.decimal "amount", precision: 10, scale: 2
+    t.index ["personal_id"], name: "index_payments_on_personal_id"
+    t.index ["student_plan_id"], name: "index_payments_on_student_plan_id"
+  end
+
   create_table "personals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.datetime "created_at", null: false
@@ -81,7 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_12_200237) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.float "price"
+    t.float "monthly_price"
     t.integer "duration_in_months"
     t.uuid "personal_id", null: false
     t.index ["personal_id"], name: "index_plans_on_personal_id"
@@ -109,6 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_12_200237) do
     t.date "started_at"
     t.date "finished_at"
     t.string "status"
+    t.string "payment_status", default: "PENDING", comment: "column with student_plan payment situation"
     t.index ["plan_id"], name: "index_student_plans_on_plan_id"
     t.index ["student_id"], name: "index_student_plans_on_student_id"
   end
@@ -151,6 +164,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_12_200237) do
   add_foreign_key "exercise_workout_plans", "workout_plans"
   add_foreign_key "exercises", "muscular_groups"
   add_foreign_key "exercises_groups", "workout_plans"
+  add_foreign_key "payments", "personals"
+  add_foreign_key "payments", "student_plans"
   add_foreign_key "personals", "users"
   add_foreign_key "plans", "personals"
   add_foreign_key "schedules", "personals"

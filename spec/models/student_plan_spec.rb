@@ -6,6 +6,8 @@ RSpec.describe StudentPlan, type: :model do
   it { should belong_to(:student) }
   it { should belong_to(:plan) }
 
+  it { should have_many(:payments) }
+
   it { should validate_presence_of(:started_at) }
   it { should validate_presence_of(:status) }
 
@@ -14,6 +16,13 @@ RSpec.describe StudentPlan, type: :model do
       progress: 'progress',
       finished: 'finished',
       canceled: 'canceled'
+    ).backed_by_column_of_type(:string)
+  end
+
+  it do
+    should define_enum_for(:payment_status).with_values(
+      pending: 'PENDING',
+      paid: 'PAID'
     ).backed_by_column_of_type(:string)
   end
 end

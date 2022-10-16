@@ -5,6 +5,7 @@ FactoryBot.define do
     started_at { '2022-10-12' }
     finished_at { '2022-10-12' }
     status { :progress }
+    payment_status { :pending }
     student
     plan
   end

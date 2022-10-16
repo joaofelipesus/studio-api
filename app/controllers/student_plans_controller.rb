@@ -3,10 +3,14 @@
 class StudentPlansController < ApplicationController
   include Secure
 
-  before_action :set_student_plan, only: %i[update]
+  before_action :set_student_plan, only: %i[update show]
 
   def student_plans
     render('student_plans/index', formats: :json, locals: { paginated_data: plans })
+  end
+
+  def show
+    render_success(@student_plan)
   end
 
   def create
@@ -29,7 +33,7 @@ class StudentPlansController < ApplicationController
   private
 
   def set_student_plan
-    @student_plan = StudentPlan.find(params[:id])
+    @student_plan = StudentPlan.includes(:payments).find(params[:id])
   end
 
   def update_params

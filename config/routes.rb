@@ -13,9 +13,12 @@ Rails.application.routes.draw do
     resources :objectives, only: %i[index]
     resources :exercises_groups, only: %i[create destroy show]
     resources :plans, only: %i[create update index show]
-    resources :student_plans, only: %i[create update] do
-      get 'student/:student_id', to: 'student_plans#student_plans', as: :student_plans,
-                                 on: :collection
+    resources :payments, only: %i[create destroy index show]
+    resources :student_plans, only: %i[create update show] do
+      get 'student/:student_id',
+          to: 'student_plans#student_plans',
+          as: :student_plans,
+          on: :collection
     end
   end
 end

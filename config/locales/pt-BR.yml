@@ -38,7 +38,7 @@
       plan:
         name: 'Nome'
         duration_in_months: 'Duração em meses'
-        price: 'Preço'
+        monthly_price: 'Valor da mensalidade'
       student_plan:
         name: 'Nome'
         started_at: 'Data de início'
@@ -48,6 +48,12 @@
         student: 'Aluno'
         plan_id: 'Plano'
         plan: 'Plano'
+      payment:
+        student_plan: 'Plano'
+        student_plan_id: 'Plano'
+        date: 'Data do recebimento'
+        amount: 'Valor'
+        payment_method: 'Método de pagamento'
   messages:
     user:
       invalid_credentials: 'Email e/ou senha inválido(s).'

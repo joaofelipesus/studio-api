@@ -35,7 +35,7 @@ class PlansController < ApplicationController
   def plan_params
     params.permit(
       :name,
-      :price,
+      :monthly_price,
       :duration_in_months
     ).merge(personal_id: current_personal.id)
   end
