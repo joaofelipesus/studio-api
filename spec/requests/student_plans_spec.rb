@@ -21,7 +21,8 @@ RSpec.describe 'StudentPlans', type: :request do
         'name' => plan.name,
         'monthly_price' => plan.monthly_price,
         'duration_in_months' => plan.duration_in_months
-      }
+      },
+      'payments' => []
     }
   end
 
@@ -41,6 +42,26 @@ RSpec.describe 'StudentPlans', type: :request do
 
       it 'returns created student_plan' do
         expect(response_body['student_plans'].size).to be(1)
+      end
+    end
+  end
+
+  describe 'GET /api/student_plans/:id' do
+    before(:each) do
+      student_plan = create(:student_plan, student:, plan:)
+      get(
+        "/api/student_plans/#{student_plan.id}",
+        headers: headers(user: personal.user)
+      )
+    end
+
+    context 'when params are ok' do
+      let(:student_plan) { StudentPlan.last }
+
+      it { expect(response).to have_http_status(:ok) }
+
+      it 'returns created student_plan' do
+        expect(response_body['student_plan']).to match(student_plan_json)
       end
     end
   end

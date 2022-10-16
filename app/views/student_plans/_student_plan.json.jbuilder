@@ -9,4 +9,9 @@ json.student_plan do
   json.status student_plan.status
   json.payment_status student_plan.payment_status
   json.partial! 'plans/plan', plan: student_plan.plan
+  json.payments do
+    json.array! student_plan.payments do |payment|
+      json.partial! 'payments/payment', payment: student_plan.payment
+    end
+  end
 end
