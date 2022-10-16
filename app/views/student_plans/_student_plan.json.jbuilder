@@ -11,7 +11,9 @@ json.student_plan do
   json.partial! 'plans/plan', plan: student_plan.plan
   json.payments do
     json.array! student_plan.payments do |payment|
+      # rubocop:disable Style/HashSyntax
       json.partial! 'payments/payment', payment: payment
+      # rubocop:enable Style/HashSyntax
     end
   end
 end
