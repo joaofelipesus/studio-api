@@ -3,6 +3,7 @@
 class Student < ApplicationRecord
   belongs_to :personal
   belongs_to :objective
+  belongs_to :user, optional: true
 
   has_many :student_plans, dependent: :destroy
 
