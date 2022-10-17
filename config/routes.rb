@@ -7,7 +7,12 @@ Rails.application.routes.draw do
     resources :exercises, only: %i[create update show index destroy]
     resources :workout_plans, only: %i[create update show index]
     resources :exercise_workout_plans, only: %i[create update show index]
-    resources :students, only: %i[create update show index destroy]
+    resources :students, only: %i[create update show index destroy] do
+      post 'give_access',
+        to: 'students#give_access',
+        as: :give_student_access,
+        on: :collection
+    end
     resources :schedules, only: %i[create update show index destroy]
     resources :muscular_groups, only: %i[index]
     resources :objectives, only: %i[index]

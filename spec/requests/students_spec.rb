@@ -138,4 +138,29 @@ RSpec.describe 'Students', type: :request do
       it { expect(response).to have_http_status(:not_found) }
     end
   end
+
+  describe 'POST /api/students/give_access' do
+    let(:params) { { student_id:, email: 'some@email.com' } }
+    let!(:student) { create(:student, objective:, personal:, name: 'Rei') }
+
+    before(:each) do
+      post(
+        '/api/students/give_access',
+        params:,
+        headers: headers(user: personal.user)
+      )
+    end
+
+    context 'when student exist' do
+      let(:student_id) { student.id }
+
+      it { expect(response).to have_http_status(:ok) }
+    end
+
+    context 'when student dont exist' do
+      let(:student_id) { '1q2w3e4r' }
+
+      it { expect(response).to have_http_status(:not_found) }
+    end
+  end
 end

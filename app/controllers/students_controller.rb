@@ -38,6 +38,14 @@ class StudentsController < ApplicationController
     render(json: {}, status: :ok)
   end
 
+  def give_access
+    Students::GiveAccessService.call(
+      email: params[:email],
+      student_id: params[:student_id]
+    )
+    render json: {}, status: :ok
+  end
+
   private
 
   def set_student
