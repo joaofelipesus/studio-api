@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe 'ExercisesGroups', type: :request do
+RSpec.describe 'Personals::ExercisesGroups', type: :request do
   let(:personal) { create(:personal) }
 
-  describe 'POST /exercises_groups' do
+  describe 'POST api/exercises_groups' do
     context 'when receive correct params' do
       let!(:exercise) { create(:exercise) }
       let!(:workout_plan) { create(:workout_plan, personal:) }
@@ -23,7 +23,7 @@ RSpec.describe 'ExercisesGroups', type: :request do
       let(:exercise_schedule) { ExerciseSchedule.last }
 
       it 'creates a new exercises_group with its schedule_exercises' do
-        post('/api/exercises_groups', params:, headers: headers(user: personal.user))
+        post('/api/personal/exercises_groups', params:, headers: headers(user: personal.user))
         expect(response).to have_http_status(:created)
         expect(ExercisesGroup.count).to match(1)
         expect(ExerciseSchedule.count).to match(1)
@@ -58,7 +58,7 @@ RSpec.describe 'ExercisesGroups', type: :request do
       let(:params) { { workout_plan_id: nil, exercise_schedules: [] } }
 
       it 'returns status bad_request' do
-        post('/api/exercises_groups', params:, headers: headers(user: personal.user))
+        post('/api/personal/exercises_groups', params:, headers: headers(user: personal.user))
         expect(response).to have_http_status(:bad_request)
       end
     end
@@ -72,7 +72,7 @@ RSpec.describe 'ExercisesGroups', type: :request do
       create(:exercises_group, workout_plan:, execution_sequence: 3)
 
       delete(
-        "/api/exercises_groups/#{second_exercises_group.id}",
+        "/api/personal/exercises_groups/#{second_exercises_group.id}",
         headers: headers(user: personal.user)
       )
 
@@ -81,9 +81,9 @@ RSpec.describe 'ExercisesGroups', type: :request do
     end
   end
 
-  describe 'GET /api/exercises_groups/:id' do
+  describe 'GET /api/personal/exercises_groups/:id' do
     before do
-      get("/api/exercises_groups/#{exercises_group_id}", headers: headers(user: personal.user))
+      get("/api/personal/exercises_groups/#{exercises_group_id}", headers: headers(user: personal.user))
     end
 
     context 'when exercises_group exist' do
