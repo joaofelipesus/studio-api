@@ -2,6 +2,6 @@
 
 json.objectives do
   json.array! objectives do |objective|
-    json.partial! 'objectives/objective', objective:
+    json.partial! 'personals/objectives/objective', objective:
   end
 end

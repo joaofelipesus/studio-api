@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Objetcives', type: :request do
+RSpec.describe 'Personals::Objetcives', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
   let(:objective_json) do
@@ -12,10 +12,10 @@ RSpec.describe 'Objetcives', type: :request do
     }
   end
 
-  describe 'GET /api/objectives' do
+  describe 'GET /api/personal/objectives' do
     let!(:create_objectives) { 3.times { create(:objective) } }
 
-    before(:each) { get('/api/objectives', headers: headers(user: personal.user)) }
+    before(:each) { get('/api/personal/objectives', headers: headers(user: personal.user)) }
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['objectives'].size).to match(3) }

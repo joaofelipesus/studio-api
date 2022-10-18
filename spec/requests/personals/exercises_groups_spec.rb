@@ -83,7 +83,8 @@ RSpec.describe 'Personals::ExercisesGroups', type: :request do
 
   describe 'GET /api/personal/exercises_groups/:id' do
     before do
-      get("/api/personal/exercises_groups/#{exercises_group_id}", headers: headers(user: personal.user))
+      get("/api/personal/exercises_groups/#{exercises_group_id}",
+          headers: headers(user: personal.user))
     end
 
     context 'when exercises_group exist' do
