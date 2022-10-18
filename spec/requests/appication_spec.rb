@@ -7,7 +7,7 @@ RSpec.describe 'Application' do
     context 'when received token has invalid format' do
       let!(:exercise) { create(:exercise) }
       it 'returns status unauthorized' do
-        get("/api/exercises/#{exercise.id}", headers: { Authorization: '1q2w3e4r' })
+        get("/api/personal/exercises/#{exercise.id}", headers: { Authorization: '1q2w3e4r' })
         expect(response).to have_http_status(:unauthorized)
       end
     end

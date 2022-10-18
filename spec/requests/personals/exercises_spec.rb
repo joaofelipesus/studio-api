@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Exercises', type: :request do
+RSpec.describe 'Personals::Exercises', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
   let(:exercise_json) do
@@ -14,18 +14,20 @@ RSpec.describe 'Exercises', type: :request do
     }
   end
 
-  describe 'GET /api/exercises' do
+  describe 'GET /api/personal/exercises' do
     let!(:create_exercises) { 3.times { create(:exercise, personal:) } }
 
-    before(:each) { get('/api/exercises', headers: headers(user: personal.user)) }
+    before(:each) { get('/api/personal/exercises', headers: headers(user: personal.user)) }
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['exercises'].size).to match(3) }
     it { expect(response_body['total_pages']).to match(1) }
   end
 
-  describe 'GET /api/exercises/:id' do
-    before(:each) { get("/api/exercises/#{exercise_id}", headers: headers(user: personal.user)) }
+  describe 'GET /api/personal/exercises/:id' do
+    before(:each) do
+      get("/api/personal/exercises/#{exercise_id}", headers: headers(user: personal.user))
+    end
 
     context 'when exercise exist' do
       let!(:exercise) { create(:exercise, personal:) }
@@ -42,10 +44,12 @@ RSpec.describe 'Exercises', type: :request do
     end
   end
 
-  describe 'POST /api/exercises' do
+  describe 'POST /api/personal/exercises' do
     let!(:muscular_group) { create(:muscular_group) }
 
-    before(:each) { post('/api/exercises', params:, headers: headers(user: personal.user)) }
+    before(:each) do
+      post('/api/personal/exercises', params:, headers: headers(user: personal.user))
+    end
 
     context 'when params are ok' do
       let(:params) { { name: 'Some name', muscular_group_id: muscular_group.id } }
@@ -67,12 +71,12 @@ RSpec.describe 'Exercises', type: :request do
     end
   end
 
-  describe 'PUT/PATCH /api/exercises/:id' do
+  describe 'PUT/PATCH /api/personal/exercises/:id' do
     let!(:muscular_group) { create(:muscular_group) }
     let!(:exercise) { create(:exercise, personal:) }
 
     before(:each) do
-      put("/api/exercises/#{exercise.id}", params:, headers: headers(user: personal.user))
+      put("/api/personal/exercises/#{exercise.id}", params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do
@@ -95,8 +99,8 @@ RSpec.describe 'Exercises', type: :request do
     end
   end
 
-  describe 'DELETE /api/exercises/:id' do
-    before(:each) { delete("/api/exercises/#{exercise_id}", headers: headers(user: personal.user)) }
+  describe 'DELETE /api/personal/exercises/:id' do
+    before(:each) { delete("/api/personal/exercises/#{exercise_id}", headers: headers(user: personal.user)) }
 
     context 'when exercise exist' do
       let!(:exercise) { create(:exercise, personal:) }

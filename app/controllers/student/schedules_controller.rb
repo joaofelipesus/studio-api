@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Students
+module Student
   class SchedulesController < ApplicationController
   end
 end

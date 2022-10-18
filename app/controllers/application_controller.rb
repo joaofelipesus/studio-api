@@ -45,6 +45,6 @@ class ApplicationController < ActionController::API
   end
 
   def model_name
-    model_class_name.underscore
+    model_class_name.underscore.split('/').last
   end
 end

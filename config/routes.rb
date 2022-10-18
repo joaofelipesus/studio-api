@@ -2,12 +2,11 @@
 
 Rails.application.routes.draw do
   scope :api do
-    scope :personal do
-
+    scope :personal, module: 'personals' do
+      resources :exercises, only: %i[create update show index destroy]
     end
 
     post '/users/login', to: 'users#login', as: :login
-    resources :exercises, only: %i[create update show index destroy]
     resources :workout_plans, only: %i[create update show index]
     resources :exercise_workout_plans, only: %i[create update show index]
     resources :students, only: %i[create update show index destroy] do
