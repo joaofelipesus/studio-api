@@ -20,7 +20,7 @@ class ApplicationController < ActionController::API
   def render_all(paginated_data, paginate: true)
     paginated_data[:paginate] = paginate
     render(
-      "#{model_name}s/index",
+      "#{module_name}/#{model_name}s/index",
       formats: :json,
       status: :ok,
       locals: paginated_data

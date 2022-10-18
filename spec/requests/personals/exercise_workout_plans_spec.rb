@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'ExerciseWorkoutPlans', type: :request do
+RSpec.describe 'Personals::ExerciseWorkoutPlans', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
   let(:exercise_workout_plan_json) do
@@ -16,18 +16,20 @@ RSpec.describe 'ExerciseWorkoutPlans', type: :request do
     }
   end
 
-  describe 'GET /api/exercise_workout_plans' do
+  describe 'GET /api/personal/exercise_workout_plans' do
     let!(:create_exercise_workout_plans) { 3.times { create(:exercise_workout_plan) } }
 
-    before(:each) { get('/api/exercise_workout_plans', headers: headers(user: personal.user)) }
+    before(:each) do
+      get('/api/personal/exercise_workout_plans', headers: headers(user: personal.user))
+    end
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['exercise_workout_plans'].size).to match(3) }
   end
 
-  describe 'GET /api/exercise_workout_plans/:id' do
+  describe 'GET /api/personal/exercise_workout_plans/:id' do
     before(:each) do
-      get("/api/exercise_workout_plans/#{id}", headers: headers(user: personal.user))
+      get("/api/personal/exercise_workout_plans/#{id}", headers: headers(user: personal.user))
     end
 
     context 'when exercise_workout_plan exist' do
@@ -45,11 +47,11 @@ RSpec.describe 'ExerciseWorkoutPlans', type: :request do
     end
   end
 
-  describe 'POST /api/exercise_workout_plans' do
+  describe 'POST /api/personal/exercise_workout_plans' do
     let!(:exercise) { create(:exercise) }
     let!(:workout_plan) { create(:workout_plan) }
     before(:each) do
-      post('/api/exercise_workout_plans', params:, headers: headers(user: personal.user))
+      post('/api/personal/exercise_workout_plans', params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do
@@ -89,13 +91,13 @@ RSpec.describe 'ExerciseWorkoutPlans', type: :request do
     end
   end
 
-  describe 'PUT/PATCH /api/exercise_workout_plans/:id' do
+  describe 'PUT/PATCH /api/personal/exercise_workout_plans/:id' do
     let(:exercise_workout_plan) { create(:exercise_workout_plan) }
     let(:id) { exercise_workout_plan.id }
 
     before(:each) do
-      put("/api/exercise_workout_plans/#{id}", params:,
-                                               headers: headers(user: personal.user))
+      put("/api/personal/exercise_workout_plans/#{id}", params:,
+                                                        headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do
