@@ -2,7 +2,7 @@
 
 json.plans do
   json.array! paginated_data[:plans] do |plan|
-    json.partial! 'plans/plan', plan:
+    json.partial! 'personals/plans/plan', plan:
   end
 end
 json.total_pages paginated_data[:meta][:total_pages]

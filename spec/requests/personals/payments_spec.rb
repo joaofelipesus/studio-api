@@ -26,7 +26,9 @@ RSpec.describe 'Personals::Payments', type: :request do
   end
 
   describe 'GET /api/personal/payments/:id' do
-    before(:each) { get("/api/personal/payments/#{payment_id}", headers: headers(user: personal.user)) }
+    before(:each) do
+      get("/api/personal/payments/#{payment_id}", headers: headers(user: personal.user))
+    end
 
     context 'when payment exist' do
       let!(:payment) { create(:payment, personal:) }
@@ -84,7 +86,9 @@ RSpec.describe 'Personals::Payments', type: :request do
   end
 
   describe 'DELETE /api/personal/payments/:id' do
-    before(:each) { delete("/api/personal/payments/#{payment_id}", headers: headers(user: personal.user)) }
+    before(:each) do
+      delete("/api/personal/payments/#{payment_id}", headers: headers(user: personal.user))
+    end
 
     context 'when payment exist' do
       let!(:payment) { create(:payment) }

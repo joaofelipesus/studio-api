@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Plans', type: :request do
+RSpec.describe 'Personals::Plans', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
   let(:plan_json) do
@@ -14,18 +14,18 @@ RSpec.describe 'Plans', type: :request do
     }
   end
 
-  describe 'GET /api/plans' do
+  describe 'GET /api/personal/plans' do
     let!(:create_plans) { 3.times { create(:plan, personal:) } }
 
-    before(:each) { get('/api/plans', headers: headers(user: personal.user)) }
+    before(:each) { get('/api/personal/plans', headers: headers(user: personal.user)) }
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['plans'].size).to match(3) }
     it { expect(response_body['total_pages']).to match(1) }
   end
 
-  describe 'GET /api/plans/:id' do
-    before(:each) { get("/api/plans/#{plan_id}", headers: headers(user: personal.user)) }
+  describe 'GET /api/personal/plans/:id' do
+    before(:each) { get("/api/personal/plans/#{plan_id}", headers: headers(user: personal.user)) }
 
     context 'when plan exist' do
       let!(:plan) { create(:plan, personal:) }
@@ -42,8 +42,8 @@ RSpec.describe 'Plans', type: :request do
     end
   end
 
-  describe 'POST /api/plans' do
-    before(:each) { post('/api/plans', params:, headers: headers(user: personal.user)) }
+  describe 'POST /api/personal/plans' do
+    before(:each) { post('/api/personal/plans', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do
       let(:params) { { name: 'Some name', monthly_price: 300.0, duration_in_months: 6 } }
@@ -65,11 +65,11 @@ RSpec.describe 'Plans', type: :request do
     end
   end
 
-  describe 'PUT/PATCH /api/plans/:id' do
+  describe 'PUT/PATCH /api/personal/plans/:id' do
     let!(:plan) { create(:plan, personal:) }
 
     before(:each) do
-      put("/api/plans/#{plan.id}", params:, headers: headers(user: personal.user))
+      put("/api/personal/plans/#{plan.id}", params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do
