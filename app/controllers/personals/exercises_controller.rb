@@ -6,7 +6,11 @@ module Personals
     before_action :set_exercise, only: %i[show update destroy]
 
     def index
-      render('exercises/index', formats: :json, locals: { paginated_data: paginated_exercises })
+      render(
+        'personals/exercises/index',
+        formats: :json,
+        locals: { paginated_data: paginated_exercises }
+      )
     end
 
     def show

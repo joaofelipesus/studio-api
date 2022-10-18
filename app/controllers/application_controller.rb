@@ -33,7 +33,7 @@ class ApplicationController < ActionController::API
   def render_success(register, status: :ok)
     locals = { model_name.to_sym => register }
     render(
-      "#{model_name}s/show",
+      "#{module_name}/#{model_name}s/show",
       formats: :json,
       status:,
       locals:
@@ -46,5 +46,9 @@ class ApplicationController < ActionController::API
 
   def model_name
     model_class_name.underscore.split('/').last
+  end
+
+  def module_name
+    model_class_name.underscore.split('/').first
   end
 end

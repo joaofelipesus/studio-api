@@ -100,7 +100,9 @@ RSpec.describe 'Personals::Exercises', type: :request do
   end
 
   describe 'DELETE /api/personal/exercises/:id' do
-    before(:each) { delete("/api/personal/exercises/#{exercise_id}", headers: headers(user: personal.user)) }
+    before(:each) do
+      delete("/api/personal/exercises/#{exercise_id}", headers: headers(user: personal.user))
+    end
 
     context 'when exercise exist' do
       let!(:exercise) { create(:exercise, personal:) }
