@@ -2,8 +2,6 @@
 
 module Personals
   class SchedulesController < ApplicationController
-    include Secure
-
     before_action :set_schedule, only: %i[show update destroy]
 
     def index

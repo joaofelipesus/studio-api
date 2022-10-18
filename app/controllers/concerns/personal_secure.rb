@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Secure
+module PersonalSecure
   extend ActiveSupport::Concern
 
   included do
@@ -12,10 +12,12 @@ module Secure
       @current_user = Services::Auth::CreateSession.new(
         authorization: request.headers[:Authorization]
       ).call
+
+      raise WrongUserKindError unless @current_user.personal?
     end
 
     # Handle authentication exceptions.
-    rescue_from JWT::VerificationError, JWT::DecodeError do
+    rescue_from JWT::VerificationError, JWT::DecodeError, WrongUserKindError do
       render json: {}, status: :unauthorized
     end
   end

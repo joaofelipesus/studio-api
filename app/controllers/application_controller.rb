@@ -11,10 +11,6 @@ class ApplicationController < ActionController::API
     render json: {}, status: :not_found
   end
 
-  def current_personal
-    Personal.find_by(user: current_user)
-  end
-
   # Render default index return.
   # @param paginated_data [List<Model>] a list of a model.
   def render_all(paginated_data, paginate: true)

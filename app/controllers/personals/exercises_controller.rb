@@ -2,7 +2,6 @@
 
 module Personals
   class ExercisesController < ApplicationController
-    include Secure
     before_action :set_exercise, only: %i[show update destroy]
 
     def index

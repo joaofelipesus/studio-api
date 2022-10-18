@@ -2,7 +2,6 @@
 
 module Personals
   class StudentsController < ApplicationController
-    include Secure
     before_action :set_student, only: %i[show update destroy]
 
     def index

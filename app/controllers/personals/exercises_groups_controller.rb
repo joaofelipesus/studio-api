@@ -2,8 +2,6 @@
 
 module Personals
   class ExercisesGroupsController < ApplicationController
-    include Secure
-
     def create
       exercises_group = ExercisesGroups::CreateService.call(exercises_group_params)
       if exercises_group.valid?

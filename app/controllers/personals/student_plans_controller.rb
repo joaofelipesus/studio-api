@@ -2,8 +2,6 @@
 
 module Personals
   class StudentPlansController < ApplicationController
-    include Secure
-
     before_action :set_student_plan, only: %i[update show]
 
     def student_plans

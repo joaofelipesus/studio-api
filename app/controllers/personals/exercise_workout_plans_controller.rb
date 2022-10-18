@@ -2,8 +2,6 @@
 
 module Personals
   class ExerciseWorkoutPlansController < ApplicationController
-    include Secure
-
     def index
       paginated_data = Services::Pagination::Index.new(
         klass: ExerciseWorkoutPlan,

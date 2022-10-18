@@ -2,8 +2,6 @@
 
 module Personals
   class PlansController < ApplicationController
-    include Secure
-
     before_action :set_plan, only: %i[show update]
 
     def index

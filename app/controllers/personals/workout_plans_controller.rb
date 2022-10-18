@@ -2,8 +2,6 @@
 
 module Personals
   class WorkoutPlansController < ApplicationController
-    include Secure
-
     def index
       render(
         'personals/workout_plans/index',

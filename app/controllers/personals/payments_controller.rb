@@ -2,8 +2,6 @@
 
 module Personals
   class PaymentsController < ApplicationController
-    include Secure
-
     def index
       render('personals/payments/index', formats: :json, locals: { paginated_data: payments })
     end
