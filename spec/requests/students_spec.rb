@@ -12,6 +12,9 @@ RSpec.describe 'Students', type: :request do
       'objective_id' => objective.id,
       'active_plan' => student.active_plan?,
       'has_access' => student.has_access,
+      'user' => {
+        'email' => nil
+      },
       'objective' => {
         'id' => objective.id,
         'name' => objective.name

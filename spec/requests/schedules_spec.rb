@@ -22,6 +22,9 @@ RSpec.describe 'Schedules', type: :request do
         'objective_id' => schedule.student.objective_id,
         'active_plan' => schedule.student.active_plan?,
         'has_access' => schedule.student.has_access,
+        'user' => {
+          'email' => nil
+        },
         'objective' => {
           'id' => schedule.student.objective_id,
           'name' => schedule.student.objective.name
