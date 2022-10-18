@@ -12,6 +12,11 @@ Rails.application.routes.draw do
         to: 'students#give_access',
         as: :give_student_access,
         on: :collection
+
+      put ':id/revoke_access',
+        to: 'students#revoke_access',
+        as: :revoke_student_access,
+        on: :collection
     end
     resources :schedules, only: %i[create update show index destroy]
     resources :muscular_groups, only: %i[index]

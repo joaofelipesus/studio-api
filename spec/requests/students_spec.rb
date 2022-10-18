@@ -163,4 +163,31 @@ RSpec.describe 'Students', type: :request do
       it { expect(response).to have_http_status(:not_found) }
     end
   end
+
+  describe 'PUT /api/students/:id/revoke_access' do
+    let(:params) { { student_id: } }
+    let(:user) { create(:user, kind: :student) }
+    let!(:student) { create(:student, objective:, personal:, name: 'Rei', user:, has_access: true) }
+
+    before(:each) do
+      put(
+        "/api/students/#{student_id}/revoke_access",
+        params:,
+        headers: headers(user: personal.user)
+      )
+    end
+
+    context 'when student exist' do
+      let(:student_id) { student.id }
+
+      it { expect(response).to have_http_status(:ok) }
+      it { expect(student.reload.has_access).to be_falsey }
+    end
+
+    context 'when student dont exist' do
+      let(:student_id) { '1q2w3e4r' }
+
+      it { expect(response).to have_http_status(:not_found) }
+    end
+  end
 end

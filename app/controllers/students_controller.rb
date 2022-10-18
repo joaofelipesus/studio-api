@@ -46,6 +46,15 @@ class StudentsController < ApplicationController
     render json: {}, status: :ok
   end
 
+  def revoke_access
+    @student = Students::RevokeAccessService.call(
+      student_id: params[:id],
+      personal:current_personal
+    )
+
+    render_success(@student)
+  end
+
   private
 
   def set_student
