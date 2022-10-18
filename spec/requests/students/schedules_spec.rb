@@ -12,7 +12,7 @@ RSpec.describe 'Students::Schedules', type: :request do
       create(:schedule, personal:, student:)
       create(:schedule, personal:, student:)
       create(:schedule, personal:, student: other_student)
-      get('/api/student/schedules', headers: headers(user: user))
+      get('/api/student/schedules', headers: headers(user:))
     end
 
     it { expect(response).to have_http_status(:ok) }

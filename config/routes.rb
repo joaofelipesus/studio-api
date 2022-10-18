@@ -32,7 +32,8 @@ Rails.application.routes.draw do
     end
 
     scope :student, module: 'students' do
-      resources :schedules, only: %i[create update show index destroy]
+      resources :schedules, only: %i[index]
+      resources :student_plans, only: %i[index]
     end
 
     post '/users/login', to: 'users#login', as: :login

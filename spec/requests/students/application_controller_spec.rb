@@ -9,7 +9,7 @@ RSpec.describe 'Application' do
 
     context 'when received token has invalid format' do
       it 'returns status unauthorized' do
-        get("/api/student/schedules", headers: { Authorization: '1q2w3e4r' })
+        get('/api/student/schedules', headers: { Authorization: '1q2w3e4r' })
         expect(response).to have_http_status(:unauthorized)
       end
     end
@@ -17,7 +17,7 @@ RSpec.describe 'Application' do
     context 'token is valid but from wrong user kind' do
       it 'returns status unauthorized' do
         personal = create(:personal)
-        get("/api/student/schedules", headers: headers(user: personal.user))
+        get('/api/student/schedules', headers: headers(user: personal.user))
         expect(response).to have_http_status(:unauthorized)
       end
     end
