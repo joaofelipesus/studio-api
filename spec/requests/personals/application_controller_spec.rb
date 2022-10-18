@@ -16,7 +16,7 @@ RSpec.describe 'Application' do
       it 'returns status unauthorized' do
         exercise = create(:exercise)
         user = create(:user, kind: :student)
-        get("/api/personal/exercises/#{exercise.id}", headers: headers(user: user))
+        get("/api/personal/exercises/#{exercise.id}", headers: headers(user:))
         expect(response).to have_http_status(:unauthorized)
       end
     end
