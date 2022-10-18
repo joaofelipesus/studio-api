@@ -12,7 +12,7 @@ module Students
     end
 
     def call
-      user = create_student_user
+      user = find_or_create_user
       student.update!(
         has_access: true,
         user:
@@ -28,7 +28,9 @@ module Students
       @student ||= Student.find(student_id)
     end
 
-    def create_student_user
+    def find_or_create_user
+      return student.user if student.user
+
       User.create!(
         status: :confirmed,
         kind: :student,
