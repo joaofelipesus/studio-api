@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :exercises, only: %i[create update show index destroy]
       resources :exercise_workout_plans, only: %i[create update show index]
       resources :exercises_groups, only: %i[create destroy show]
+      resources :muscular_groups, only: %i[index]
     end
 
     post '/users/login', to: 'users#login', as: :login
@@ -22,7 +23,7 @@ Rails.application.routes.draw do
           on: :collection
     end
     resources :schedules, only: %i[create update show index destroy]
-    resources :muscular_groups, only: %i[index]
+
     resources :objectives, only: %i[index]
 
     resources :plans, only: %i[create update index show]
