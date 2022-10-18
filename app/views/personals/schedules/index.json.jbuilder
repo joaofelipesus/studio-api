@@ -3,7 +3,7 @@
 json.schedules do
   json.array! paginated_data[:schedules] do |schedule|
     # rubocop:disable Style/HashSyntax
-    json.partial! 'schedules/schedule', schedule: schedule
+    json.partial! 'personals/schedules/schedule', schedule: schedule
     # rubocop:enable Style/HashSyntax
   end
 end

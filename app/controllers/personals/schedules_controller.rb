@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+module Personals
 class SchedulesController < ApplicationController
   include Secure
 
@@ -60,4 +61,5 @@ class SchedulesController < ApplicationController
       :date
     ).merge(personal_id: current_personal.id)
   end
+end
 end

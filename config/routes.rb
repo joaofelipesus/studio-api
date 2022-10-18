@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :objectives, only: %i[index]
       resources :payments, only: %i[create destroy index show]
       resources :plans, only: %i[create update index show]
+      resources :schedules, only: %i[create update show index destroy]
     end
 
     post '/users/login', to: 'users#login', as: :login
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
           as: :revoke_student_access,
           on: :collection
     end
-    resources :schedules, only: %i[create update show index destroy]
+
 
     resources :student_plans, only: %i[create update show] do
       get 'student/:student_id',

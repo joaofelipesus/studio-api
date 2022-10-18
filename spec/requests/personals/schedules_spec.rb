@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Schedules', type: :request do
+RSpec.describe 'Personals::Schedules', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
   # rubocop:disable Metrics/BlockLength
@@ -40,21 +40,21 @@ RSpec.describe 'Schedules', type: :request do
   end
   # rubocop:enable Metrics/BlockLength
 
-  describe 'GET /api/schedules' do
+  describe 'GET /api/personal/schedules' do
     before(:each) do
       student = create(:student, name: 'Rock Lee')
       create(:schedule, personal:, student:)
       create(:schedule, personal:, student:)
       create(:schedule, personal:, student:)
-      get('/api/schedules', headers: headers(user: personal.user))
+      get('/api/personal/schedules', headers: headers(user: personal.user))
     end
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['schedules'].size).to match(3) }
   end
 
-  describe 'GET /api/schedules/:id' do
-    before(:each) { get("/api/schedules/#{schedule_id}", headers: headers(user: personal.user)) }
+  describe 'GET /api/personal/schedules/:id' do
+    before(:each) { get("/api/personal/schedules/#{schedule_id}", headers: headers(user: personal.user)) }
 
     context 'when schedule exist' do
       let!(:schedule) { create(:schedule, personal:) }
@@ -71,11 +71,11 @@ RSpec.describe 'Schedules', type: :request do
     end
   end
 
-  describe 'POST /api/schedules' do
+  describe 'POST /api/personal/schedules' do
     let!(:workout_plan) { create(:workout_plan) }
     let!(:student) { create(:student, name: 'Du') }
 
-    before(:each) { post('/api/schedules', params:, headers: headers(user: personal.user)) }
+    before(:each) { post('/api/personal/schedules', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do
       let(:params) do
@@ -112,11 +112,11 @@ RSpec.describe 'Schedules', type: :request do
     end
   end
 
-  describe 'PUT/PATCH /api/schedules/:id' do
+  describe 'PUT/PATCH /api/personal/schedules/:id' do
     let!(:schedule) { create(:schedule, personal:) }
 
     before(:each) do
-      put("/api/schedules/#{schedule.id}", params:, headers: headers(user: personal.user))
+      put("/api/personal/schedules/#{schedule.id}", params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do
@@ -154,8 +154,8 @@ RSpec.describe 'Schedules', type: :request do
     end
   end
 
-  describe 'DELETE /api/schedules/:id' do
-    before(:each) { delete("/api/schedules/#{schedule_id}", headers: headers(user: personal.user)) }
+  describe 'DELETE /api/personal/schedules/:id' do
+    before(:each) { delete("/api/personal/schedules/#{schedule_id}", headers: headers(user: personal.user)) }
 
     context 'when schedule exist' do
       let!(:schedule) { create(:schedule, personal:) }
