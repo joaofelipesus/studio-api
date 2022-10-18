@@ -3,7 +3,7 @@
 json.students do
   json.array! paginated_data[:students] do |student|
     # rubocop:disable Style/HashSyntax
-    json.partial! 'students/student', student: student
+    json.partial! 'personals/students/student', student: student
     # rubocop:enable Style/HashSyntax
   end
 end

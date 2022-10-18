@@ -54,7 +54,9 @@ RSpec.describe 'Personals::Schedules', type: :request do
   end
 
   describe 'GET /api/personal/schedules/:id' do
-    before(:each) { get("/api/personal/schedules/#{schedule_id}", headers: headers(user: personal.user)) }
+    before(:each) do
+      get("/api/personal/schedules/#{schedule_id}", headers: headers(user: personal.user))
+    end
 
     context 'when schedule exist' do
       let!(:schedule) { create(:schedule, personal:) }
@@ -75,7 +77,9 @@ RSpec.describe 'Personals::Schedules', type: :request do
     let!(:workout_plan) { create(:workout_plan) }
     let!(:student) { create(:student, name: 'Du') }
 
-    before(:each) { post('/api/personal/schedules', params:, headers: headers(user: personal.user)) }
+    before(:each) do
+      post('/api/personal/schedules', params:, headers: headers(user: personal.user))
+    end
 
     context 'when params are ok' do
       let(:params) do
@@ -155,7 +159,9 @@ RSpec.describe 'Personals::Schedules', type: :request do
   end
 
   describe 'DELETE /api/personal/schedules/:id' do
-    before(:each) { delete("/api/personal/schedules/#{schedule_id}", headers: headers(user: personal.user)) }
+    before(:each) do
+      delete("/api/personal/schedules/#{schedule_id}", headers: headers(user: personal.user))
+    end
 
     context 'when schedule exist' do
       let!(:schedule) { create(:schedule, personal:) }

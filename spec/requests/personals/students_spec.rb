@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Students', type: :request do
+RSpec.describe 'Personals::Students', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
   let!(:objective) { create(:objective) }
@@ -22,32 +22,34 @@ RSpec.describe 'Students', type: :request do
     }
   end
 
-  describe 'GET /api/students' do
+  describe 'GET /api/personal/students' do
     before(:each) do
       create(:student, objective:, personal:, name: 'Asuka')
       create(:student, objective:, personal:, name: 'Langley')
       create(:student, objective:, personal:, name: 'Sohryu')
-      get('/api/students', headers: headers(user: personal.user))
+      get('/api/personal/students', headers: headers(user: personal.user))
     end
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['students'].size).to match(3) }
   end
 
-  describe 'GET /api/students?all=true' do
+  describe 'GET /api/personal/students?all=true' do
     before(:each) do
       create(:student, objective:, personal:, name: 'Asuka')
       create(:student, objective:, personal:, name: 'Rei')
       create(:student, objective:, personal:, name: 'Shinji')
-      get('/api/students?all=true', headers: headers(user: personal.user))
+      get('/api/personal/students?all=true', headers: headers(user: personal.user))
     end
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['students'].size).to match(3) }
   end
 
-  describe 'GET /api/students/:id' do
-    before(:each) { get("/api/students/#{student_id}", headers: headers(user: personal.user)) }
+  describe 'GET /api/personal/students/:id' do
+    before(:each) do
+      get("/api/personal/students/#{student_id}", headers: headers(user: personal.user))
+    end
 
     context 'when student exist' do
       let!(:student) { create(:student, objective:, name: 'Asuka') }
@@ -64,8 +66,8 @@ RSpec.describe 'Students', type: :request do
     end
   end
 
-  describe 'POST /api/students' do
-    before(:each) { post('/api/students', params:, headers: headers(user: personal.user)) }
+  describe 'POST /api/personal/students' do
+    before(:each) { post('/api/personal/students', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do
       let(:params) do
@@ -94,11 +96,11 @@ RSpec.describe 'Students', type: :request do
     end
   end
 
-  describe 'PUT/PATCH /api/students/:id' do
+  describe 'PUT/PATCH /api/personal/students/:id' do
     let!(:student) { create(:student, objective:, name: 'Shinji') }
 
     before(:each) do
-      put("/api/students/#{student.id}", params:, headers: headers(user: personal.user))
+      put("/api/personal/students/#{student.id}", params:, headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do
@@ -125,8 +127,10 @@ RSpec.describe 'Students', type: :request do
     end
   end
 
-  describe 'DELETE /api/students/:id' do
-    before(:each) { delete("/api/students/#{student_id}", headers: headers(user: personal.user)) }
+  describe 'DELETE /api/personal/students/:id' do
+    before(:each) do
+      delete("/api/personal/students/#{student_id}", headers: headers(user: personal.user))
+    end
 
     context 'when student exist' do
       let!(:student) { create(:student, objective:, name: 'Rei') }
@@ -142,13 +146,13 @@ RSpec.describe 'Students', type: :request do
     end
   end
 
-  describe 'POST /api/students/give_access' do
+  describe 'POST /api/personal/students/give_access' do
     let(:params) { { student_id:, email: 'some@email.com' } }
     let!(:student) { create(:student, objective:, personal:, name: 'Rei') }
 
     before(:each) do
       post(
-        '/api/students/give_access',
+        '/api/personal/students/give_access',
         params:,
         headers: headers(user: personal.user)
       )
@@ -167,14 +171,14 @@ RSpec.describe 'Students', type: :request do
     end
   end
 
-  describe 'PUT /api/students/:id/revoke_access' do
+  describe 'PUT /api/personal/students/:id/revoke_access' do
     let(:params) { { student_id: } }
     let(:user) { create(:user, kind: :student) }
     let!(:student) { create(:student, objective:, personal:, name: 'Rei', user:, has_access: true) }
 
     before(:each) do
       put(
-        "/api/students/#{student_id}/revoke_access",
+        "/api/personal/students/#{student_id}/revoke_access",
         params:,
         headers: headers(user: personal.user)
       )
