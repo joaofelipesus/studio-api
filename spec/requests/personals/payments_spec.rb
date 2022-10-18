@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Payments', type: :request do
+RSpec.describe 'Personals::Payments', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
   let(:payment_json) do
@@ -15,18 +15,18 @@ RSpec.describe 'Payments', type: :request do
     }
   end
 
-  describe 'GET /api/payments' do
+  describe 'GET /api/personal/payments' do
     let!(:create_payments) { 3.times { create(:payment, personal:) } }
 
-    before(:each) { get('/api/payments', headers: headers(user: personal.user)) }
+    before(:each) { get('/api/personal/payments', headers: headers(user: personal.user)) }
 
     it { expect(response).to have_http_status(:ok) }
     it { expect(response_body['payments'].size).to match(3) }
     it { expect(response_body['total_pages']).to match(1) }
   end
 
-  describe 'GET /api/payments/:id' do
-    before(:each) { get("/api/payments/#{payment_id}", headers: headers(user: personal.user)) }
+  describe 'GET /api/personal/payments/:id' do
+    before(:each) { get("/api/personal/payments/#{payment_id}", headers: headers(user: personal.user)) }
 
     context 'when payment exist' do
       let!(:payment) { create(:payment, personal:) }
@@ -43,9 +43,9 @@ RSpec.describe 'Payments', type: :request do
     end
   end
 
-  describe 'POST /api/payments' do
+  describe 'POST /api/personal/payments' do
     let(:student_plan) { create(:student_plan) }
-    before(:each) { post('/api/payments', params:, headers: headers(user: personal.user)) }
+    before(:each) { post('/api/personal/payments', params:, headers: headers(user: personal.user)) }
 
     context 'when params are ok' do
       let(:params) do
@@ -83,8 +83,8 @@ RSpec.describe 'Payments', type: :request do
     end
   end
 
-  describe 'DELETE /api/payments/:id' do
-    before(:each) { delete("/api/payments/#{payment_id}", headers: headers(user: personal.user)) }
+  describe 'DELETE /api/personal/payments/:id' do
+    before(:each) { delete("/api/personal/payments/#{payment_id}", headers: headers(user: personal.user)) }
 
     context 'when payment exist' do
       let!(:payment) { create(:payment) }
