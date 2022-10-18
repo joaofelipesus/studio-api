@@ -11,10 +11,10 @@ Rails.application.routes.draw do
       resources :payments, only: %i[create destroy index show]
       resources :plans, only: %i[create update index show]
       resources :schedules, only: %i[create update show index destroy]
+      resources :workout_plans, only: %i[create update show index]
     end
 
     post '/users/login', to: 'users#login', as: :login
-    resources :workout_plans, only: %i[create update show index]
     resources :students, only: %i[create update show index destroy] do
       post 'give_access',
            to: 'students#give_access',

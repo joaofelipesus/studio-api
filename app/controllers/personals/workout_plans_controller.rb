@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
+module Personals
 class WorkoutPlansController < ApplicationController
   include Secure
 
   def index
     render(
-      'workout_plans/index',
+      'personals/workout_plans/index',
       formats: :json,
       locals: { paginated_data: paginated_workout_plans }
     )
@@ -52,4 +53,5 @@ class WorkoutPlansController < ApplicationController
       }
     )
   end
+end
 end
