@@ -6,6 +6,7 @@ class StudentsMailer < ApplicationMailer
     @generated_password = params[:password]
     @user = @student.user
     @email = @user.email
-    mail to: @email, subject: 'Acesso a plataforma SmartStudio'
+    subject = 'Acesso a plataforma SmartStudio'
+    mail to: @email, subject:
   end
 end

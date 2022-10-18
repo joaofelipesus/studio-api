@@ -49,7 +49,7 @@ class StudentsController < ApplicationController
   def revoke_access
     @student = Students::RevokeAccessService.call(
       student_id: params[:id],
-      personal:current_personal
+      personal: current_personal
     )
 
     render_success(@student)
