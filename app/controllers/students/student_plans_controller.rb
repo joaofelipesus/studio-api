@@ -11,7 +11,7 @@ module Students
     def plans
       StudentPlansQuery.call(
         params: {
-          student_id: params[:student_id],
+          student_id: current_student.id,
           all: params[:all]
         }
       )
