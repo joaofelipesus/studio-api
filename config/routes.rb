@@ -11,6 +11,12 @@ Rails.application.routes.draw do
       resources :payments, only: %i[create destroy index show]
       resources :plans, only: %i[create update index show]
       resources :schedules, only: %i[create update show index destroy]
+      resources :student_plans, only: %i[create update show] do
+        get 'student/:student_id',
+            to: 'student_plans#student_plans',
+            as: :student_plans,
+            on: :collection
+      end
       resources :students, only: %i[create update show index destroy] do
         post 'give_access',
              to: 'students#give_access',
@@ -26,11 +32,5 @@ Rails.application.routes.draw do
     end
 
     post '/users/login', to: 'users#login', as: :login
-    resources :student_plans, only: %i[create update show] do
-      get 'student/:student_id',
-          to: 'student_plans#student_plans',
-          as: :student_plans,
-          on: :collection
-    end
   end
 end

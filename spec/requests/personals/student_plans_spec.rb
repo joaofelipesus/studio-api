@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'StudentPlans', type: :request do
+RSpec.describe 'Personals::StudentPlans', type: :request do
   let(:response_body) { JSON.parse(response.body) }
   let!(:personal) { create(:personal) }
   let!(:plan) { create(:plan, personal:) }
@@ -26,11 +26,11 @@ RSpec.describe 'StudentPlans', type: :request do
     }
   end
 
-  describe 'GET /api/student_plans/student/:student_id' do
+  describe 'GET /api/personal/student_plans/student/:student_id' do
     before(:each) do
       create(:student_plan, student:, plan:)
       get(
-        "/api/student_plans/student/#{student.id}",
+        "/api/personal/student_plans/student/#{student.id}",
         headers: headers(user: personal.user)
       )
     end
@@ -46,11 +46,11 @@ RSpec.describe 'StudentPlans', type: :request do
     end
   end
 
-  describe 'GET /api/student_plans/:id' do
+  describe 'GET /api/personal/student_plans/:id' do
     before(:each) do
       student_plan = create(:student_plan, student:, plan:)
       get(
-        "/api/student_plans/#{student_plan.id}",
+        "/api/personal/student_plans/#{student_plan.id}",
         headers: headers(user: personal.user)
       )
     end
@@ -66,8 +66,10 @@ RSpec.describe 'StudentPlans', type: :request do
     end
   end
 
-  describe 'POST /api/student_plans' do
-    before(:each) { post('/api/student_plans', params:, headers: headers(user: personal.user)) }
+  describe 'POST /api/personal/student_plans' do
+    before(:each) do
+      post('/api/personal/student_plans', params:, headers: headers(user: personal.user))
+    end
 
     context 'when params are ok' do
       let(:params) do
@@ -104,11 +106,12 @@ RSpec.describe 'StudentPlans', type: :request do
     end
   end
 
-  describe 'PUT/PATCH /api/student_plans/:id' do
+  describe 'PUT/PATCH /api/personal/student_plans/:id' do
     let!(:student_plan) { create(:student_plan, plan:, student:) }
 
     before(:each) do
-      put("/api/student_plans/#{student_plan.id}", params:, headers: headers(user: personal.user))
+      put("/api/personal/student_plans/#{student_plan.id}", params:,
+                                                            headers: headers(user: personal.user))
     end
 
     context 'when params are ok' do

@@ -17,7 +17,11 @@ module Personals
         }
       )
 
-      render('schedules/index', formats: :json, locals: { paginated_data: paginated_schedules })
+      render(
+        'personals/schedules/index',
+        formats: :json,
+        locals: { paginated_data: paginated_schedules }
+      )
     end
 
     def show
