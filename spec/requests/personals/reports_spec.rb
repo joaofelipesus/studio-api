@@ -68,4 +68,29 @@ RSpec.describe 'Personals::Reports', type: :request do
       )
     end
   end
+
+  describe 'GET /students_without_active_plan_count' do
+    it 'returns current personal students count' do
+      personal = create(:personal)
+
+      travel_to(Time.zone.local(2021, 11, 1))
+      create(:student, name: 'Asuka', personal:)
+      create(:student, name: 'Shinji', personal:)
+      create(:student, name: 'Rei', personal:)
+      travel_back
+
+      get(
+        '/api/personal/reports/new_students_relation?year=2021',
+        headers: headers(user: personal.user)
+      )
+
+      expect(response.parsed_body).to match(
+        {
+          'students_relation' => {
+            '11/2021' => 3
+          }
+        }
+      )
+    end
+  end
 end

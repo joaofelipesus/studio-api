@@ -25,5 +25,14 @@ module Personals
 
       render json: { students_plan_relation: students_relation }, status: :ok
     end
+
+    def new_students_relation
+      students_relation = NewStudentsRelationReport.call(
+        year: params[:year],
+        personal: current_personal
+      )
+
+      render json: { students_relation: }, status: :ok
+    end
   end
 end

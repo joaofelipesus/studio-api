@@ -31,13 +31,20 @@ Rails.application.routes.draw do
       resources :workout_plans, only: %i[create update show index]
       resources :reports do
         get :students_count, to: 'reports#students_count', as: :students_count, on: :collection
+
         get :students_without_active_plan_count,
             to: 'reports#students_without_active_plan_count',
             as: :students_without_active_plan_count,
             on: :collection
+
         get :students_plan_relation,
             to: 'reports#students_plan_relation',
             as: :students_plan_relation,
+            on: :collection
+
+        get :new_students_relation,
+            to: 'reports#new_students_relation',
+            as: :new_students_relation,
             on: :collection
       end
     end
