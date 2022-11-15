@@ -33,7 +33,7 @@ RSpec.describe 'Students::StudentPlans', type: :request do
         create(:student_plan, student:, plan:)
         get(
           "/api/student/student_plans?student_id=#{student.id}&all=true",
-          headers: headers(user: user),
+          headers: headers(user:)
         )
       end
 
