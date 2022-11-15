@@ -29,6 +29,9 @@ Rails.application.routes.draw do
             on: :collection
       end
       resources :workout_plans, only: %i[create update show index]
+      resources :reports do
+        get :students_count, to: 'reports#students_count', as: :students_count, on: :collection
+      end
     end
 
     scope :student, module: 'students' do
