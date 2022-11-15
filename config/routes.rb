@@ -35,6 +35,10 @@ Rails.application.routes.draw do
             to: 'reports#students_without_active_plan_count',
             as: :students_without_active_plan_count,
             on: :collection
+        get :students_plan_relation,
+            to: 'reports#students_plan_relation',
+            as: :students_plan_relation,
+            on: :collection
       end
     end
 
