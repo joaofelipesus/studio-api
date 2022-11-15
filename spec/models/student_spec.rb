@@ -7,6 +7,7 @@ RSpec.describe Student, type: :model do
 
   it { should belong_to(:personal) }
   it { is_expected.to belong_to(:objective) }
+  it { is_expected.to belong_to(:user).optional }
 
   it { is_expected.to have_many(:student_plans) }
 

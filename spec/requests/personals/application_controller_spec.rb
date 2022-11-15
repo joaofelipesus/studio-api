@@ -11,5 +11,14 @@ RSpec.describe 'Application' do
         expect(response).to have_http_status(:unauthorized)
       end
     end
+
+    context 'token is valid but from wrong user kind' do
+      it 'returns status unauthorized' do
+        exercise = create(:exercise)
+        user = create(:user, kind: :student)
+        get("/api/personal/exercises/#{exercise.id}", headers: headers(user:))
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
   end
 end

@@ -11,16 +11,12 @@ class ApplicationController < ActionController::API
     render json: {}, status: :not_found
   end
 
-  def current_personal
-    Personal.find_by(user: current_user)
-  end
-
   # Render default index return.
   # @param paginated_data [List<Model>] a list of a model.
   def render_all(paginated_data, paginate: true)
     paginated_data[:paginate] = paginate
     render(
-      "#{model_name}s/index",
+      "#{module_name}/#{model_name}s/index",
       formats: :json,
       status: :ok,
       locals: paginated_data
@@ -33,7 +29,7 @@ class ApplicationController < ActionController::API
   def render_success(register, status: :ok)
     locals = { model_name.to_sym => register }
     render(
-      "#{model_name}s/show",
+      "#{module_name}/#{model_name}s/show",
       formats: :json,
       status:,
       locals:
@@ -45,6 +41,10 @@ class ApplicationController < ActionController::API
   end
 
   def model_name
-    model_class_name.underscore
+    model_class_name.underscore.split('/').last
+  end
+
+  def module_name
+    model_class_name.underscore.split('/').first
   end
 end
