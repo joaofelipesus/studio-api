@@ -44,5 +44,14 @@ module Personals
 
       render json: { invoice_value: }, status: :ok
     end
+
+    def invoice_relation
+      invoice_data = InvoiceByMonthReport.call(
+        year: params[:year],
+        personal: current_personal
+      )
+
+      render json: { invoice_data: }, status: :ok
+    end
   end
 end

@@ -113,4 +113,22 @@ RSpec.describe 'Personals::Reports', type: :request do
       travel_back
     end
   end
+
+  describe 'GET /invoice_relation' do
+    it 'returns current month invoice' do
+      personal = create(:personal)
+      plan = create(:plan, personal:, name: 'Anual')
+      student = create(:student, name: 'Asuka', personal:)
+      student_plan = create(:student_plan, plan:, student:)
+      create(:payment, student_plan:, amount: 500, date: '2022-11-10', personal:)
+
+      get(
+        '/api/personal/reports/invoice_relation?year=2022',
+        headers: headers(user: personal.user)
+      )
+
+      expect(response.parsed_body).to match({ 'invoice_data' => { '11/2022' => '500.0' } })
+      travel_back
+    end
+  end
 end
