@@ -56,6 +56,11 @@ Rails.application.routes.draw do
             to: 'reports#invoice_relation',
             as: :invoice_relation,
             on: :collection
+
+        get :student_plan_pendencies,
+            to: 'reports#student_plan_pendencies',
+            as: :student_plan_pendencies,
+            on: :collection
       end
     end
 

@@ -131,4 +131,33 @@ RSpec.describe 'Personals::Reports', type: :request do
       travel_back
     end
   end
+
+  describe 'GET /student_plan_pendencies' do
+    it 'returns current month invoice' do
+      personal = create(:personal)
+      student = create(:student, personal:)
+      plan = create(:plan, personal:, monthly_price: 100, duration_in_months: 12)
+      student_plan = create(:student_plan, student:, plan:)
+      create(:payment, student_plan:, amount: 100, personal:)
+
+      get(
+        '/api/personal/reports/student_plan_pendencies',
+        headers: headers(user: personal.user)
+      )
+
+      expect(response.parsed_body).to match(
+        {
+          'student_plan_pendencies' => [
+            {
+              'id' => student_plan.id,
+              'student' => student.name,
+              'pending_value' => '1100.0',
+              'total_value' => 1200.0,
+              'plan' => plan.name
+            }
+          ]
+        }
+      )
+    end
+  end
 end

@@ -53,5 +53,11 @@ module Personals
 
       render json: { invoice_data: }, status: :ok
     end
+
+    def student_plan_pendencies
+      pendencies = StudentPlanPendenciesReport.call(personal: current_personal)
+
+      render json: { student_plan_pendencies: pendencies }, status: :ok
+    end
   end
 end

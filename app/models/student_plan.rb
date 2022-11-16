@@ -18,4 +18,8 @@ class StudentPlan < ApplicationRecord
     pending: 'PENDING',
     paid: 'PAID'
   }
+
+  def pending_value
+    plan.total_amount - payments.sum(&:amount)
+  end
 end
