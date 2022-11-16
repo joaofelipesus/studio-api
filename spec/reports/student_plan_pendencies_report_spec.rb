@@ -15,13 +15,12 @@ RSpec.describe StudentPlanPendenciesReport do
           {
             id: student_plan.id,
             student: student.name,
-            pending_value:1100.0,
-            total_value:1200.0,
+            pending_value: 1100.0,
+            total_value: 1200.0,
             plan: plan.name
           }
         ]
       )
-
     end
   end
 end

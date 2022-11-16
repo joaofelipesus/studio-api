@@ -11,11 +11,11 @@ class StudentPlanPendenciesReport
 
   def call
     pending_plans = StudentPlan
-      .includes(:payments)
-      .joins(:plan, :student)
-      .where('students.personal_id = ?', personal.id)
-      .pending
-      .uniq
+                    .includes(:payments)
+                    .joins(:plan, :student)
+                    .where(students: { personal_id: personal.id })
+                    .pending
+                    .uniq
 
     pending_plans.map do |student_plan|
       {
