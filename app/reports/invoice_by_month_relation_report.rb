@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class InvoiceByMonthReport < BaseReport
+class InvoiceByMonthRelationReport < BaseRelationReport
   private
 
   def report_data

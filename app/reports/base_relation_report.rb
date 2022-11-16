@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BaseReport
+class BaseRelationReport
   def initialize(year:, personal:)
     @year = year
     @personal = personal

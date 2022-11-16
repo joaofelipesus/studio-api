@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NewStudentsRelationReport < BaseReport
+class NewStudentsRelationReport < BaseRelationReport
   private
 
   def report_data

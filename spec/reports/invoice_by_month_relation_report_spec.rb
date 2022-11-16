@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe InvoiceByMonthReport do
+RSpec.describe InvoiceByMonthRelationReport do
   describe '#call' do
     let(:personal) { create(:personal) }
     let(:student) { create(:student, personal:) }

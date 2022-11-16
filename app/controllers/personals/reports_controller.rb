@@ -46,7 +46,7 @@ module Personals
     end
 
     def invoice_relation
-      invoice_data = InvoiceByMonthReport.call(
+      invoice_data = InvoiceByMonthRelationReport.call(
         year: params[:year],
         personal: current_personal
       )
