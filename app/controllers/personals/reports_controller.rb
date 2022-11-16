@@ -34,5 +34,15 @@ module Personals
 
       render json: { students_relation: }, status: :ok
     end
+
+    def current_month_invoicing
+      invoice_value = Payment
+                      .where(personal: current_personal)
+                      .where('date >= ?', Date.current.beginning_of_month)
+                      .where('date <= ?', Date.current.end_of_month)
+                      .sum(:amount)
+
+      render json: { invoice_value: }, status: :ok
+    end
   end
 end

@@ -46,6 +46,11 @@ Rails.application.routes.draw do
             to: 'reports#new_students_relation',
             as: :new_students_relation,
             on: :collection
+
+        get :current_month_invoicing,
+            to: 'reports#current_month_invoicing',
+            as: :current_month_invoicing,
+            on: :collection
       end
     end
 
