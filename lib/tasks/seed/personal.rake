@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 namespace :seed do
-  desc 'Create default exercises'
+  desc 'Create default personal'
   task personal: :environment do |task, args|
     puts 'Personal [start]'
     return unless Rails.env.development?

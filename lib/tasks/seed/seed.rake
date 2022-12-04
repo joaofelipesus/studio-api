@@ -7,6 +7,8 @@ namespace :seed do
     puts 'Exercises [start]'
     Rake::Task['default_registers:exercises'].invoke(personal.id)
     puts 'Exercises [create]'
+    puts '-------------------'
+    Rake::Task['seed:plans'].invoke(personal.id)
   end
 
   def personal
