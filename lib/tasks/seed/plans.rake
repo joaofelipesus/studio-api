@@ -20,7 +20,7 @@ namespace :seed do
           {
             name: 'Semestral',
             personal_id: args[:personal_id],
-            monthly_price: 3250,
+            monthly_price: 325,
             duration_in_months: 6
           },
           {
