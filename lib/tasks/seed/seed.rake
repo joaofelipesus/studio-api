@@ -11,6 +11,7 @@ namespace :seed do
     puts '-------------------'
     Rake::Task['seed:plans'].invoke(personal.id)
     Rake::Task['seed:students'].invoke(personal.id)
+    Rake::Task['seed:workout_plans'].invoke(personal.id)
   end
 
   def personal
